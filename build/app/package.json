@@ -1,0 +1,19 @@
+{
+  "name": "mytools-desktop",
+  "productName": "MyTools",
+  "version": "2.0.0",
+  "description": "A desktop application based on Electron and React for daily application development",
+  "main": "./dist/main/main.js",
+  "author": {
+    "name": "hiql",
+    "email": "qiu_lin@163.com",
+    "url": "https://github.com/hiql"
+  },
+  "scripts": {
+    "electron-rebuild": "node -r ../../.erb/scripts/babel-register.js ../../.erb/scripts/electron-rebuild.js",
+    "link-modules": "node -r ../../.erb/scripts/babel-register.js ../../.erb/scripts/link-modules.js",
+    "postinstall": "yarn electron-rebuild && yarn link-modules"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}

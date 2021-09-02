@@ -1,0 +1,460 @@
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+
+@import '~semantic-ui-css/semantic.min.css';
+@import '~overlayscrollbars/css/OverlayScrollbars.min.css';
+@import '~highlight.js/styles/atom-one-light.css';
+@import '~rc-slider/assets/index.css';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.app {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; */
+}
+
+.app-sidebar {
+  width: 220px;
+  height: 100%;
+  border-right: 1px solid #d9d9d9;
+  background-color: #e5e6e7;
+}
+
+.app-sidebar-container {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  height: 100%;
+}
+
+.app-sidebar-controls {
+  grid-row: 1;
+  height: 54px;
+}
+
+.app-sidebar-header {
+  grid-row: 2;
+  text-align: center;
+}
+
+.app-sidebar-main {
+  grid-row: 3;
+  height: 100%;
+  overflow: auto;
+}
+
+.app-sidebar-main-menu-list {
+  margin: 0 !important;
+  width: 100% !important;
+  padding: 12px;
+}
+
+.app-main {
+  flex: 1;
+  height: 100%;
+}
+
+.app-main-container {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+}
+
+.app-main-header {
+  padding: 0;
+  background: #f8f9fa;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  grid-row: 1;
+  z-index: 101;
+}
+
+.app-main-content {
+  grid-row: 2;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.app-main-content-wrap {
+  padding: 15px;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0 4px;
+  min-height: 52px;
+}
+
+.navbar-container-item-left {
+  flex-shrink: 1;
+}
+
+.navbar-container-item-center {
+  flex: 1;
+  text-align: center;
+}
+
+.navbar-container-item-center > h4 {
+  font-weight: normal !important;
+}
+
+.navbar-container-item-right {
+  flex-shrink: 1;
+}
+
+.navbar-button {
+  background-color: transparent !important;
+}
+
+.navbar-button:hover {
+  color: #0d71bb !important;
+}
+
+.padding-left-70 {
+  padding-left: 70px !important;
+}
+
+.scroll-shadow {
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.search-box.ui > input {
+  /* border-radius: 500rem; */
+  border: none !important;
+  background-color: rgba(0, 0, 0,0.065);
+}
+
+.search-box.ui > input:focus {
+  background-color: #f3f3f3;
+}
+
+.link-button {
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: #4183c4 !important;
+  background-color: transparent !important;
+  border: none;
+  outline: none;
+}
+
+.link-button:hover {
+  color: #0d71bb !important;
+}
+
+.home-button {
+  width: 120px;
+  padding: 15px;
+  cursor: pointer;
+  color: #4183c4 !important;
+  border: 0px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  outline: none;
+  text-align: center;
+}
+
+.home-button:hover {
+  color: #0d71bb !important;
+  background-color: #fafafa;
+}
+
+.drag {
+  -webkit-app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+.drawer-container {
+  display:  flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+}
+
+.drawer-container-header {
+  flex-shrink: 1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 42px;
+  padding: 4px 8px;
+  -webkit-app-region: drag;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.drawer-container-header .title {
+  font-weight: bold;
+}
+
+.drawer-container-header-item-right {
+  margin-left: auto;
+  margin-right: 20px;
+  flex-shrink: 1;
+}
+
+.drawer-container-content {
+  flex: 1;
+  overflow: auto;
+}
+
+.code-box {
+  margin-bottom: 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.color-value {
+  border-left: 24px solid #000;
+  padding-left: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.picker {
+  position: relative;
+}
+
+.swatch {
+  width: 32px;
+  height: 28px;
+  border-radius: 2px;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.popover {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  border-radius: 9px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+}
+
+.file-list {
+  display: grid;
+  user-select: none;
+  min-height: 50px;
+}
+
+.file-item {
+  padding: 12px 8px;
+  cursor: grab;
+  word-break: break-all;
+  word-wrap: break-word;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.file-item:last-child {
+  border: none;
+}
+
+.file-dragged {
+  border: 2px solid #00b5ad !important;
+  background-color: #e0fffd;
+  font-weight: bold;
+}
+
+.image-box {
+  background-position: 0 0, 5px 5px !important;
+  background-size: 10px 10px !important;
+  background-image: linear-gradient(45deg,
+    #eee 25%,
+    transparent 25%,
+    transparent 75%,
+    #eee 75%,
+    #eee 100%
+    ),
+    linear-gradient(45deg,
+    #eee 25%,
+    #fff 25%,
+    #fff 75%,
+    #eee 75%,
+    #eee 100%) !important;
+}
+
+.ui.vertical.menu .item a {
+  color:  #686969 !important;
+}
+
+.ui.vertical.menu .active.item a {
+  color: #454545 !important;
+}
+
+.ui.segment {
+  box-shadow: none;
+}
+
+.ui.attached.segment {
+  border: none;
+}
+
+.ui.secondary.pointing.menu .item {
+  border-bottom-width: 3px;
+}
+
+.ui.secondary.pointing.menu {
+  border-bottom: 1px solid rgba(34,36,38,.15);
+}
+/*
+ * File Drop
+ */
+.file-drop {
+  position: relative;
+  height: 200px;
+  width: 100%;
+}
+
+.file-drop > .file-drop-target {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 2px;
+
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+
+  align-items: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+
+  justify-content: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+
+  align-content: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+
+  text-align: center;
+}
+
+.file-drop > .file-drop-target.file-drop-dragging-over-frame {
+  border: none;
+  background-color: rgba(0, 0, 0, 0.65);
+  box-shadow: none;
+  z-index: 50;
+  opacity: 1;
+  color: white;
+}
+
+.file-drop > .file-drop-target.file-drop-dragging-over-target {
+  color: #fdc6b5;
+  box-shadow: 0 0 13px 3px #f3b6a4;
+}
+
+.file-drop-box {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.87);
+  border-radius: 0.28571429rem;
+  margin-bottom: 8px;
+  background-color: #fafafa;
+  cursor: pointer;
+}
+
+.file-drop-box:hover {
+  background-color: #e4e4e4;
+}
+
+.react-numeric-input > input {
+  border-radius: 0.28571429rem !important;
+}
+
+.react-numeric-input > b {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* TicTacToe */
+.tic-tac-toe-board-row:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+.tic-tac-toe-square {
+  background: #eef0f1;
+  border: none;
+  color: #2f363d;
+  border-radius: 8px;
+  float: left;
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 80px;
+  /* margin-right: -1px;
+  margin-top: -1px; */
+  margin: 4px;
+  padding: 0;
+  text-align: center;
+  width: 80px;
+}
+
+.tic-tac-toe-square:hover {
+  background: #f3f3f3;
+}
+
+.tic-tac-toe-winner {
+  font-weight: bold;
+}
+
+.tic-tac-toe-square:focus {
+  outline: none;
+}
+
+.tic-tac-toe-game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.tic-tac-toe-game-info {
+  margin-left: 20px;
+  font-size: 1.2em;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  width: 100%;
+  flex-wrap: wrap;
+
+}
+
+.cards-item {
+  flex-basis: 50%;
+  text-align: center;
+}
