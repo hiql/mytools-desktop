@@ -50,8 +50,8 @@ export default function JsonPrettifier() {
           rows={10}
           onChange={(e) => setRawValue(e.currentTarget.value)}
           value={rawValue}
-          label="String"
-          placeholder="Please paste your json string here"
+          label="JSON"
+          placeholder="Enter or paste json here"
         />
         <OverlayScrollbarsComponent
           style={{ height: 400 }}
@@ -76,7 +76,7 @@ export default function JsonPrettifier() {
             visible={visible}
             onClose={closeDrawer}
             width="100%"
-            height="80%"
+            height="70%"
             placement="bottom"
             closable
           >
@@ -84,7 +84,12 @@ export default function JsonPrettifier() {
               <div className="drawer-container-header">
                 <div className="title">JSON Inspector</div>
               </div>
-              <OverlayScrollbarsComponent className="drawer-container-content">
+              <OverlayScrollbarsComponent
+                options={{
+                  scrollbars: { autoHide: 'leave' },
+                  className: 'os-theme-dark drawer-container-content',
+                }}
+              >
                 <ReactJson style={{ padding: 20 }} src={jsonObject} />
               </OverlayScrollbarsComponent>
             </div>

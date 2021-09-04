@@ -116,26 +116,28 @@ const TabAesDesEncryptor = () => {
 
       const keyValue = CryptoJS.enc.Utf8.parse(secretKey);
       const ivValue = CryptoJS.enc.Utf8.parse(iv);
-      let result;
+      let result = null;
       if (algorithm === 'AES') {
         result = CryptoJS.AES.encrypt(rawValue, keyValue, {
-          iv: mode === 'CBC' ? ivValue : null,
+          iv: mode === 'CBC' ? ivValue : undefined,
           mode: toCryptoJSMode(mode),
           padding: toCryptoJSPadding(padding),
         });
       } else if (algorithm === 'DES') {
         result = CryptoJS.DES.encrypt(rawValue, keyValue, {
-          iv: mode === 'CBC' ? ivValue : null,
+          iv: mode === 'CBC' ? ivValue : undefined,
           mode: toCryptoJSMode(mode),
           padding: toCryptoJSPadding(padding),
         });
       } else if (algorithm === 'TDES') {
         result = CryptoJS.TripleDES.encrypt(rawValue, keyValue, {
-          iv: mode === 'CBC' ? ivValue : null,
+          iv: mode === 'CBC' ? ivValue : undefined,
           mode: toCryptoJSMode(mode),
           padding: toCryptoJSPadding(padding),
         });
       }
+
+      if (result == null) return;
 
       if (outputTextFormat === 'base64') {
         setResultValue(result.toString());
@@ -169,9 +171,9 @@ const TabAesDesEncryptor = () => {
         <Form.TextArea
           rows={8}
           value={rawValue}
-          label="Input Text"
+          label="Text"
           onChange={(e) => setRawValue(e.currentTarget.value)}
-          placeholder="Please input the content"
+          placeholder="Enter plain text here"
         />
         <Form.Group widths="equal">
           <Form.Select
@@ -243,12 +245,7 @@ const TabAesDesEncryptor = () => {
             Encrypt
           </Form.Button>
         </Form.Group>
-        <Form.TextArea
-          rows={8}
-          value={resultValue}
-          label="Output Text"
-          placeholder="Encrypted goes here"
-        />
+        <Form.TextArea rows={8} value={resultValue} label="Output Text" />
         <Form.Group inline>
           <Form.Button onClick={onCopy}>
             <Icon name="copy" />
@@ -330,23 +327,26 @@ const TabAesDesDecryptor = () => {
       let result;
       if (algorithm === 'AES') {
         result = CryptoJS.AES.decrypt(rawText, keyValue, {
-          iv: mode === 'CBC' ? ivValue : null,
+          iv: mode === 'CBC' ? ivValue : undefined,
           mode: toCryptoJSMode(mode),
           padding: toCryptoJSPadding(padding),
         });
       } else if (algorithm === 'DES') {
         result = CryptoJS.DES.decrypt(rawText, keyValue, {
-          iv: mode === 'CBC' ? ivValue : null,
+          iv: mode === 'CBC' ? ivValue : undefined,
           mode: toCryptoJSMode(mode),
           padding: toCryptoJSPadding(padding),
         });
       } else if (algorithm === 'TDES') {
         result = CryptoJS.TripleDES.decrypt(rawText, keyValue, {
-          iv: mode === 'CBC' ? ivValue : null,
+          iv: mode === 'CBC' ? ivValue : undefined,
           mode: toCryptoJSMode(mode),
           padding: toCryptoJSPadding(padding),
         });
       }
+
+      if (result == null) return;
+
       setResultValue(result.toString());
       setDecodedResultValue(result.toString(CryptoJS.enc.Utf8));
     } catch (error) {
@@ -385,9 +385,9 @@ const TabAesDesDecryptor = () => {
         <Form.TextArea
           rows={8}
           value={rawValue}
-          label="Input Text"
+          label="Text"
           onChange={(e) => setRawValue(e.currentTarget.value)}
-          placeholder="Please input the content"
+          placeholder="Enter encrypted text here"
         />
         <Form.Group inline>
           <label>Input Text Format </label>
@@ -460,13 +460,7 @@ const TabAesDesDecryptor = () => {
             Decrypt
           </Form.Button>
         </Form.Group>
-        <Form.TextArea
-          rows={8}
-          value={resultValue}
-          label="Output Text(Hex)"
-          onChange={(e) => setResultValue(e.currentTarget.value)}
-          placeholder="Decrypted goes here"
-        />
+        <Form.TextArea rows={8} value={resultValue} label="Output Text(Hex)" />
         <Form.Group inline>
           <Form.Button onClick={onCopy}>
             <Icon name="copy" />
@@ -477,8 +471,7 @@ const TabAesDesDecryptor = () => {
         <Form.TextArea
           rows={8}
           value={decodedResultValue}
-          label="Decoded"
-          placeholder="Plain text will appear here"
+          label="Decoded(Plain Text)"
         />
       </Form>
     </Tab.Pane>

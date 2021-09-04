@@ -27,7 +27,7 @@ A desktop application based on Electron and React for daily application developm
 - HTML to Markdown
 - Password Generator
 - UUID Generator
-- Unix Timestamp Converter
+- Unix Time Converter
 - Cron Reader
 - Color Picker
 - SVG Optimizer
@@ -40,7 +40,7 @@ A desktop application based on Electron and React for daily application developm
 - File Merger
 - File Checksum Calculator
 - Archive Explorer
-- QRCode
+- QRCode Generator
 - SQL Formatter
 - IP Converter
 - Morse Code Translator

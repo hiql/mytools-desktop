@@ -57,7 +57,10 @@ export default function ImageResizer() {
   const [outputFile, setOutputFile] = React.useState('');
 
   React.useEffect(() => {
-    const storedImageSize = window.store.get(constants.KEY_SVGE_IMAGE_SIZE);
+    const storedImageSize = window.store.get(
+      constants.KEY_SVGE_IMAGE_SIZE,
+      imagePreviewSize
+    );
     setImagePreviewSize(storedImageSize as string);
   }, []);
 
@@ -115,7 +118,7 @@ export default function ImageResizer() {
       <Form>
         <Form.Group inline>
           <Form.Button primary onClick={showFilePicker}>
-            Choose file ...
+            Choose image ...
           </Form.Button>
           <Form.Select
             value={imagePreviewSize}
@@ -205,7 +208,7 @@ export default function ImageResizer() {
         </Form.Group>
       </Form>
       <Segment textAlign="center">
-        <Label attached="top left">Result</Label>
+        <Label attached="top left">Output File</Label>
         <Image id="expi" inline src={outputFile} />
         <p
           style={{

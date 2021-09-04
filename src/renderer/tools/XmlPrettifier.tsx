@@ -49,8 +49,8 @@ export default function XmlPrettifier() {
           rows={10}
           onChange={(e) => setRawValue(e.currentTarget.value)}
           value={rawValue}
-          label="String"
-          placeholder="Please paste your xml string here"
+          label="XML"
+          placeholder="Enter or paste xml here"
         />
         <Form.Field inline>
           <label>Indent</label>

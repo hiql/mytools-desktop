@@ -32,7 +32,8 @@ export default function SQLFormatter() {
 
   React.useEffect(() => {
     const storedSqlLang = window.store.get(
-      constants.KEY_SQLFORMATTER_SQL_LANGUAGE
+      constants.KEY_SQLFORMATTER_SQL_LANGUAGE,
+      sqlLang
     );
     setSqlLang(storedSqlLang as string);
   }, []);
@@ -75,7 +76,7 @@ export default function SQLFormatter() {
         value={rawValue}
         label="SQL"
         onChange={(e) => setRawValue(e.currentTarget.value)}
-        placeholder="Please input the content"
+        placeholder="Enter or paste SQL here"
       />
       <Form.Group>
         <Form.Select
@@ -115,7 +116,7 @@ export default function SQLFormatter() {
           onChange={(_e, { checked }) =>
             setUppercase(checked === undefined ? uppercase : checked)
           }
-          label="Uppercase Keywords"
+          label="Uppercase keywords"
         />
       </Form.Group>
       <OverlayScrollbarsComponent style={{ height: 400 }} className="code-box">

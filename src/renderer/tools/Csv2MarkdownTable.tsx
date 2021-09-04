@@ -44,7 +44,7 @@ export default function Csv2MarkdownTable() {
         value={rawValue}
         label="CSV"
         onChange={(e) => setRawValue(e.currentTarget.value)}
-        placeholder="Please paste your CSV here"
+        placeholder="Enter or paste csv here"
       />
       <Form.Group inline>
         <Form.Select
@@ -70,13 +70,7 @@ export default function Csv2MarkdownTable() {
           Convert
         </Form.Button>
       </Form.Group>
-      <Form.TextArea
-        rows={10}
-        value={resultValue}
-        label="Markdown Table"
-        onChange={(e) => setResultValue(e.currentTarget.value)}
-        placeholder=""
-      />
+      <Form.TextArea rows={10} value={resultValue} label="Markdown Table" />
       <Form.Group inline>
         <Form.Button onClick={onCopy}>
           <Icon name="copy" />

@@ -34,20 +34,14 @@ export default function Html2Markdown() {
         value={rawValue}
         label="HTML"
         onChange={(e) => setRawValue(e.currentTarget.value)}
-        placeholder="Please paste your HTML content here"
+        placeholder="Enter or paste html here"
       />
       <Form.Group>
         <Form.Button primary onClick={onConvert}>
           Convert
         </Form.Button>
       </Form.Group>
-      <Form.TextArea
-        rows={10}
-        value={resultValue}
-        label="Markdown"
-        onChange={(e) => setResultValue(e.currentTarget.value)}
-        placeholder=""
-      />
+      <Form.TextArea rows={10} value={resultValue} label="Markdown" />
       <Form.Group inline>
         <Form.Button onClick={onCopy}>
           <Icon name="copy" />

@@ -32,7 +32,6 @@ export default function UnixTimestampConverter() {
   const [humanDateResult, setHumanDateResult] = React.useState('');
 
   const [currentTimestamp, setCurrentTimestamp] = React.useState('');
-  const [currentDatetime, setCurrentDatetime] = React.useState('');
   const [dateTimePattern, setDateTimePattern] = React.useState('LLLL Z');
 
   const [utcTimestamp, setUtcTimestamp] = React.useState(false);
@@ -41,7 +40,7 @@ export default function UnixTimestampConverter() {
   React.useEffect(() => {
     const storedDateTimeFormat = window.store.get(
       constants.KEY_TIMESTAMP_CONVERTER_DATETIME_FORMAT,
-      'LLLL Z'
+      dateTimePattern
     );
 
     setDateTimePattern(storedDateTimeFormat as string);
@@ -49,8 +48,6 @@ export default function UnixTimestampConverter() {
     const timer = setInterval(() => {
       const time = Math.round(new Date().getTime() / 1000);
       setCurrentTimestamp(time.toString());
-      setCurrentDatetime(new Date().toLocaleString());
-      setCurrentDatetime(new Date().toLocaleString());
     }, 1000);
 
     const now = moment();
@@ -127,16 +124,16 @@ export default function UnixTimestampConverter() {
             {numberWithCommas(currentTimestamp)}
           </Statistic.Value>
         </Statistic>
-        <Header as="h3">Unix TimeStamp to Date/Time</Header>
+        <Header as="h3">Unix Time to Date/Time</Header>
         <Form.Group>
           <Form.Input
-            label="Unix TimeStamp"
+            label="Unix Time"
             value={timestamp}
             onChange={(e) => setTimestamp(e.currentTarget.value)}
           />
           <Form.Select
             value={dateTimePattern}
-            label="Select Date Format	"
+            label="Select Date/Time Format	"
             onChange={(_e, { value }) =>
               value !== undefined && onChange(value.toString())
             }
@@ -157,14 +154,14 @@ export default function UnixTimestampConverter() {
           </Form.Button>
           <Form.Button onClick={onCopy}>
             <Icon name="clock outline" />
-            Get Current Unix Timestamp
+            Get Current Unix Time
           </Form.Button>
         </Form.Group>
         <Segment basic>
           <strong> {timestampResult}</strong>
         </Segment>
 
-        <Header as="h3">Date/Time to Unix TimeStamp</Header>
+        <Header as="h3">Date/Time to Unix Time</Header>
 
         <Form.Group>
           <Form.Field>
@@ -292,7 +289,7 @@ export default function UnixTimestampConverter() {
         </table>
 
         <h2>In programming languages</h2>
-        <table className="ui collapsing very basic table">
+        <table className="ui collapsing very basic table stackable">
           <thead>
             <tr>
               <th>Language</th>

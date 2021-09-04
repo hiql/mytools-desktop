@@ -53,7 +53,7 @@ export default function Csv2Json() {
         value={rawValue}
         label="JSON"
         onChange={(e) => setRawValue(e.currentTarget.value)}
-        placeholder="Please paste your JSON here"
+        placeholder="Enter or paste json here"
       />
       <Form.Group inline>
         <Form.Select
@@ -89,13 +89,7 @@ export default function Csv2Json() {
           Convert
         </Form.Button>
       </Form.Group>
-      <Form.TextArea
-        rows={10}
-        value={resultValue}
-        label="CSV"
-        onChange={(e) => setResultValue(e.currentTarget.value)}
-        placeholder=""
-      />
+      <Form.TextArea rows={10} value={resultValue} label="CSV" />
       <Form.Group inline>
         <Form.Button onClick={onCopy}>
           <Icon name="copy" />

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, List } from 'semantic-ui-react';
+import { Form, Label, List } from 'semantic-ui-react';
 
 function toByte(v: number, u: string): number {
   if (u === 'b') return v;
@@ -27,13 +27,15 @@ export default function ByteCalculator() {
   const [tbValue, setTbValue] = React.useState(0);
 
   const setBaseValue = (v: string, u: string) => {
-    if (u === 'b') setBValue(v);
-    if (u === 'kb') setKbValue(v);
-    if (u === 'mb') setMbValue(v);
-    if (u === 'gb') setGbValue(v);
-    if (u === 'tb') setTbValue(v);
+    const nv = v === '' ? 0 : parseFloat(v);
 
-    const bt = toByte(v, u);
+    if (u === 'b') setBValue(nv);
+    if (u === 'kb') setKbValue(nv);
+    if (u === 'mb') setMbValue(nv);
+    if (u === 'gb') setGbValue(nv);
+    if (u === 'tb') setTbValue(nv);
+
+    const bt = toByte(nv, u);
 
     if (u !== 'b') setBValue(calc(bt, 'b'));
     if (u !== 'kb') setKbValue(calc(bt, 'kb'));
@@ -42,51 +44,88 @@ export default function ByteCalculator() {
     if (u !== 'tb') setTbValue(calc(bt, 'tb'));
   };
 
+  const noborder: React.CSSProperties = {
+    borderLeft: 'none',
+    color: 'grey',
+    width: 50,
+    textAlign: 'right',
+    fontWeight: 'normal',
+  };
+
   return (
     <>
       <Form>
-        <Form.Group inline>
+        <Form.Group>
           <Form.Input
+            type="text"
             label="Bytes"
             value={bValue}
+            labelPosition="right"
             onChange={(e) => setBaseValue(e.currentTarget.value, 'b')}
-          />
-          <span>B</span>
+          >
+            <input />
+            <Label basic style={noborder}>
+              B
+            </Label>
+          </Form.Input>
         </Form.Group>
-        <Form.Group inline>
+        <Form.Group>
           <Form.Input
+            type="text"
             label="Kilobytes"
+            labelPosition="right"
             value={kbValue}
             onChange={(e) => setBaseValue(e.currentTarget.value, 'kb')}
-          />
-          <span>KB</span>
+          >
+            <input />
+            <Label basic style={noborder}>
+              KB
+            </Label>
+          </Form.Input>
         </Form.Group>
-        <Form.Group inline>
+        <Form.Group>
           <Form.Input
+            type="text"
             label="Megabytes"
+            labelPosition="right"
             value={mbValue}
             onChange={(e) => setBaseValue(e.currentTarget.value, 'mb')}
-          />
-          <span>MB</span>
+          >
+            <input />
+            <Label basic style={noborder}>
+              MB
+            </Label>
+          </Form.Input>
         </Form.Group>
-        <Form.Group inline>
+        <Form.Group>
           <Form.Input
+            type="text"
             label="Gigabytes"
+            labelPosition="right"
             value={gbValue}
             onChange={(e) => setBaseValue(e.currentTarget.value, 'gb')}
-          />
-          <span>GB</span>
+          >
+            <input />
+            <Label basic style={noborder}>
+              GB
+            </Label>
+          </Form.Input>
         </Form.Group>
-        <Form.Group inline>
+        <Form.Group>
           <Form.Input
+            type="text"
             label="Terabytes"
+            labelPosition="right"
             value={tbValue}
             onChange={(e) => setBaseValue(e.currentTarget.value, 'tb')}
-          />
-          <span>TB</span>
+          >
+            <input />
+            <Label basic style={noborder}>
+              TB
+            </Label>
+          </Form.Input>
         </Form.Group>
       </Form>
-      <br />
       <List relaxed>
         <List.Header as="h3">Reference</List.Header>
         <List.Item>1 Byte = 8 Bits</List.Item>

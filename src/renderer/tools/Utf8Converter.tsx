@@ -1,6 +1,6 @@
 import * as React from 'react';
 import utils from 'renderer/utils';
-import { Form, Grid, GridColumn, Icon, Segment } from 'semantic-ui-react';
+import { Form, Icon } from 'semantic-ui-react';
 import utf8 from 'utf8';
 
 function hexEscape(string: string) {
@@ -152,48 +152,38 @@ export default function Utf8Converter() {
       <Form.TextArea
         rows={10}
         value={rawValue}
-        label="String"
+        label="Text"
         onChange={(e) => setRawValue(e.currentTarget.value)}
-        placeholder="Please input the content"
+        placeholder="Enter text here"
       />
-      <Segment>
-        <Grid columns="3" stackable>
-          <GridColumn>
-            <Form.Button fluid primary onClick={onEncode}>
-              UTF8 Encode
-            </Form.Button>
 
-            <Form.Button fluid primary onClick={onDecode}>
-              UTF8 Decode
-            </Form.Button>
-          </GridColumn>
+      <Form.Group widths="equal">
+        <Form.Button fluid primary onClick={onEncode}>
+          UTF8 Encode
+        </Form.Button>
 
-          <GridColumn>
-            <Form.Button fluid primary onClick={onStringToHex}>
-              UTF8 to Hex
-            </Form.Button>
-            <Form.Button fluid primary onClick={onHexToString}>
-              Hex to UTF8
-            </Form.Button>
-          </GridColumn>
-          <GridColumn>
-            <Form.Button fluid primary onClick={onByteToString}>
-              Byte to String
-            </Form.Button>
+        <Form.Button fluid primary onClick={onDecode}>
+          UTF8 Decode
+        </Form.Button>
 
-            <Form.Button fluid primary onClick={onStringToByte}>
-              String to Byte
-            </Form.Button>
-          </GridColumn>
-        </Grid>
-      </Segment>
-      <Form.TextArea
-        rows={10}
-        value={resultValue}
-        label="Result"
-        onChange={(e) => setResultValue(e.currentTarget.value)}
-        placeholder=""
-      />
+        <Form.Button fluid primary onClick={onStringToHex}>
+          UTF8 to Hex
+        </Form.Button>
+      </Form.Group>
+      <Form.Group widths="equal">
+        <Form.Button fluid primary onClick={onHexToString}>
+          Hex to UTF8
+        </Form.Button>
+
+        <Form.Button fluid primary onClick={onByteToString}>
+          Byte to String
+        </Form.Button>
+
+        <Form.Button fluid primary onClick={onStringToByte}>
+          String to Byte
+        </Form.Button>
+      </Form.Group>
+      <Form.TextArea rows={10} value={resultValue} label="Output" />
 
       <Form.Group inline>
         <Form.Button onClick={onCopy}>

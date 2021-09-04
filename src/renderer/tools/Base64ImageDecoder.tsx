@@ -31,15 +31,17 @@ const mimeTypeOptions = [
 
 export default function Base64ImageDecoder() {
   const [rawValue, setRawValue] = React.useState('');
-  const [mimeType, setMimeType] = React.useState('');
+  const [mimeType, setMimeType] = React.useState('svg');
   const [imageSize, setImageSize] = React.useState('medium');
 
   React.useEffect(() => {
     const storedImageSize = window.store.get(
-      constants.KEY_BASE64_IMAGE_DECODER_IMAGE_SIZE
+      constants.KEY_BASE64_IMAGE_DECODER_IMAGE_SIZE,
+      imageSize
     );
     const storedImageType = window.store.get(
-      constants.KEY_BASE64_IMAGE_DECODER_IMAGE_TYPE
+      constants.KEY_BASE64_IMAGE_DECODER_IMAGE_TYPE,
+      mimeType
     );
     setImageSize(storedImageSize as string);
     setMimeType(storedImageType as string);
@@ -76,7 +78,7 @@ export default function Base64ImageDecoder() {
         rows={15}
         value={rawValue}
         label="Base64 String"
-        placeholder="Please paste the image base64 string here"
+        placeholder="Enter or paste base64 string here"
         onChange={(e) => setRawValue(e.currentTarget.value)}
       />
       <Form.Group inline>

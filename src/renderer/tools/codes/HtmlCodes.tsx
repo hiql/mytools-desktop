@@ -1,8 +1,8 @@
 import * as React from 'react';
-import htmlCodes from './html_codes';
 import TableSearcher, {
   IColumnDescriptor,
-} from '../../components/TableSearcher';
+} from 'renderer/components/TableSearcher';
+import htmlCodes from './html_codes';
 
 export default function HtmlCodes() {
   const cols: IColumnDescriptor[] = [

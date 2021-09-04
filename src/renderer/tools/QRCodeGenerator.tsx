@@ -18,13 +18,30 @@ const renderOptions = [
   { key: 'svg', value: 'svg', text: 'SVG' },
 ];
 
+interface IQRCodeOptions {
+  value: string;
+  renderAs: string;
+  size: number;
+  level: string;
+  bgColor: string;
+  fgColor: string;
+  includeMargin: boolean;
+  imageSettings: {
+    src: string;
+    x: null;
+    y: null;
+    height: number;
+    width: number;
+    excavate: boolean;
+  } | null;
+}
 export default function QRCodeGenerator() {
   const { files, FileInput, showFilePicker } = useFilePicker({
     minSize: 10000,
     maxSize: 10000000,
   });
 
-  const [qrcodeOptions, setQRCodeOptions] = React.useState({
+  const [qrcodeOptions, setQRCodeOptions] = React.useState<IQRCodeOptions>({
     value: '',
     renderAs: 'canvas',
     size: 256,
@@ -87,9 +104,9 @@ export default function QRCodeGenerator() {
       <Form.TextArea
         rows="5"
         value={stringValue}
-        label="String"
+        label="Text"
         onChange={(e) => setStringValue(e.currentTarget.value)}
-        placeholder="Please input the content"
+        placeholder="Enter text here"
       />
       <Form.Group>
         <Form.Field>
@@ -149,7 +166,7 @@ export default function QRCodeGenerator() {
           onChange={(_e, { checked }) =>
             checked !== undefined && setIncludeImage(checked)
           }
-          label="Include Image"
+          label="Include image"
         />
         <Form.Checkbox
           inline
@@ -158,7 +175,7 @@ export default function QRCodeGenerator() {
           onChange={(_e, { checked }) =>
             checked !== undefined && setIncludeMargin(checked)
           }
-          label="Include Margin"
+          label="Include margin"
         />
       </Form.Group>
       <Segment disabled={!includeImage}>
@@ -186,7 +203,7 @@ export default function QRCodeGenerator() {
             />
           </Form.Field>
           <Form.Button primary onClick={showFilePicker}>
-            Select an image ...
+            Choose image ...
           </Form.Button>
         </Form.Group>
 

@@ -45,6 +45,14 @@ export default function RsaCryptor() {
     utils.copy(resultValue);
   };
 
+  const onPrivateKeyCopy = () => {
+    utils.copy(genPrivateKeyValue);
+  };
+
+  const onPublicKeyCopy = () => {
+    utils.copy(genPublicKeyValue);
+  };
+
   const onReset = () => {
     setRawValue('');
     setResultValue('');
@@ -69,25 +77,24 @@ export default function RsaCryptor() {
 
   return (
     <Form>
-      <Header as="h3">RSA Encryption and Decryption</Header>
       <Form.TextArea
         rows={10}
         value={rawValue}
         label="Text"
         onChange={(e) => setRawValue(e.currentTarget.value)}
-        placeholder="Please input the content"
+        placeholder="Enter or paste text here"
       />
       <Form.TextArea
         rows={10}
         value={keyValue}
-        label="Public/Private key"
+        label="Public/Private Key"
         onChange={(e) => setKeyValue(e.currentTarget.value)}
-        placeholder="Paste Public/Private key"
+        placeholder="Paste public or private key here"
       />
       <Form.Group inline>
         <label>RSA Key Type</label>
         <Form.Radio
-          label="Public key"
+          label="Public Key"
           value="public"
           checked={keyType === 'public'}
           onChange={(_e, { value }) =>
@@ -114,7 +121,7 @@ export default function RsaCryptor() {
       <Form.TextArea
         rows={8}
         value={resultValue}
-        label="Result"
+        label="Output"
         onChange={(e) => setResultValue(e.currentTarget.value)}
         placeholder=""
       />
@@ -127,23 +134,11 @@ export default function RsaCryptor() {
       </Form.Group>
 
       <Header as="h3">Generate RSA Key</Header>
-      <Form.TextArea
-        rows={8}
-        value={genPublicKeyValue}
-        label="Public Key"
-        onChange={(e) => setGenPublicKeyValue(e.currentTarget.value)}
-        placeholder=""
-      />
-      <Form.TextArea
-        rows={10}
-        value={genPrivateKeyValue}
-        label="Private Key"
-        onChange={(e) => setGenPrivateKeyValue(e.currentTarget.value)}
-        placeholder=""
-      />
+      <Form.TextArea rows={8} value={genPublicKeyValue} label="Public Key" />
+      <Form.TextArea rows={10} value={genPrivateKeyValue} label="Private Key" />
       <Form.Group inline>
         <Form.Select
-          label="Key Size"
+          label="Key size"
           value={genKeySize}
           onChange={(_e, { value }) =>
             value !== undefined && setGenKeySize(value.toString())
@@ -152,9 +147,19 @@ export default function RsaCryptor() {
           options={keySizeOptions}
         />
       </Form.Group>
-      <Form.Button primary onClick={onGenerateKeys}>
-        Generate RSA Key Pair
-      </Form.Button>
+      <Form.Group inline>
+        <Form.Button primary onClick={onGenerateKeys}>
+          Generate
+        </Form.Button>
+        <Form.Button onClick={onPublicKeyCopy}>
+          <Icon name="key" />
+          Copy Public Key
+        </Form.Button>
+        <Form.Button onClick={onPrivateKeyCopy}>
+          <Icon name="lock" />
+          Copy Private Key
+        </Form.Button>
+      </Form.Group>
     </Form>
   );
 }

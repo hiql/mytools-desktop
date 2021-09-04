@@ -8,14 +8,15 @@ import TableSearcher, {
 export default function CountryCodes() {
   const cols: IColumnDescriptor[] = [
     {
-      field: 'continent',
-      text: 'Continent',
-      searchable: true,
-    },
-    {
       field: 'name',
       text: 'Name',
       searchable: true,
+    },
+    {
+      field: 'continent',
+      text: 'Continent',
+      searchable: true,
+      align: 'center',
     },
     {
       field: 'iso2',
@@ -29,7 +30,7 @@ export default function CountryCodes() {
     },
     {
       field: 'telephone',
-      text: 'Telephone',
+      text: 'Tel',
       exact: true,
       searchable: true,
     },
@@ -44,7 +45,7 @@ export default function CountryCodes() {
   return (
     <div>
       <TableSearcher data={countryCodes} columns={cols} />
-      <List>
+      <List relaxed>
         <List.Header as="h4">Summary</List.Header>
         {continent.map((cont) => (
           <List.Item

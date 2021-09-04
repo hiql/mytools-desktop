@@ -50,6 +50,11 @@ languageRegistry.set('.less', 'less');
 languageRegistry.set('.scss', 'scss');
 languageRegistry.set('.log', 'accesslog');
 
+interface IEntryFile {
+  isFile: boolean;
+  path: string;
+}
+
 export default function ArchiveExplorer() {
   const { files, FileInput, showFilePicker } = useFilePicker({
     minSize: 10000,
@@ -61,8 +66,10 @@ export default function ArchiveExplorer() {
   const [archiveFilePath, setArchiveFilePath] = React.useState('');
   const [archiveFileSize, setArchiveFileSize] = React.useState('');
   const [archiveFileType, setArchiveFileType] = React.useState('');
-  const [resultValue, setResultValue] = React.useState([]);
-  const [filteredResultValue, setFilteredResultValue] = React.useState([]);
+  const [resultValue, setResultValue] = React.useState<IEntryFile[]>([]);
+  const [filteredResultValue, setFilteredResultValue] = React.useState<
+    IEntryFile[]
+  >([]);
   const [openFileContent, setOpenFileContent] = React.useState('');
   const [openFilePath, setOpenFilePath] = React.useState('');
   const [keyword, setKeyword] = React.useState('');
@@ -74,7 +81,7 @@ export default function ArchiveExplorer() {
   const closeDrawer = () => setIsVisible(false);
   const openDrawer = () => setIsVisible(true);
 
-  React.useEffect(() => {
+  const setFile = (file: File | null) => {
     setArchiveFile('');
     setArchiveFileName('');
     setArchiveFilePath('');
@@ -83,18 +90,21 @@ export default function ArchiveExplorer() {
     setResultValue([]);
     setFilteredResultValue([]);
 
-    if (files.length === 0) return;
+    if (file == null) return;
 
     try {
-      const filePath = files[0].path;
-      setArchiveFile(filePath);
-      setArchiveFileSize(byteSize(files[0].size).toString());
-      setArchiveFileType(files[0].type);
-      setArchiveFileName(files[0].name);
-      setArchiveFilePath(window.nio.dirname(filePath));
+      setArchiveFile(file.path);
+      setArchiveFileSize(byteSize(file.size).toString());
+      setArchiveFileType(file.type);
+      setArchiveFileName(file.name);
+      setArchiveFilePath(window.nio.dirname(file.path));
     } catch (error) {
       utils.toast.error('Invalid archive file!');
     }
+  };
+
+  React.useEffect(() => {
+    setFile(files.length > 0 ? files[0] : null);
   }, [files]);
 
   React.useEffect(() => {
@@ -104,7 +114,7 @@ export default function ArchiveExplorer() {
     if (archiveFile === '') return;
 
     try {
-      window.nio.archive.list(archiveFile, (err, entries) => {
+      window.nio.archive.list(archiveFile, (err: Error, entries: []) => {
         if (err !== null) {
           setLoading(false);
           utils.toast.error(err.message);
@@ -122,13 +132,13 @@ export default function ArchiveExplorer() {
     }
   }, [archiveFile]);
 
-  const onOpenFile = (e) => {
+  const onOpenFile = (e: string) => {
     setOpenFileContent('');
     setOpenFilePath('');
     setLang('');
 
     if (e === '') return;
-    window.nio.archive.read(archiveFile, e, (err, content) => {
+    window.nio.archive.read(archiveFile, e, (err: Error, content: string) => {
       if (err !== null) {
         utils.toast.error(err.message);
         return;
@@ -143,29 +153,30 @@ export default function ArchiveExplorer() {
     });
   };
 
-  const onSaveFile = (e) => {
-    if (e === '') return;
+  const onSaveFile = (file: string) => {
+    if (file === '') return;
 
-    const fileName = window.nio.basename(e);
+    const fileName = window.nio.basename(file);
     const outputFullPath = window.nio.safename(
       window.nio.desktopdir(),
       fileName
     );
-    window.nio.archive.save(archiveFile, e, outputFullPath, (err, outpath) => {
-      if (err !== null) {
-        utils.toast.error(err.message);
-        return;
+    window.nio.archive.save(
+      archiveFile,
+      file,
+      outputFullPath,
+      (err: Error, outpath: string) => {
+        if (err !== null) {
+          utils.toast.error(err.message);
+          return;
+        }
+        utils.toast.success(`Saved to ${outpath}`);
       }
-      utils.toast.success(`Saved to ${outpath}`);
-    });
+    );
   };
 
-  const onFileDrop = (dropFiles) => {
-    if (dropFiles.length > 0) {
-      setArchiveFile(dropFiles[0].path);
-      setArchiveFileSize(byteSize(dropFiles[0].size).toString());
-      setArchiveFileType(dropFiles[0].type);
-    }
+  const onFileDrop = (dropFiles: FileList | null) => {
+    setFile(dropFiles != null && dropFiles.length > 0 ? dropFiles[0] : null);
   };
 
   const search = (kw: string) => {
@@ -190,8 +201,17 @@ export default function ArchiveExplorer() {
     <>
       <div className="file-drop-box">
         <FileDrop onDrop={onFileDrop} onTargetClick={showFilePicker}>
-          <div style={{ margin: 8, fontSize: '1.6em' }}>{archiveFileName}</div>
-          <div style={{ margin: 8, fontSize: '1.0em', color: '#555' }}>
+          <div style={{ margin: 8, fontSize: '1.2em', wordBreak: 'break-all' }}>
+            {archiveFileName}
+          </div>
+          <div
+            style={{
+              margin: 8,
+              fontSize: '1.0em',
+              color: '#555',
+              wordBreak: 'break-all',
+            }}
+          >
             {archiveFilePath}
           </div>
           <div style={{ color: '#333' }}>{archiveFileSize}</div>
@@ -203,7 +223,7 @@ export default function ArchiveExplorer() {
               display: archiveFile === '' ? 'block' : 'none',
             }}
           >
-            Drop your file here or click to select
+            Drop your file here or Click to select
           </div>
         </FileDrop>
 
@@ -221,9 +241,7 @@ export default function ArchiveExplorer() {
           placeholder="Search..."
         />
 
-        <Label attached="top right" color="teal">
-          {archiveFileType}
-        </Label>
+        <Label attached="top right">{archiveFileType}</Label>
 
         <List relaxed>
           <List.Header />
@@ -273,7 +291,7 @@ export default function ArchiveExplorer() {
         visible={visible}
         onClose={closeDrawer}
         width="100%"
-        height="80%"
+        height="70%"
         placement="bottom"
         closable
       >
@@ -289,7 +307,12 @@ export default function ArchiveExplorer() {
               </Button>
             </div>
           </div>
-          <OverlayScrollbarsComponent className="drawer-container-content">
+          <OverlayScrollbarsComponent
+            options={{
+              scrollbars: { autoHide: 'leave' },
+              className: 'os-theme-dark drawer-container-content',
+            }}
+          >
             <Highlight language={lang}>{openFileContent}</Highlight>
           </OverlayScrollbarsComponent>
         </div>

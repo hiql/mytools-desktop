@@ -79,7 +79,7 @@ export default function TextCounter() {
           value={textValue}
           label="Text"
           onChange={(e) => setTextValue(e.currentTarget.value)}
-          placeholder="Please input the text"
+          placeholder="Enter or paste text here"
         />
         <Segment>
           <Statistic.Group size="tiny" widths="4">

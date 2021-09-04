@@ -57,7 +57,7 @@ export default function UrlParser() {
           value={rawValue}
           label="URL"
           onChange={(e) => setRawValue(e.currentTarget.value)}
-          placeholder="Paste your url here"
+          placeholder="Enter or paste url here"
         />
         <Form.Group inline>
           <Form.Button onClick={onReset}>Reset</Form.Button>

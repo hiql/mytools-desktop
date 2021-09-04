@@ -30,9 +30,8 @@ export default function Hasher() {
   const [upperCase, setUpperCase] = React.useState(false);
 
   const onEncrypt = () => {
-    // console.log('Hash:', name, ',Password:', password);
-    let result = '';
-    setResultValue(result);
+    setResultValue('');
+    let result;
     switch (name) {
       case 'md5':
         result = crypto.MD5(rawValue);
@@ -56,7 +55,7 @@ export default function Hasher() {
         result = crypto.SHA3(rawValue);
         break;
       case 'ripemd160':
-        result = crypto.RIPEMD160(rawValue, password);
+        result = crypto.RIPEMD160(rawValue);
         break;
       case 'hmac-md5':
         result = crypto.HmacMD5(rawValue, password);
@@ -83,6 +82,7 @@ export default function Hasher() {
       default:
         break;
     }
+    if (result === undefined) return;
     if (upperCase === true) {
       setResultValue(result.toString().toUpperCase());
     } else {
@@ -173,9 +173,9 @@ export default function Hasher() {
       <Form.TextArea
         rows={10}
         value={rawValue}
-        label="String"
+        label="Text"
         onChange={(e) => setRawValue(e.currentTarget.value)}
-        placeholder="Please input the content"
+        placeholder="Enter plain text here"
       />
       <Form.Group inline>
         <Form.Select
@@ -199,13 +199,7 @@ export default function Hasher() {
           Encrypt
         </Form.Button>
       </Form.Group>
-      <Form.TextArea
-        rows={5}
-        value={resultValue}
-        label="Result"
-        onChange={(e) => setResultValue(e.currentTarget.value)}
-        placeholder=""
-      />
+      <Form.TextArea rows={5} value={resultValue} label="Output" />
       <Form.Group inline>
         <Form.Button onClick={onCopy}>
           <Icon name="copy" />

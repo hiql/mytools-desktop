@@ -2,7 +2,21 @@ import * as React from 'react';
 import utils from 'renderer/utils';
 import { Form, Icon } from 'semantic-ui-react';
 
-function MorseNode(this: typeof MorseNode, ac: AudioContext, rate: number) {
+interface MorseNodeType {
+  oscillator: OscillatorNode;
+  gain: GainNode;
+  dot: number;
+  MORSE: Record<string, string>;
+  playString(time: number, words: string): number;
+  connect(target: AudioDestinationNode): void;
+}
+
+// eslint-disable-next-line func-names
+const MorseNode = function (
+  this: MorseNodeType,
+  ac: AudioContext,
+  rate: number
+) {
   this.oscillator = ac.createOscillator();
   this.gain = ac.createGain();
   this.gain.gain.value = 0;
@@ -14,8 +28,9 @@ function MorseNode(this: typeof MorseNode, ac: AudioContext, rate: number) {
     this.dot = 1.2 / rate;
   }
   this.oscillator.start(0);
-}
-MorseNode.prototype.connect = function connect(target: AudioContext) {
+} as unknown as { new (ac: AudioContext, rate: number): MorseNodeType };
+
+MorseNode.prototype.connect = function connect(target: AudioDestinationNode) {
   return this.gain.connect(target);
 };
 MorseNode.prototype.MORSE = {
@@ -129,14 +144,14 @@ export default function MorseCodeTranslator() {
       <Form.TextArea
         rows={10}
         value={rawValue}
-        label="String"
+        label="Text"
         onChange={(e) => onEnter(e.currentTarget.value)}
-        placeholder="Please input the content"
+        placeholder="Enter text here"
       />
       <Form.TextArea
         rows={8}
         value={resultValue}
-        label="Result"
+        label="Output"
         onChange={(e) => setResultValue(e.currentTarget.value)}
         placeholder=""
         style={{ fontSize: '1.5em' }}

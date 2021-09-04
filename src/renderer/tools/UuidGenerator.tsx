@@ -73,7 +73,7 @@ export default function UuidGenerator() {
       <Form.TextArea
         rows={15}
         value={resultValue}
-        label="Result"
+        label="Output"
         onChange={(e) => setResultValue(e.currentTarget.value)}
         placeholder=""
       />

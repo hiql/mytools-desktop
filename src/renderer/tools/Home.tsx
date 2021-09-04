@@ -25,14 +25,12 @@ export default function Home() {
           <List>
             <List.Header as="h1">MyTools</List.Header>
             <List.Description>A set of tools for Developers</List.Description>
-            <List.Item />
-            <List.Item>version: {appVer}</List.Item>
           </List>
 
           <div style={{ marginTop: 25, marginBottom: 25 }}>
             <List horizontal relaxed>
               <List.Item>
-                <Link to="/running">
+                <Link to="/running" title="App running status">
                   <div className="home-button">
                     <p>
                       <Icon name="heartbeat" color="blue" size="big" />
@@ -42,7 +40,7 @@ export default function Home() {
                 </Link>
               </List.Item>
               <List.Item>
-                <Link to="/games">
+                <Link to="/games" title="Let's play">
                   <div className="home-button">
                     <p>
                       <Icon name="game" color="blue" size="big" />
@@ -52,7 +50,7 @@ export default function Home() {
                 </Link>
               </List.Item>
               <List.Item>
-                <Link to="/settings">
+                <Link to="/settings" title="App global settings">
                   <div className="home-button">
                     <p>
                       <Icon name="setting" color="blue" size="big" />
@@ -99,7 +97,7 @@ export default function Home() {
                 <a
                   href="https://github.com/hiql/mytools-desktop/issues"
                   target="_blank"
-                  title="Visit Github"
+                  title="Report Bugs"
                   rel="noreferrer"
                 >
                   <div className="home-button">
@@ -114,13 +112,9 @@ export default function Home() {
           </div>
 
           <List relaxed>
-            <List.Item>
-              <Icon name="cubes" color="grey" />
-            </List.Item>
             <List.Item>Electron: {window.sysinfo.versions.electron}</List.Item>
             <List.Item>Node: {window.sysinfo.versions.node}</List.Item>
             <List.Item>Chrome: {window.sysinfo.versions.chrome}</List.Item>
-            <List.Item />
             <List.Item>
               <div
                 style={{
@@ -147,6 +141,8 @@ export default function Home() {
                 </svg>
               </div>
             </List.Item>
+            <List.Item />
+            <List.Item>version: {appVer}</List.Item>
           </List>
         </div>
       </div>

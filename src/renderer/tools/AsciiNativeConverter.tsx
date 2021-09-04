@@ -57,9 +57,9 @@ export default function AsciiNativeConverter() {
       <Form.TextArea
         rows={10}
         value={rawValue}
-        label="String"
+        label="Text"
         onChange={(e) => setRawValue(e.currentTarget.value)}
-        placeholder="Please input the content"
+        placeholder="Enter text here"
       />
       <Form.Group>
         <Form.Button primary onClick={onAscii2Native}>
@@ -69,13 +69,7 @@ export default function AsciiNativeConverter() {
           Native {'->'} ASCII
         </Form.Button>
       </Form.Group>
-      <Form.TextArea
-        rows={10}
-        value={resultValue}
-        label="Result"
-        onChange={(e) => setResultValue(e.currentTarget.value)}
-        placeholder=""
-      />
+      <Form.TextArea rows={10} value={resultValue} label="Output" />
       <Form.Group inline>
         <Form.Button onClick={onCopy}>
           <Icon name="copy" />

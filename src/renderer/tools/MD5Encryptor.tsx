@@ -37,22 +37,16 @@ export default function MD5Encryptor() {
       <Form.TextArea
         rows={10}
         value={rawValue}
-        label="String"
+        label="Text"
         onChange={(e) => setRawValue(e.currentTarget.value)}
-        placeholder="Please input the content"
+        placeholder="Enter plain text here"
       />
       <Form.Group inline>
         <Form.Button primary onClick={onEncrypt}>
           Encrypt
         </Form.Button>
       </Form.Group>
-      <Form.TextArea
-        rows={5}
-        value={resultValue}
-        label="Result"
-        onChange={(e) => setResultValue(e.currentTarget.value)}
-        placeholder=""
-      />
+      <Form.TextArea rows={5} value={resultValue} label="Output" />
       <Form.Group inline>
         <Form.Button onClick={onCopy}>
           <Icon name="copy" />

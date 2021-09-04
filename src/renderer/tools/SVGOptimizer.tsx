@@ -34,7 +34,10 @@ export default function SVGOptimizer() {
   const [imageSize, setImageSize] = React.useState('medium');
 
   React.useEffect(() => {
-    const storedImageSize = window.store.get(constants.KEY_SVGO_IMAGE_SIZE);
+    const storedImageSize = window.store.get(
+      constants.KEY_SVGO_IMAGE_SIZE,
+      imageSize
+    );
     setImageSize(storedImageSize as string);
   }, []);
 
@@ -98,7 +101,7 @@ export default function SVGOptimizer() {
     <Form>
       <Form.Group inline>
         <Form.Button primary onClick={showFilePicker}>
-          Choose a svg file ...
+          Choose image ...
         </Form.Button>
         <Form.Select
           value={imageSize}

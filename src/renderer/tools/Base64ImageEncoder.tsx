@@ -24,7 +24,8 @@ export default function Base64ImageEncoder() {
 
   React.useEffect(() => {
     const storedImageSize = window.store.get(
-      constants.KEY_BASE64_IMAGE_ENCODER_IMAGE_SIZE
+      constants.KEY_BASE64_IMAGE_ENCODER_IMAGE_SIZE,
+      imageSize
     );
     setImageSize(storedImageSize as string);
   }, []);
@@ -82,7 +83,7 @@ export default function Base64ImageEncoder() {
     <Form>
       <Form.Group inline>
         <Form.Button primary onClick={showFilePicker}>
-          Choose an image ...
+          Choose image ...
         </Form.Button>
         <Form.Select
           value={imageSize}
@@ -110,7 +111,7 @@ export default function Base64ImageEncoder() {
         </Form.Button>
         <Form.Button onClick={onCopyAsHtmlImage}>
           <Icon name="copy" />
-          Copy(HTML Image Markup)
+          Copy as HTML Image Markup
         </Form.Button>
       </Form.Group>
       <Segment

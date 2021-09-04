@@ -81,12 +81,13 @@ export default function FileMerger() {
         <Form.Button primary onClick={showFilePicker}>
           Add files ...
         </Form.Button>
-        <span>
-          Only supports text files. Drag files to adjust the merge order.
-        </span>
+        <span>Drag files to adjust the merge order.</span>
       </Form.Group>
       <FileInput accept="*" multiple />
       <Segment>
+        <Label attached="top right">
+          <strong style={{ fontSize: '1.2em' }}>{items.length}</strong>
+        </Label>
         <SortableList
           onSortEnd={onSortEnd}
           className="file-list"
@@ -96,15 +97,13 @@ export default function FileMerger() {
             // eslint-disable-next-line react/no-array-index-key
             <SortableItem key={index}>
               <div className="file-item">
-                {item.path}
-                <div style={{ float: 'right' }}>{item.size.toString()}</div>
+                <div className="size">{item.size.toString()}</div>
+                <span className="path">{item.path}</span>
               </div>
             </SortableItem>
           ))}
         </SortableList>
       </Segment>
-      <p>Added files: {items.length}</p>
-
       <Form.Group>
         <Form.Button primary onClick={merge}>
           Merge
@@ -112,7 +111,7 @@ export default function FileMerger() {
         <Form.Button onClick={clear}>Reset</Form.Button>
       </Form.Group>
       <Segment loading={loading} textAlign="center">
-        <Label attached="top left">Output file</Label>
+        <Label attached="top left">Output File</Label>
         <div style={{ height: 50 }}>{outputFileName}</div>
       </Segment>
     </Form>

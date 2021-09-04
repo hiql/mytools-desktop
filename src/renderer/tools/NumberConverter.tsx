@@ -1,6 +1,6 @@
 import * as React from 'react';
 import utils from 'renderer/utils';
-import { Form, Header, Icon } from 'semantic-ui-react';
+import { Form, Header, Icon, List } from 'semantic-ui-react';
 import numberUtils from './number-utils';
 
 const numberBases = [
@@ -157,44 +157,15 @@ export default function NumberConverter() {
       </Form.Group>
 
       <h3>Roman Numeral Symbols</h3>
-      <table className="ui collapsing compact very basic table">
-        <thead>
-          <tr>
-            <th>Symbol</th>
-            <th>Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>I</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>V</td>
-            <td>5</td>
-          </tr>
-          <tr>
-            <td>X</td>
-            <td>10</td>
-          </tr>
-          <tr>
-            <td>L</td>
-            <td>50</td>
-          </tr>
-          <tr>
-            <td>C</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>D</td>
-            <td>500</td>
-          </tr>
-          <tr>
-            <td>M</td>
-            <td>1000</td>
-          </tr>
-        </tbody>
-      </table>
+      <List relaxed>
+        <List.Item>I = 1</List.Item>
+        <List.Item>V = 5</List.Item>
+        <List.Item>X = 10</List.Item>
+        <List.Item>L = 50</List.Item>
+        <List.Item>C = 100</List.Item>
+        <List.Item>D = 500</List.Item>
+        <List.Item>M = 1000</List.Item>
+      </List>
     </Form>
   );
 }

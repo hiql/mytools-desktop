@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Header, Icon } from 'semantic-ui-react';
+import { Form, Header, Icon, Input, Table } from 'semantic-ui-react';
 import he from 'he';
 import utils from 'renderer/utils';
 
@@ -125,19 +125,19 @@ export default function StringUtility() {
         value={stringValue}
         label="String"
         onChange={(e) => setStringValue(e.currentTarget.value)}
-        placeholder="Please input or paste the string here"
+        placeholder="Enter or paste string here"
       />
-      <Form.Group>
-        <Form.Button primary onClick={onLowercase}>
+      <Form.Group widths="equal">
+        <Form.Button fluid primary onClick={onLowercase}>
           Lowercase
         </Form.Button>
-        <Form.Button primary onClick={onUppercase}>
+        <Form.Button fluid primary onClick={onUppercase}>
           Uppercase
         </Form.Button>
-        <Form.Button primary onClick={onCapitalize}>
+        <Form.Button fluid primary onClick={onCapitalize}>
           Capitalize
         </Form.Button>
-        <Form.Button primary onClick={onReverse}>
+        <Form.Button fluid primary onClick={onReverse}>
           Reverse
         </Form.Button>
       </Form.Group>
@@ -154,13 +154,13 @@ export default function StringUtility() {
         value={splitStringValue}
         label="String"
         onChange={(e) => setSplitStringValue(e.currentTarget.value)}
-        placeholder="Please input or paste the string here"
+        placeholder="Enter or paste string here"
       />
 
       <Form.Input
         inline
         value={seperator}
-        label="Split the string using:"
+        label="Split the string using"
         onChange={(e) => setSeperator(e.currentTarget.value)}
       />
       <p>
@@ -184,12 +184,7 @@ export default function StringUtility() {
           Split
         </Form.Button>
       </Form.Group>
-      <Form.TextArea
-        rows={10}
-        value={splitStringResultValue}
-        label="Result"
-        placeholder=""
-      />
+      <Form.TextArea rows={10} value={splitStringResultValue} label="Result" />
       <Form.Group inline>
         <Form.Button onClick={onSplitResultCopy}>
           <Icon name="copy" />
@@ -197,56 +192,55 @@ export default function StringUtility() {
         </Form.Button>
         <Form.Button onClick={onSplitReset}>Reset</Form.Button>
       </Form.Group>
-      <Header>Get detailed character information</Header>
-      <Form.Group>
-        <Form.Input
-          maxLength="1"
-          label="Copy-paste the character here"
-          onChange={(e) => onGetCharInfo(e.currentTarget.value)}
-        />
-      </Form.Group>
+      <Header>Character Test</Header>
+      <Table collapsing>
+        <Table.Row>
+          <Table.Cell>
+            <strong>Character</strong>
+          </Table.Cell>
+          <Table.Cell>
+            <Input
+              maxLength="1"
+              placeholder="Enter or paste char here"
+              onChange={(e) => onGetCharInfo(e.currentTarget.value)}
+            />
+          </Table.Cell>
+        </Table.Row>
 
-      <Form.Input
-        inline
-        label="Decimal"
-        value={charInfo == null ? '' : charInfo.dec}
-      />
+        <Table.Row>
+          <Table.Cell>Decimal</Table.Cell>
+          <Table.Cell>{charInfo == null ? '' : charInfo.dec}</Table.Cell>
+        </Table.Row>
 
-      <Form.Input
-        inline
-        label="Octal"
-        value={charInfo == null ? '' : charInfo.oct}
-      />
+        <Table.Row>
+          <Table.Cell>Octal</Table.Cell>
+          <Table.Cell>{charInfo == null ? '' : charInfo.oct}</Table.Cell>
+        </Table.Row>
 
-      <Form.Input
-        inline
-        label="Hexadecimal"
-        value={charInfo == null ? '' : charInfo.hex}
-      />
+        <Table.Row>
+          <Table.Cell>Hexadecimal</Table.Cell>
+          <Table.Cell>{charInfo == null ? '' : charInfo.hex}</Table.Cell>
+        </Table.Row>
 
-      <Form.Input
-        inline
-        label="Unicode"
-        value={charInfo == null ? '' : charInfo.uni}
-      />
+        <Table.Row>
+          <Table.Cell>Unicode</Table.Cell>
+          <Table.Cell>{charInfo == null ? '' : charInfo.uni}</Table.Cell>
+        </Table.Row>
 
-      <Form.Input
-        inline
-        label="Escaped unicode"
-        value={charInfo == null ? '' : charInfo.esc}
-      />
+        <Table.Row>
+          <Table.Cell>Escaped unicode</Table.Cell>
+          <Table.Cell>{charInfo == null ? '' : charInfo.esc}</Table.Cell>
+        </Table.Row>
 
-      <Form.Input
-        inline
-        label="HTML Entity"
-        value={charInfo == null ? '' : charInfo.html}
-      />
-
-      <Form.Input
-        inline
-        label="HTML Entity Name"
-        value={charInfo == null ? '' : charInfo.htmlName}
-      />
+        <Table.Row>
+          <Table.Cell>HTML Entity</Table.Cell>
+          <Table.Cell>{charInfo == null ? '' : charInfo.html}</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.Cell>HTML Entity Name</Table.Cell>
+          <Table.Cell>{charInfo == null ? '' : charInfo.htmlName}</Table.Cell>
+        </Table.Row>
+      </Table>
     </Form>
   );
 }

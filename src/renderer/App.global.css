@@ -22,7 +22,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .app-sidebar {
@@ -87,7 +87,7 @@ body {
 }
 
 .app-main-content-wrap {
-  padding: 15px;
+  padding: 20px;
 }
 
 .navbar-container {
@@ -268,10 +268,22 @@ body {
   border: none;
 }
 
+.file-item .path {
+  display: block;
+  margin-right: 120px;
+}
+
+.file-item .size {
+  display: block;
+  float: right;
+  color:rgba(0, 0, 0,0.6)
+}
+
 .file-dragged {
-  border: 2px solid #00b5ad !important;
-  background-color: #e0fffd;
+  border: 1px solid #000000 !important;
+  background-color: #ffffff;
   font-weight: bold;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 }
 
 .image-box {
@@ -282,8 +294,7 @@ body {
     transparent 25%,
     transparent 75%,
     #eee 75%,
-    #eee 100%
-    ),
+    #eee 100%),
     linear-gradient(45deg,
     #eee 25%,
     #fff 25%,
@@ -306,6 +317,7 @@ body {
 
 .ui.attached.segment {
   border: none;
+  padding: 0;
 }
 
 .ui.secondary.pointing.menu .item {
@@ -315,12 +327,36 @@ body {
 .ui.secondary.pointing.menu {
   border-bottom: 1px solid rgba(34,36,38,.15);
 }
+
+.password-generator {
+  border-radius: 6px;
+  font-family: Courier Prime Bits,monospace;
+  font-size: 1.625rem;
+  letter-spacing: .156rem;
+  line-height: 1.2;
+  text-align: center;
+  max-width: 450px;
+  min-height: 100px;
+  word-break: break-all;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 25px 8px 8px;
+  margin-bottom: 8px;
+}
+
+.password-generator-digits {
+  color: #0572ec;
+}
+
+.password-generator-letter {
+  color: #333;
+}
+
 /*
  * File Drop
  */
 .file-drop {
   position: relative;
-  height: 200px;
+  min-height: 150px;
   width: 100%;
 }
 
@@ -451,10 +487,23 @@ body {
   height: 80vh;
   width: 100%;
   flex-wrap: wrap;
-
 }
 
 .cards-item {
-  flex-basis: 50%;
+  flex-basis: 30%;
   text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+  .cards-item {
+    flex-basis: 100%;
+
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 800px) {
+  .cards-item {
+    flex-basis: 50%;
+
+  }
 }

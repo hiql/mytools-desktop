@@ -33,11 +33,10 @@ export default function FileChecksum() {
 
   React.useEffect(() => {
     const storedHashType = window.store.get(
-      constants.KEY_FILECHECKSUM_HASH_TYPE
+      constants.KEY_FILECHECKSUM_HASH_TYPE,
+      hasher
     );
-    if (storedHashType !== undefined && storedHashType !== '') {
-      setHasher(storedHashType as string);
-    }
+    setHasher(storedHashType as string);
   }, []);
 
   const onEncrypt = () => {
@@ -76,7 +75,9 @@ export default function FileChecksum() {
     setFileName(name);
   };
 
-  const onFileDrop = (dropFiles) => {
+  const onFileDrop = (dropFiles: FileList | null) => {
+    setFileNameAndSize('', '', 0);
+    if (dropFiles == null) return;
     if (dropFiles.length > 0) {
       setFileNameAndSize(
         dropFiles[0].name,
@@ -121,7 +122,9 @@ export default function FileChecksum() {
     <Form>
       <div className="file-drop-box">
         <FileDrop onDrop={onFileDrop} onTargetClick={showFilePicker}>
-          <div style={{ margin: 8, fontSize: '1.2em' }}>{fileName}</div>
+          <div style={{ margin: 8, fontSize: '1.2em', wordBreak: 'break-all' }}>
+            {fileName}
+          </div>
           <div style={{ color: '#555' }}>{fileSize}</div>
           <div
             style={{
@@ -131,7 +134,7 @@ export default function FileChecksum() {
               display: fileName === '' ? 'block' : 'none',
             }}
           >
-            Drop your file here or click to select
+            Drop your file here or Click to select
           </div>
         </FileDrop>
 
@@ -153,7 +156,7 @@ export default function FileChecksum() {
           Calculate
         </Form.Button>
       </Form.Group>
-      <Form.TextArea rows={5} value={resultValue} label="File checksum" />
+      <Form.TextArea rows={5} value={resultValue} label="File Checksum" />
       <Form.Group inline>
         <Form.Button onClick={onCopy}>
           <Icon name="copy" />
@@ -175,7 +178,7 @@ export default function FileChecksum() {
         value={compareValue}
         label="Compare with:"
         onChange={(e) => setCompareValue(e.currentTarget.value)}
-        placeholder="Paste the compared checksum here"
+        placeholder="Paste checksum here"
       />
       <MatchResult
         value={compareResult}

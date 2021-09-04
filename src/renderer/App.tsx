@@ -204,7 +204,7 @@ const routes: IRoute[] = [
   },
   {
     path: '/unix-time-converter',
-    title: 'Timestamp Converter',
+    title: 'Unix Time Converter',
     keywords: 'unix,date,time,timestamp,converter',
     main: React.lazy(() => import('./tools/UnixTimestampConverter')),
   },

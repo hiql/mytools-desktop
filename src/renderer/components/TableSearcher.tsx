@@ -7,34 +7,34 @@ export interface IColumnDescriptor {
   field: string;
   text: string;
   searchable?: boolean;
+  align?: 'right' | 'left' | 'center' | undefined;
   exact?: boolean;
-  render?(meta: IColumnDescriptor, data: any[]): JSX.Element;
+  render?(meta: IColumnDescriptor, data: []): JSX.Element;
 }
 
 export default function TableSearcher(props: {
-  data: any[];
+  data: [];
   columns: IColumnDescriptor[];
   notFoundMessage?: string;
   defaultDisplayAll?: boolean;
   placeholder?: string;
 }) {
   const [searchKeyword, setSearchKeyword] = React.useState('');
-  const [searchResult, setSearchResult] = React.useState([]);
+  const [searchResult, setSearchResult] = React.useState<[]>([]);
   const [loading, setLoading] = React.useState(true);
   const { data, notFoundMessage, defaultDisplayAll, columns, placeholder } =
     props;
 
   const search = () => {
-    let result;
     if (searchKeyword === '') {
       if (defaultDisplayAll) {
-        result = data;
+        setSearchResult(data);
       } else {
-        result = [];
+        setSearchResult([]);
       }
     } else {
       const patt = new RegExp(searchKeyword, 'i');
-      result = _.filter(data, (row: { [x: string]: string }) => {
+      const result = _.filter(data, (row: { [x: string]: string }) => {
         let matched = false;
         for (let i = 0; i < columns.length; i += 1) {
           const col = columns[i];
@@ -52,8 +52,9 @@ export default function TableSearcher(props: {
         }
         return matched;
       });
+
+      setSearchResult(result as []);
     }
-    setSearchResult(result);
     setLoading(false);
   };
 
@@ -68,7 +69,7 @@ export default function TableSearcher(props: {
   }, [searchKeyword]);
 
   return (
-    <div>
+    <>
       <Input
         size="small"
         loading={loading}
@@ -82,7 +83,9 @@ export default function TableSearcher(props: {
         <Table.Header>
           <Table.Row>
             {columns.map((col, index) => (
-              <Table.HeaderCell key={index}>{col.text}</Table.HeaderCell>
+              <Table.HeaderCell key={index} textAlign={col.align}>
+                {col.text}
+              </Table.HeaderCell>
             ))}
           </Table.Row>
         </Table.Header>
@@ -90,7 +93,7 @@ export default function TableSearcher(props: {
           {searchResult.map((item, index) => (
             <Table.Row key={index}>
               {columns.map((col, idx) => (
-                <Table.Cell key={idx}>
+                <Table.Cell key={idx} textAlign={col.align}>
                   {col.render === undefined
                     ? item[col.field]
                     : col.render(col, item)}
@@ -110,7 +113,7 @@ export default function TableSearcher(props: {
       >
         {notFoundMessage}
       </Segment>
-    </div>
+    </>
   );
 }
 

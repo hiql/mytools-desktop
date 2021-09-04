@@ -5,6 +5,25 @@ import PasswordStrengthBar from 'react-password-strength-bar';
 import NumericInput from 'react-numeric-input';
 import utils from 'renderer/utils';
 
+function isCharNumber(c: string) {
+  return c >= '0' && c <= '9';
+}
+
+interface IItem {
+  idx: number;
+  char: string;
+  isDigit: boolean;
+}
+
+function strSlice(text: string) {
+  const ret = new Array<IItem>();
+  let i = 0;
+  [...text].forEach((c) => {
+    ret.push({ idx: (i += 1), char: c, isDigit: isCharNumber(c) });
+  });
+  return ret;
+}
+
 export default function PasswordGenerator() {
   const [options, setOptionsValue] = React.useState({
     length: 12,
@@ -41,24 +60,25 @@ export default function PasswordGenerator() {
   };
 
   return (
-    <Form>
-      <Form.Field>
-        <label>Password Length</label>
-        <NumericInput
-          min={1}
-          max={128}
-          step={1}
-          value={options.length}
-          onChange={(value: string) =>
-            setOptionsValue({
-              ...options,
-              length: parseInt(value, 10),
-            })
-          }
-        />
-      </Form.Field>
-      <Form.Group inline>
+    <>
+      <Form>
+        <Form.Field>
+          <label>Length</label>
+          <NumericInput
+            min={4}
+            max={128}
+            step={1}
+            value={options.length}
+            onChange={(value: string) =>
+              setOptionsValue({
+                ...options,
+                length: parseInt(value, 10),
+              })
+            }
+          />
+        </Form.Field>
         <Form.Checkbox
+          required
           checked={options.numbers}
           slider
           onChange={(_e, { checked }) =>
@@ -67,42 +87,43 @@ export default function PasswordGenerator() {
               numbers: checked === undefined ? options.numbers : checked,
             })
           }
-          label="Numbers*"
+          label="Numbers"
         />
         <Form.Checkbox
           checked={options.symbols}
           slider
+          required
           onChange={(_e, { checked }) =>
             setOptionsValue({
               ...options,
               symbols: checked === undefined ? options.symbols : checked,
             })
           }
-          label="Symbols*"
+          label="Symbols"
         />
         <Form.Checkbox
           checked={options.uppercase}
           slider
+          required
           onChange={(_e, { checked }) =>
             setOptionsValue({
               ...options,
               uppercase: checked === undefined ? options.uppercase : checked,
             })
           }
-          label="UpperCase*"
+          label="UpperCase"
         />
-      </Form.Group>
-      <Form.Group>
         <Form.Checkbox
           checked={options.lowercase}
           slider
+          required
           onChange={(_e, { checked }) =>
             setOptionsValue({
               ...options,
               lowercase: checked === undefined ? options.lowercase : checked,
             })
           }
-          label="LowerCase*"
+          label="LowerCase"
         />
 
         <Form.Checkbox
@@ -119,17 +140,33 @@ export default function PasswordGenerator() {
           }
           label="Exclude similar chars, like 'i' and 'l'"
         />
-      </Form.Group>
-      <Segment basic>* At least one should be true.</Segment>
-      <Form.Button primary onClick={onGenerate}>
-        Generate
-      </Form.Button>
-      <Form.TextArea rows={3} value={resultValue} label="Password" />
-      <PasswordStrengthBar password={resultValue} />
-      <Form.Button onClick={onCopy}>
-        <Icon name="copy" />
-        Copy
-      </Form.Button>
-    </Form>
+        <Segment basic>* At least one should be true.</Segment>
+        <div className="password-generator">
+          <div style={{ minHeight: 50 }}>
+            {strSlice(resultValue).map((item) =>
+              item.isDigit ? (
+                <span key={item.idx} className="password-generator-digits">
+                  {item.char}
+                </span>
+              ) : (
+                <span key={item.idx} className="password-generator-letter">
+                  {item.char}
+                </span>
+              )
+            )}
+          </div>
+          <PasswordStrengthBar password={resultValue} />
+        </div>
+        <Form.Group>
+          <Form.Button primary onClick={onGenerate}>
+            Generate
+          </Form.Button>
+          <Form.Button onClick={onCopy}>
+            <Icon name="copy" />
+            Copy
+          </Form.Button>
+        </Form.Group>
+      </Form>
+    </>
   );
 }

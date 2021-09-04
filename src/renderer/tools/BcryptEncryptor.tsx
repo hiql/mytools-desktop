@@ -58,11 +58,11 @@ export default function BcryptEncryptor() {
         value={rawValue}
         label="Text"
         onChange={(e) => setRawValue(e.currentTarget.value)}
-        placeholder="Enter plain text to hash"
+        placeholder="Enter plain text here"
       />
       <Form.Group inline widths="equal">
         <Form.Select
-          label="Number of rounds"
+          label="Number of Rounds"
           value={saltRounds.toString()}
           onChange={(_e, { value }) =>
             value !== undefined && setSaltRounds(parseInt(value.toString(), 10))
@@ -75,13 +75,7 @@ export default function BcryptEncryptor() {
           Encrypt
         </Form.Button>
       </Form.Group>
-      <Form.TextArea
-        rows={5}
-        value={resultValue}
-        label="Result"
-        onChange={(e) => setResultValue(e.currentTarget.value)}
-        placeholder=""
-      />
+      <Form.TextArea rows={5} value={resultValue} label="Output" />
       <Form.Group inline>
         <Form.Button onClick={onCopy}>
           <Icon name="copy" />
@@ -96,14 +90,14 @@ export default function BcryptEncryptor() {
         value={compareCipherValue}
         label="Hashed"
         onChange={(e) => setCompareCipherValue(e.currentTarget.value)}
-        placeholder="Enter the Bcrypt Hashed Text"
+        placeholder="Enter the bcrypt hashed text here"
       />
       <Form.TextArea
         rows={5}
         value={comparePlainValue}
         label="Plain Text"
         onChange={(e) => setComparePlainValue(e.currentTarget.value)}
-        placeholder="Enter the Plain Text"
+        placeholder="Enter the plain text here"
       />
       <MatchResult
         value={compareResult}

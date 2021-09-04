@@ -133,11 +133,13 @@ function TabColorPicker() {
           </div>
           <Form>
             <Form.Input
+              inline
               onChange={(e) => onHexColorChange(e.currentTarget.value)}
               action={{ icon: 'copy', onClick: onCopyHex }}
               value={hexColor}
             />
             <Form.Input
+              inline
               onChange={(e) => onRgbaStringColorChange(e.currentTarget.value)}
               action={{ icon: 'copy', onClick: onCopyRgb }}
               value={rgbaStringColor}
@@ -178,8 +180,13 @@ function TabColorPicker() {
         </Grid.Row>
         <Grid.Row>
           {colorScales.map((scale, idx) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <Grid.Column key={idx} style={{ padding: 12 }} width="4">
+            <Grid.Column
+              textAlign="center"
+              // eslint-disable-next-line react/no-array-index-key
+              key={idx}
+              style={{ padding: 12 }}
+              width="4"
+            >
               <Header as="h4">{scale.color}</Header>
               <Button.Group vertical fluid>
                 {scale.scale.map((c: string, index) => (
@@ -188,6 +195,7 @@ function TabColorPicker() {
                     key={index}
                     onClick={() => onClickColorPalettes(c)}
                     style={{
+                      justifyContent: 'center',
                       backgroundColor: c,
                       color: isDarkColor(c)
                         ? 'rgba(255,255,255,0.75)'
@@ -214,6 +222,7 @@ function TabColorPicker() {
                   key={index}
                   onClick={() => onClickColorPalettes(c)}
                   style={{
+                    justifyContent: 'center',
                     backgroundColor: c,
                     color: isDarkColor(c)
                       ? 'rgba(255,255,255,0.75)'
@@ -256,7 +265,8 @@ function TabImageColorPicker() {
 
   React.useEffect(() => {
     const storedImageSize = window.store.get(
-      constants.KEY_COLOR_PICKER_IMAGE_SIZE
+      constants.KEY_COLOR_PICKER_IMAGE_SIZE,
+      imageSize
     );
     setImageSize(storedImageSize as SemanticSIZES);
   }, []);
@@ -276,7 +286,7 @@ function TabImageColorPicker() {
       <Form>
         <Form.Group inline>
           <Form.Button primary onClick={showFilePicker}>
-            Choose an image ...
+            Choose image ...
           </Form.Button>
           <Form.Button primary onClick={colorPalette}>
             Extract
@@ -324,7 +334,7 @@ function TabImageColorPicker() {
               </Table.Cell>
               <Table.Cell>{`rgb(${color[0]}, ${color[1]}, ${color[2]})`}</Table.Cell>
               <Table.Cell>{rgbToHex(color[0], color[1], color[2])}</Table.Cell>
-              <Table.Cell>
+              <Table.Cell textAlign="right">
                 <Button
                   basic
                   icon="star outline"
@@ -363,7 +373,7 @@ function TabImageColorPicker() {
               </Table.Cell>
               <Table.Cell>{`rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`}</Table.Cell>
               <Table.Cell>{rgbToHex(rgb[0], rgb[1], rgb[2])}</Table.Cell>
-              <Table.Cell>
+              <Table.Cell textAlign="right">
                 <Button
                   basic
                   icon="star outline"
@@ -406,7 +416,7 @@ function TabWebSafeColors() {
               <Table.Cell>{color.hex}</Table.Cell>
               <Table.Cell>{color.decimal}</Table.Cell>
               <Table.Cell>{color.name}</Table.Cell>
-              <Table.Cell>
+              <Table.Cell textAlign="right">
                 <Button
                   basic
                   icon="star outline"
@@ -472,7 +482,7 @@ function TabFavoriteColors() {
               </Table.Cell>
               <Table.Cell>{hexToRgb(hex)}</Table.Cell>
               <Table.Cell>{hex}</Table.Cell>
-              <Table.Cell>
+              <Table.Cell textAlign="right">
                 <Button
                   basic
                   color="red"

@@ -42,9 +42,9 @@ export default function Base64Converter() {
       <Form.TextArea
         rows={10}
         value={rawValue}
-        label="String"
+        label="Text"
         onChange={(e) => setRawValue(e.currentTarget.value)}
-        placeholder="Please input the content"
+        placeholder="Enter plain text here"
       />
       <Form.Group inline>
         <Form.Button primary onClick={onEncode}>
@@ -54,13 +54,7 @@ export default function Base64Converter() {
           Decode
         </Form.Button>
       </Form.Group>
-      <Form.TextArea
-        rows={10}
-        value={resultValue}
-        label="Result"
-        onChange={(e) => setResultValue(e.currentTarget.value)}
-        placeholder=""
-      />
+      <Form.TextArea rows={10} value={resultValue} label="Output" />
       <Form.Group inline>
         <Form.Button onClick={onCopy}>
           <Icon name="copy" />

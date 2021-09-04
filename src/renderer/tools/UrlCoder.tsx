@@ -1,6 +1,6 @@
 import * as React from 'react';
 import utils from 'renderer/utils';
-import { Form, Header, Icon } from 'semantic-ui-react';
+import { Form, Icon, Container } from 'semantic-ui-react';
 
 export default function UrlCoder() {
   const [rawValue, setRawValue] = React.useState('');
@@ -34,14 +34,14 @@ export default function UrlCoder() {
   };
 
   return (
-    <div>
+    <>
       <Form>
         <Form.TextArea
           rows={10}
           value={rawValue}
-          label="String"
+          label="URL"
           onChange={(e) => setRawValue(e.currentTarget.value)}
-          placeholder="Please input the content"
+          placeholder="Enter url here"
         />
         <Form.Group inline>
           <Form.Button primary onClick={onEncode}>
@@ -51,13 +51,7 @@ export default function UrlCoder() {
             Decode
           </Form.Button>
         </Form.Group>
-        <Form.TextArea
-          rows={10}
-          value={resultValue}
-          label="Result"
-          onChange={(e) => setResultValue(e.currentTarget.value)}
-          placeholder=""
-        />
+        <Form.TextArea rows={10} value={resultValue} label="Output" />
         <Form.Group inline>
           <Form.Button onClick={onCopy}>
             <Icon name="copy" />
@@ -66,46 +60,53 @@ export default function UrlCoder() {
           <Form.Button onClick={onReset}>Reset</Form.Button>
         </Form.Group>
       </Form>
-
-      <Header as="h3">Why do I need URL encoding?</Header>
-      <p>
-        The URL specification{' '}
-        <a href="http://www.ietf.org/rfc/rfc1738.txt">RFC 1738</a> specifies
-        that only a small set of characters can be used in a URL. Those
-        characters are:
-      </p>
-      <ul className="ui list relaxed">
-        <li>A to Z (ABCDEFGHIJKLMNOPQRSTUVWXYZ)</li>
-        <li>a to z (abcdefghijklmnopqrstuvwxyz)</li>
-        <li>0 to 9 (0123456789)</li>
-        <li>$ (Dollar Sign)</li>
-        <li>- (Hyphen / Dash)</li>
-        <li>_ (Underscore)</li>
-        <li>. (Period)</li>
-        <li>+ (Plus sign)</li>
-        <li>! (Exclamation / Bang)</li>
-        <li>* (Asterisk / Star)</li>
-        <li>&apos; (Single Quote)</li>
-        <li>( (Open Bracket)</li>
-        <li>) (Closing Bracket)</li>
-      </ul>
-      <h3>How does URL encoding work?</h3>
-      <p>
-        All offending characters are replaced by a % and a two digit hexadecimal
-        value that represents the character in the proper ISO character set.
-        Here are a couple of examples:
-      </p>
-      <ul className="ui list relaxed">
-        <li>$ (Dollar Sign) becomes %24</li>
-        <li>&amp; (Ampersand) becomes %26</li>
-        <li>+ (Plus) becomes %2B</li>
-        <li>, (Comma) becomes %2C</li>
-        <li>: (Colon) becomes %3A</li>
-        <li>; (Semi-Colon) becomes %3B</li>
-        <li>= (Equals) becomes %3D</li>
-        <li>? (Question Mark) becomes %3F</li>
-        <li>@ (Commercial A / At) becomes %40</li>
-      </ul>
-    </div>
+      <Container fluid>
+        <h3>Why do I need URL encoding?</h3>
+        <p>
+          The URL specification{' '}
+          <a
+            href="http://www.ietf.org/rfc/rfc1738.txt"
+            target="_blank"
+            rel="noreferrer"
+          >
+            RFC 1738
+          </a>{' '}
+          specifies that only a small set of characters can be used in a URL.
+          Those characters are:
+        </p>
+        <ul className="ui list relaxed">
+          <li>A to Z (ABCDEFGHIJKLMNOPQRSTUVWXYZ)</li>
+          <li>a to z (abcdefghijklmnopqrstuvwxyz)</li>
+          <li>0 to 9 (0123456789)</li>
+          <li>$ (Dollar Sign)</li>
+          <li>- (Hyphen / Dash)</li>
+          <li>_ (Underscore)</li>
+          <li>. (Period)</li>
+          <li>+ (Plus sign)</li>
+          <li>! (Exclamation / Bang)</li>
+          <li>* (Asterisk / Star)</li>
+          <li>&apos; (Single Quote)</li>
+          <li>( (Open Bracket)</li>
+          <li>) (Closing Bracket)</li>
+        </ul>
+        <h3>How does URL encoding work?</h3>
+        <p>
+          All offending characters are replaced by a % and a two digit
+          hexadecimal value that represents the character in the proper ISO
+          character set. Here are a couple of examples:
+        </p>
+        <ul className="ui list relaxed">
+          <li>$ (Dollar Sign) becomes %24</li>
+          <li>&amp; (Ampersand) becomes %26</li>
+          <li>+ (Plus) becomes %2B</li>
+          <li>, (Comma) becomes %2C</li>
+          <li>: (Colon) becomes %3A</li>
+          <li>; (Semi-Colon) becomes %3B</li>
+          <li>= (Equals) becomes %3D</li>
+          <li>? (Question Mark) becomes %3F</li>
+          <li>@ (Commercial A / At) becomes %40</li>
+        </ul>
+      </Container>
+    </>
   );
 }
