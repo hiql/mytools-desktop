@@ -3,7 +3,7 @@ import { Form, List } from 'semantic-ui-react';
 import cronstrue from 'cronstrue/i18n';
 import parser from 'cron-parser';
 import moment from 'moment';
-import utils from 'renderer/utils';
+import utils from '../utils';
 
 const langOptions = [
   { key: 'en', value: 'en', text: 'English' },

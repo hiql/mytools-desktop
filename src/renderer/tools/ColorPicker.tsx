@@ -19,11 +19,11 @@ import hexRgb from 'hex-rgb';
 import rgbHex from 'rgb-hex';
 import _ from 'lodash';
 import isDarkColor from 'is-dark-color';
-import utils from 'renderer/utils';
-import colorScales from './color_scale';
-import { useFilePicker } from '../components/useFilePicker';
-import webSafeColors from './web_safe_colors';
+import utils from '../utils';
 import * as constants from '../constants';
+import colorScales from './color_scale';
+import webSafeColors from './web_safe_colors';
+import { useFilePicker } from '../components/useFilePicker';
 
 const colorThief = new ColorThief();
 

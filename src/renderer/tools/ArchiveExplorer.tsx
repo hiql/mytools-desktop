@@ -11,10 +11,9 @@ import {
 import { FileDrop } from 'react-file-drop';
 import { Drawer } from 'react-pretty-drawer';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-
 import byteSize from 'byte-size';
 import _ from 'lodash';
-import utils from 'renderer/utils';
+import utils from '../utils';
 import Highlight from '../components/Highlight';
 import { useFilePicker } from '../components/useFilePicker';
 

@@ -1,0 +1,47 @@
+/* TicTacToe */
+.tic-tac-toe-board-row:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+.tic-tac-toe-square {
+  background: #eef0f1;
+  border: none;
+  color: #2f363d;
+  border-radius: 8px;
+  float: left;
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 80px;
+  /* margin-right: -1px;
+  margin-top: -1px; */
+  margin: 4px;
+  padding: 0;
+  text-align: center;
+  width: 80px;
+}
+
+.tic-tac-toe-square:hover {
+  background: #f3f3f3;
+}
+
+.tic-tac-toe-winner {
+  font-weight: bold;
+}
+
+.tic-tac-toe-square:focus {
+  outline: none;
+}
+
+.tic-tac-toe-game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.tic-tac-toe-game-info {
+  margin-left: 20px;
+  font-size: 1.2em;
+}

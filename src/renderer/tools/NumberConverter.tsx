@@ -1,6 +1,6 @@
 import * as React from 'react';
-import utils from 'renderer/utils';
 import { Form, Header, Icon, List } from 'semantic-ui-react';
+import utils from '../utils';
 import numberUtils from './number-utils';
 
 const numberBases = [

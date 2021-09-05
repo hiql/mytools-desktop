@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
-import utils from 'renderer/utils';
+import utils from '../utils';
 
 function nativeToAscii(text: string): string {
   const output = [];

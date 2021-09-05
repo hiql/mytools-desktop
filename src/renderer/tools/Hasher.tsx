@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import crypto from 'crypto-js';
-import utils from 'renderer/utils';
+import utils from '../utils';
 
 const hasherOptions = [
   { key: 'md5', value: 'md5', text: 'md5' },

@@ -5,7 +5,7 @@ import NumericInput from 'react-numeric-input';
 import { Drawer } from 'react-pretty-drawer';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import ReactJson from 'react-json-view';
-import utils from 'renderer/utils';
+import utils from '../utils';
 import Highlight from '../components/Highlight';
 
 export default function JsonPrettifier() {

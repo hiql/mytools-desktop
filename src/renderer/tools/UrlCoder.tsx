@@ -1,6 +1,6 @@
 import * as React from 'react';
-import utils from 'renderer/utils';
 import { Form, Icon, Container } from 'semantic-ui-react';
+import utils from '../utils';
 
 export default function UrlCoder() {
   const [rawValue, setRawValue] = React.useState('');

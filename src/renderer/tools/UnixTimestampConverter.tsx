@@ -10,9 +10,9 @@ import {
 } from 'semantic-ui-react';
 import moment from 'moment';
 import NumericInput from 'react-numeric-input';
-import utils from 'renderer/utils';
-import timezones from './timezones';
+import utils from '../utils';
 import * as constants from '../constants';
+import timezones from './timezones';
 
 const datetimePatterns = [
   { value: 'YYYY/MM/DD HH:mm:ss ZZ', text: 'YYYY/MM/DD HH:mm:ss ZZ' },

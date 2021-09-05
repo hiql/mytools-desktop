@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import csvToMarkdown from 'csv-to-markdown-table';
-import utils from 'renderer/utils';
+import utils from '../utils';
 
 const separatorOptions = [
   { key: 'comma', value: ',', text: 'Comma' },

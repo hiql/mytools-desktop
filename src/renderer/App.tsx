@@ -8,8 +8,8 @@ import {
   useLocation,
   useHistory,
 } from 'react-router-dom';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { Button, Header, Input, Menu } from 'semantic-ui-react';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import _ from 'lodash';
 import * as constants from './constants';
 import './App.global.css';
@@ -27,28 +27,28 @@ const routes: IRoute[] = [
     path: '/',
     title: '',
     keywords: '',
-    main: React.lazy(() => import('./tools/Home')),
+    main: React.lazy(() => import('./Home')),
     hideInSidebar: true,
   },
   {
     path: '/running',
     title: 'Running',
     keywords: '',
-    main: React.lazy(() => import('./tools/Running')),
+    main: React.lazy(() => import('./Running')),
     hideInSidebar: true,
   },
   {
     path: '/games',
     title: 'Games',
     keywords: '',
-    main: React.lazy(() => import('./tools/Games')),
+    main: React.lazy(() => import('./Games')),
     hideInSidebar: true,
   },
   {
     path: '/settings',
     title: 'Settings',
     keywords: '',
-    main: React.lazy(() => import('./tools/Settings')),
+    main: React.lazy(() => import('./Settings')),
     hideInSidebar: true,
   },
   {
@@ -272,31 +272,31 @@ const routes: IRoute[] = [
     path: '/tcp-upd-ports',
     title: 'TCP/UDP Ports',
     keywords: 'tcp,udp,port,codes',
-    main: React.lazy(() => import('./tools/codes/TcpUdpPorts')),
+    main: React.lazy(() => import('./cheatsheets/TcpUdpPorts')),
   },
   {
     path: '/http-status-codes',
     title: 'HTTP Status Codes',
     keywords: 'http,status,codes',
-    main: React.lazy(() => import('./tools/codes/HttpStatusCodes')),
+    main: React.lazy(() => import('./cheatsheets/HttpStatusCodes')),
   },
   {
     path: '/html-codes',
     title: 'HTML Entities',
     keywords: 'html,codes',
-    main: React.lazy(() => import('./tools/codes/HtmlCodes')),
+    main: React.lazy(() => import('./cheatsheets/HtmlCodes')),
   },
   {
     path: '/mime-type-codes',
     title: 'MIME Types',
     keywords: 'html,mime,codes',
-    main: React.lazy(() => import('./tools/codes/MimeTypeCodes')),
+    main: React.lazy(() => import('./cheatsheets/MimeTypeCodes')),
   },
   {
     path: '/country-codes',
     title: 'Country Codes',
     keywords: 'country,codes',
-    main: React.lazy(() => import('./tools/codes/CountryCodes')),
+    main: React.lazy(() => import('./cheatsheets/CountryCodes')),
   },
 ];
 

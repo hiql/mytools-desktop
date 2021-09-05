@@ -1,7 +1,7 @@
 import * as React from 'react';
-import utils from 'renderer/utils';
 import { Form, Icon } from 'semantic-ui-react';
 import utf8 from 'utf8';
+import utils from '../utils';
 
 function hexEscape(string: string) {
   let index = -1;

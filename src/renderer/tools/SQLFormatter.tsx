@@ -5,9 +5,9 @@ import { format } from 'sql-formatter';
 import NumericInput from 'react-numeric-input';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import repeat from 'repeat-string';
-import utils from 'renderer/utils';
-import Highlight from '../components/Highlight';
+import utils from '../utils';
 import * as constants from '../constants';
+import Highlight from '../components/Highlight';
 
 const formatOptions = [
   { value: 'sql', text: 'SQL' },

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Form, Icon, Segment } from 'semantic-ui-react';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import NumericInput from 'react-numeric-input';
-import utils from 'renderer/utils';
+import utils from '../utils';
 
 function isCharNumber(c: string) {
   return c >= '0' && c <= '9';

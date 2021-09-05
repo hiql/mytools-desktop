@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Form, Icon, Tab } from 'semantic-ui-react';
 import CryptoJS from 'crypto-js';
-import utils from 'renderer/utils';
+import utils from '../utils';
 
 const algorithmOptions = [
   { key: 'AES', value: 'AES', text: 'AES' },

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Header } from 'semantic-ui-react';
-import * as constants from '../constants';
+import * as constants from './constants';
 
 const menuSortOptions = [
   { key: 'default', value: 'default', text: 'Default' },

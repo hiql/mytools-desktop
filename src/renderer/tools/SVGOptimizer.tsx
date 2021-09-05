@@ -10,9 +10,9 @@ import {
 } from 'semantic-ui-react';
 import base64 from 'base-64';
 import utf8 from 'utf8';
-import utils from 'renderer/utils';
-import { useFilePicker } from '../components/useFilePicker';
+import utils from '../utils';
 import * as constants from '../constants';
+import { useFilePicker } from '../components/useFilePicker';
 
 const imageSizeOptions = [
   { key: 'small', value: 'small', text: 'Small' },

@@ -1,8 +1,6 @@
 import * as React from 'react';
 import mimeTypes from './mime_type';
-import TableSearcher, {
-  IColumnDescriptor,
-} from '../../components/TableSearcher';
+import TableSearcher, { IColumnDescriptor } from '../components/TableSearcher';
 
 export default function MimeTypeCodes() {
   const cols: IColumnDescriptor[] = [

@@ -11,8 +11,8 @@ import {
 import NumericInput from 'react-numeric-input';
 import Resizer from 'react-image-file-resizer';
 import utils from 'renderer/utils';
-import { useFilePicker } from '../components/useFilePicker';
 import * as constants from '../constants';
+import { useFilePicker } from '../components/useFilePicker';
 
 const imagePreviewSizeOptions = [
   { key: 'small', value: 'small', text: 'Small' },

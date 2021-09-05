@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import { FileDrop } from 'react-file-drop';
 import byteSize from 'byte-size';
-import utils from 'renderer/utils';
-import MatchResult from '../components/MatchResult';
-import { useFilePicker } from '../components/useFilePicker';
+import utils from '../utils';
 import * as constants from '../constants';
+import { useFilePicker } from '../components/useFilePicker';
+import MatchResult from '../components/MatchResult';
 
 const hasherOptions = [
   { key: 'md5', value: 'md5', text: 'md5' },

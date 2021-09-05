@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Form, Icon, Radio } from 'semantic-ui-react';
 import csv2json from 'csvjson-csv2json';
-import utils from 'renderer/utils';
+import utils from '../utils';
 
 const separatorOptions = [
   { key: 'auto', value: 'auto', text: 'Auto' },

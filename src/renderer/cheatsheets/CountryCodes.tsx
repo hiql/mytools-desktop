@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { List } from 'semantic-ui-react';
 import { continent, countryCodes } from './country_codes';
-import TableSearcher, {
-  IColumnDescriptor,
-} from '../../components/TableSearcher';
+import TableSearcher, { IColumnDescriptor } from '../components/TableSearcher';
 
 export default function CountryCodes() {
   const cols: IColumnDescriptor[] = [

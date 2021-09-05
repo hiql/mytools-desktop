@@ -3,7 +3,7 @@ import { Form, Label, Segment } from 'semantic-ui-react';
 import SortableList, { SortableItem } from 'react-easy-sort';
 import arrayMove from 'array-move';
 import byteSize from 'byte-size';
-import utils from 'renderer/utils';
+import utils from '../utils';
 import { useFilePicker } from '../components/useFilePicker';
 
 interface MergeFile {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import md5 from 'crypto-js/md5';
-import utils from 'renderer/utils';
+import utils from '../utils';
 
 export default function MD5Encryptor() {
   const [rawValue, setRawValue] = React.useState('');

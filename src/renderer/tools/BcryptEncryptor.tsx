@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Form, Header, Icon } from 'semantic-ui-react';
-import utils from 'renderer/utils';
-import MatchResult from 'renderer/components/MatchResult';
+import utils from '../utils';
+import MatchResult from '../components/MatchResult';
 
 const roundsOptions = [
   { key: '1', value: '1', text: '1' },

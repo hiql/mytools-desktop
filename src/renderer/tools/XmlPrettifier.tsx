@@ -5,7 +5,7 @@ import NumericInput from 'react-numeric-input';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import xmlFormatter from 'xml-formatter';
 import repeat from 'repeat-string';
-import utils from 'renderer/utils';
+import utils from '../utils';
 import Highlight from '../components/Highlight';
 
 export default function XmlPrettifier() {

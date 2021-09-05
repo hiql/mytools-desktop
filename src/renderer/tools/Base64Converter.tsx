@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import base64 from 'base-64';
 import utf8 from 'utf8';
-import utils from 'renderer/utils';
+import utils from '../utils';
 
 export default function Base64Converter() {
   const [rawValue, setRawValue] = React.useState('');

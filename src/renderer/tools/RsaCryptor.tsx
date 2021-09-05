@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import * as React from 'react';
 import { Form, Header, Icon } from 'semantic-ui-react';
-import utils from 'renderer/utils';
+import utils from '../utils';
 
 const keySizeOptions = [
   { key: '512', value: '512', text: '512' },

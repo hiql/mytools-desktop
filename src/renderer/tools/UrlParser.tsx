@@ -1,6 +1,6 @@
 import * as React from 'react';
-import utils from 'renderer/utils';
 import { Form, Header, Table } from 'semantic-ui-react';
+import utils from '../utils';
 
 interface Item {
   name: string;

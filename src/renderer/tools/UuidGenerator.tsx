@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import NumericInput from 'react-numeric-input';
 import { v4 as uuidv4 } from 'uuid';
-import utils from 'renderer/utils';
+import utils from '../utils';
 
 export default function UuidGenerator() {
   const [resultValue, setResultValue] = React.useState('');

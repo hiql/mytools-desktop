@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Form, Header, Icon, Input, Table } from 'semantic-ui-react';
 import he from 'he';
-import utils from 'renderer/utils';
+import utils from '../utils';
 
 interface ICharInfo {
   dec: string;
@@ -82,7 +82,7 @@ export default function StringUtility() {
   };
 
   const onGetCharInfo = (value: string) => {
-    if (value === '') setCharInfo(null);
+    if (value === '') setCharInfo(undefined);
     else {
       const charCode = value.charCodeAt(0);
       setCharInfo({
@@ -194,52 +194,69 @@ export default function StringUtility() {
       </Form.Group>
       <Header>Character Test</Header>
       <Table collapsing>
-        <Table.Row>
-          <Table.Cell>
-            <strong>Character</strong>
-          </Table.Cell>
-          <Table.Cell>
-            <Input
-              maxLength="1"
-              placeholder="Enter or paste char here"
-              onChange={(e) => onGetCharInfo(e.currentTarget.value)}
-            />
-          </Table.Cell>
-        </Table.Row>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>
+              <strong>Character</strong>
+            </Table.Cell>
+            <Table.Cell>
+              <Input
+                maxLength="1"
+                placeholder="Enter or paste char here"
+                onChange={(e) => onGetCharInfo(e.currentTarget.value)}
+              />
+            </Table.Cell>
+          </Table.Row>
 
-        <Table.Row>
-          <Table.Cell>Decimal</Table.Cell>
-          <Table.Cell>{charInfo == null ? '' : charInfo.dec}</Table.Cell>
-        </Table.Row>
+          <Table.Row>
+            <Table.Cell>Decimal</Table.Cell>
+            <Table.Cell>
+              {charInfo === undefined ? '' : charInfo.dec}
+            </Table.Cell>
+          </Table.Row>
 
-        <Table.Row>
-          <Table.Cell>Octal</Table.Cell>
-          <Table.Cell>{charInfo == null ? '' : charInfo.oct}</Table.Cell>
-        </Table.Row>
+          <Table.Row>
+            <Table.Cell>Octal</Table.Cell>
+            <Table.Cell>
+              {charInfo === undefined ? '' : charInfo.oct}
+            </Table.Cell>
+          </Table.Row>
 
-        <Table.Row>
-          <Table.Cell>Hexadecimal</Table.Cell>
-          <Table.Cell>{charInfo == null ? '' : charInfo.hex}</Table.Cell>
-        </Table.Row>
+          <Table.Row>
+            <Table.Cell>Hexadecimal</Table.Cell>
+            <Table.Cell>
+              {charInfo === undefined ? '' : charInfo.hex}
+            </Table.Cell>
+          </Table.Row>
 
-        <Table.Row>
-          <Table.Cell>Unicode</Table.Cell>
-          <Table.Cell>{charInfo == null ? '' : charInfo.uni}</Table.Cell>
-        </Table.Row>
+          <Table.Row>
+            <Table.Cell>Unicode</Table.Cell>
+            <Table.Cell>
+              {charInfo === undefined ? '' : charInfo.uni}
+            </Table.Cell>
+          </Table.Row>
 
-        <Table.Row>
-          <Table.Cell>Escaped unicode</Table.Cell>
-          <Table.Cell>{charInfo == null ? '' : charInfo.esc}</Table.Cell>
-        </Table.Row>
+          <Table.Row>
+            <Table.Cell>Escaped unicode</Table.Cell>
+            <Table.Cell>
+              {charInfo === undefined ? '' : charInfo.esc}
+            </Table.Cell>
+          </Table.Row>
 
-        <Table.Row>
-          <Table.Cell>HTML Entity</Table.Cell>
-          <Table.Cell>{charInfo == null ? '' : charInfo.html}</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>HTML Entity Name</Table.Cell>
-          <Table.Cell>{charInfo == null ? '' : charInfo.htmlName}</Table.Cell>
-        </Table.Row>
+          <Table.Row>
+            <Table.Cell>HTML Entity</Table.Cell>
+            <Table.Cell>
+              {charInfo === undefined ? '' : charInfo.html}
+            </Table.Cell>
+          </Table.Row>
+
+          <Table.Row>
+            <Table.Cell>HTML Entity Name</Table.Cell>
+            <Table.Cell>
+              {charInfo === undefined ? '' : charInfo.htmlName}
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
       </Table>
     </Form>
   );

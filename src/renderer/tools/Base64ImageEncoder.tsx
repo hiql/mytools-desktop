@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Form, Icon, Image, Segment, SemanticSIZES } from 'semantic-ui-react';
-import utils from 'renderer/utils';
-import { useFilePicker } from '../components/useFilePicker';
+import utils from '../utils';
 import * as constants from '../constants';
+import { useFilePicker } from '../components/useFilePicker';
 
 const imageSizeOptions = [
   { key: 'small', value: 'small', text: 'Small' },
