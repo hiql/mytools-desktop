@@ -136,7 +136,7 @@ body {
 .search-box.ui > input {
   /* border-radius: 500rem; */
   border: none !important;
-  background-color: rgba(0, 0, 0,0.065);
+  background-color: rgba(0, 0, 0, 0.065);
 }
 
 .search-box.ui > input:focus {
@@ -182,11 +182,10 @@ body {
 }
 
 .drawer-container {
-  display:  flex;
+  display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
-
 }
 
 .drawer-container-header {
@@ -237,8 +236,7 @@ body {
   height: 28px;
   border-radius: 2px;
   border: 3px solid #fff;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1),
-    inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
@@ -277,7 +275,7 @@ body {
 .file-item .size {
   display: block;
   float: right;
-  color:rgba(0, 0, 0,0.6)
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .file-dragged {
@@ -290,22 +288,19 @@ body {
 .image-box {
   background-position: 0 0, 5px 5px !important;
   background-size: 10px 10px !important;
-  background-image: linear-gradient(45deg,
-    #eee 25%,
-    transparent 25%,
-    transparent 75%,
-    #eee 75%,
-    #eee 100%),
-    linear-gradient(45deg,
-    #eee 25%,
-    #fff 25%,
-    #fff 75%,
-    #eee 75%,
-    #eee 100%) !important;
+  background-image: linear-gradient(
+      45deg,
+      #eee 25%,
+      transparent 25%,
+      transparent 75%,
+      #eee 75%,
+      #eee 100%
+    ),
+    linear-gradient(45deg, #eee 25%, #fff 25%, #fff 75%, #eee 75%, #eee 100%) !important;
 }
 
 .ui.vertical.menu .item a {
-  color:  #686969 !important;
+  color: #686969 !important;
 }
 
 .ui.vertical.menu .active.item a {
@@ -313,6 +308,10 @@ body {
 }
 
 .ui.segment {
+  box-shadow: none;
+}
+
+.ui.segments {
   box-shadow: none;
 }
 
@@ -326,14 +325,14 @@ body {
 }
 
 .ui.secondary.pointing.menu {
-  border-bottom: 1px solid rgba(34,36,38,.15);
+  border-bottom: 1px solid rgba(34, 36, 38, 0.15);
 }
 
 .password-generator {
   border-radius: 6px;
-  font-family: Courier Prime Bits,monospace;
+  font-family: Courier Prime Bits, monospace;
   font-size: 1.625rem;
-  letter-spacing: .156rem;
+  letter-spacing: 0.156rem;
   line-height: 1.2;
   text-align: center;
   max-width: 450px;
@@ -450,13 +449,11 @@ body {
 @media screen and (max-width: 800px) {
   .cards-item {
     flex-basis: 100%;
-
   }
 }
 
 @media screen and (max-width: 1024px) and (min-width: 800px) {
   .cards-item {
     flex-basis: 50%;
-
   }
 }

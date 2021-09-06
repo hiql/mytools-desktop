@@ -163,8 +163,14 @@ const routes: IRoute[] = [
   {
     path: '/color-picker',
     title: 'Color Picker',
-    keywords: 'color,image',
+    keywords: 'color',
     main: React.lazy(() => import('./tools/ColorPicker')),
+  },
+  {
+    path: '/image-color',
+    title: 'Image Color',
+    keywords: 'color,image',
+    main: React.lazy(() => import('./tools/ImageColor')),
   },
   {
     path: '/svg-optimizer ',

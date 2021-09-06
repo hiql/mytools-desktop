@@ -30,6 +30,7 @@ A desktop application based on Electron and React for daily application developm
 - Unix Time Converter
 - Cron Reader
 - Color Picker
+- Image Color
 - SVG Optimizer
 - Image Resizer
 - Base64 Image Encoder
@@ -51,8 +52,7 @@ A desktop application based on Electron and React for daily application developm
 
 and more...
 
-
-## Powered by 
+## Powered by
 
 - [Electron](https://www.electronjs.org/)
 - [Electron React Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate)
