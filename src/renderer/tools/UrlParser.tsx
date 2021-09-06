@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Header, Table } from 'semantic-ui-react';
+import { Button, Form, Header, Icon, Table } from 'semantic-ui-react';
 import utils from '../utils';
 
 interface Item {
@@ -49,6 +49,10 @@ export default function UrlParser() {
     setRawValue('');
   };
 
+  const onCopy = (str: string) => {
+    utils.copy(str);
+  };
+
   return (
     <>
       <Form>
@@ -72,6 +76,7 @@ export default function UrlParser() {
             <Table.Row>
               <Table.HeaderCell>Key</Table.HeaderCell>
               <Table.HeaderCell>Value</Table.HeaderCell>
+              <Table.HeaderCell />
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -79,6 +84,13 @@ export default function UrlParser() {
               <Table.Row key={p.name}>
                 <Table.Cell>{p.name}</Table.Cell>
                 <Table.Cell>{p.value}</Table.Cell>
+                <Table.Cell textAlign="right">
+                  {p.value !== '' && (
+                    <Button icon size="mini" onClick={() => onCopy(p.value)}>
+                      <Icon name="copy" />
+                    </Button>
+                  )}
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
@@ -89,6 +101,7 @@ export default function UrlParser() {
             <Table.Row>
               <Table.HeaderCell>Key</Table.HeaderCell>
               <Table.HeaderCell>Value</Table.HeaderCell>
+              <Table.HeaderCell />
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -97,6 +110,13 @@ export default function UrlParser() {
               <Table.Row key={idx}>
                 <Table.Cell>{p.name}</Table.Cell>
                 <Table.Cell>{p.value}</Table.Cell>
+                <Table.Cell textAlign="right">
+                  {p.value !== '' && (
+                    <Button icon size="mini" onClick={() => onCopy(p.value)}>
+                      <Icon name="copy" />
+                    </Button>
+                  )}
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
