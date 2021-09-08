@@ -1,5 +1,4 @@
 declare module 'base-64';
-declare module 'bcryptjs';
 declare module 'utf8';
 declare module 'uuid';
 declare module 'node-rsa';
@@ -13,6 +12,5 @@ declare module 'react-numeric-input';
 declare module 'react-pretty-drawer';
 declare module 'repeat-string';
 declare module 'ls-archive';
-declare module 'multistream';
 declare module 'byte-size';
 declare module 'he';
