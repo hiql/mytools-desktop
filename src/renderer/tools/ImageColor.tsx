@@ -34,6 +34,7 @@ const rgbToHex = (r: number, g: number, b: number) =>
     .join('')}`;
 
 const onAddToFavorites = (hex: string) => {
+  if (hex === '') return;
   let storedColors = window.store.get(constants.KEY_COLOR_PICKER_FAVORITES);
   if (storedColors === undefined || storedColors === null) storedColors = [];
   if (_.findIndex(storedColors, (c: string) => c === hex) === -1)
@@ -134,10 +135,10 @@ function TabImageColorPicker() {
                     </Table.Cell>
                     <Table.Cell>Dominant Color</Table.Cell>
                     <Table.Cell>
-                      {`rgb(${color[0]}, ${color[1]}, ${color[2]})`}
+                      {rgbToHex(color[0], color[1], color[2])}
                     </Table.Cell>
                     <Table.Cell>
-                      {rgbToHex(color[0], color[1], color[2])}
+                      {`rgb(${color[0]}, ${color[1]}, ${color[2]})`}
                     </Table.Cell>
                     <Table.Cell textAlign="right">
                       <Button
@@ -163,8 +164,8 @@ function TabImageColorPicker() {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Color</Table.HeaderCell>
-            <Table.HeaderCell>RGB</Table.HeaderCell>
             <Table.HeaderCell>HEX</Table.HeaderCell>
+            <Table.HeaderCell>RGB</Table.HeaderCell>
             <Table.HeaderCell />
           </Table.Row>
         </Table.Header>
@@ -179,8 +180,8 @@ function TabImageColorPicker() {
                   }}
                 />
               </Table.Cell>
-              <Table.Cell>{`rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`}</Table.Cell>
               <Table.Cell>{rgbToHex(rgb[0], rgb[1], rgb[2])}</Table.Cell>
+              <Table.Cell>{`rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`}</Table.Cell>
               <Table.Cell textAlign="right">
                 <Button
                   basic
@@ -202,6 +203,7 @@ function TabFavoriteColors() {
   const [colors, setColors] = React.useState([]);
 
   const hexToRgb = (hex: string) => {
+    if (hex === '') return '';
     const rgb = hexRgb(hex);
     return `rgb(${rgb.red}, ${rgb.green}, ${rgb.blue})`;
   };
@@ -231,8 +233,8 @@ function TabFavoriteColors() {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Color</Table.HeaderCell>
-            <Table.HeaderCell>RGB</Table.HeaderCell>
             <Table.HeaderCell>HEX</Table.HeaderCell>
+            <Table.HeaderCell>RGB</Table.HeaderCell>
             <Table.HeaderCell />
           </Table.Row>
         </Table.Header>
@@ -247,8 +249,8 @@ function TabFavoriteColors() {
                   }}
                 />
               </Table.Cell>
-              <Table.Cell>{hexToRgb(hex)}</Table.Cell>
               <Table.Cell>{hex}</Table.Cell>
+              <Table.Cell>{hexToRgb(hex)}</Table.Cell>
               <Table.Cell textAlign="right">
                 <Button
                   basic

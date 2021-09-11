@@ -19,6 +19,7 @@ import utils from '../utils';
 import * as constants from '../constants';
 import colorScales from './color_scale';
 import webSafeColors from './web_safe_colors';
+import colorTable from './color_table';
 
 const rgbToHex = (r: number, g: number, b: number) =>
   `#${[r, g, b]
@@ -29,6 +30,7 @@ const rgbToHex = (r: number, g: number, b: number) =>
     .join('')}`;
 
 const onAddToFavorites = (hex: string) => {
+  if (hex === '') return;
   let storedColors = window.store.get(constants.KEY_COLOR_PICKER_FAVORITES);
   if (storedColors === undefined || storedColors === null) storedColors = [];
   if (_.findIndex(storedColors, (c: string) => c === hex) === -1)
@@ -97,6 +99,7 @@ function TabColorPicker() {
   const [colors, setColors] = React.useState([]);
 
   const hexToRgb = (hex: string) => {
+    if (hex === '') return '';
     const rgb = hexRgb(hex);
     return `rgb(${rgb.red}, ${rgb.green}, ${rgb.blue})`;
   };
@@ -168,8 +171,8 @@ function TabColorPicker() {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Color</Table.HeaderCell>
-            <Table.HeaderCell>RGB</Table.HeaderCell>
             <Table.HeaderCell>HEX</Table.HeaderCell>
+            <Table.HeaderCell>RGB</Table.HeaderCell>
             <Table.HeaderCell />
           </Table.Row>
         </Table.Header>
@@ -184,8 +187,8 @@ function TabColorPicker() {
                   }}
                 />
               </Table.Cell>
-              <Table.Cell>{hexToRgb(hex)}</Table.Cell>
               <Table.Cell>{hex}</Table.Cell>
+              <Table.Cell>{hexToRgb(hex)}</Table.Cell>
               <Table.Cell textAlign="right">
                 <Button
                   basic
@@ -338,14 +341,58 @@ function TabPaletteColors() {
     </Tab.Pane>
   );
 }
+
+function TabColorTable() {
+  return (
+    <Tab.Pane>
+      <Table basic="very" unstackable>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Color</Table.HeaderCell>
+            <Table.HeaderCell>Name</Table.HeaderCell>
+            <Table.HeaderCell>HEX</Table.HeaderCell>
+            <Table.HeaderCell>RGB</Table.HeaderCell>
+            <Table.HeaderCell />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {colorTable.map((color) => (
+            <Table.Row key={color.name}>
+              <Table.Cell textAlign="center">
+                <Segment
+                  style={{
+                    backgroundColor: color.hex,
+                  }}
+                />
+              </Table.Cell>
+              <Table.Cell>{color.name}</Table.Cell>
+              <Table.Cell>{color.hex}</Table.Cell>
+              <Table.Cell>{`rgb(${color.rgb})`}</Table.Cell>
+              <Table.Cell textAlign="right">
+                <Button
+                  basic
+                  icon="star outline"
+                  onClick={() => onAddToFavorites(color.hex)}
+                />
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </Tab.Pane>
+  );
+}
+
 const tabColorPicker = () => <TabColorPicker />;
 const tabWebSafeColors = () => <TabWebSafeColors />;
 const tabPaletteColors = () => <TabPaletteColors />;
+const tabColorTable = () => <TabColorTable />;
 
 const panes = [
   { menuItem: 'Color Picker', render: tabColorPicker },
   { menuItem: 'Palettes', render: tabPaletteColors },
   { menuItem: 'Web Safe Colors', render: tabWebSafeColors },
+  { menuItem: 'Colors', render: tabColorTable },
 ];
 
 export default function ColorPicker() {
