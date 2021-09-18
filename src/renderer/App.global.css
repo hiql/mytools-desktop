@@ -329,18 +329,15 @@ body {
 }
 
 .password-generator {
-  border-radius: 6px;
   font-family: Courier Prime Bits, monospace;
   font-size: 1.625rem;
   letter-spacing: 0.156rem;
   line-height: 1.2;
   text-align: center;
-  max-width: 450px;
-  min-height: 100px;
   word-break: break-all;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 25px 8px 8px;
+  padding: 15px 8px;
   margin-bottom: 8px;
+  min-height: 80px;
 }
 
 .password-generator-digits {
@@ -349,6 +346,10 @@ body {
 
 .password-generator-letter {
   color: #333;
+}
+
+.password-generator-symbol {
+  color: #f77825;
 }
 
 /*

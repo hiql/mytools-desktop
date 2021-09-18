@@ -9,17 +9,29 @@ function isCharNumber(c: string) {
   return c >= '0' && c <= '9';
 }
 
+function isLetter(c: string) {
+  return c.length === 1 && c.match(/[a-z]/i);
+}
+
 interface IItem {
   idx: number;
   char: string;
-  isDigit: boolean;
+  className: string;
 }
 
 function strSlice(text: string) {
   const ret = new Array<IItem>();
   let i = 0;
   [...text].forEach((c) => {
-    ret.push({ idx: (i += 1), char: c, isDigit: isCharNumber(c) });
+    let css = '';
+    if (isCharNumber(c)) {
+      css = 'password-generator-digits';
+    } else if (isLetter(c)) {
+      css = 'password-generator-letter';
+    } else {
+      css = 'password-generator-symbol';
+    }
+    ret.push({ idx: (i += 1), char: c, className: css });
   });
   return ret;
 }
@@ -140,23 +152,17 @@ export default function PasswordGenerator() {
           }
           label="Exclude similar chars, like 'i' and 'l'"
         />
-        <Segment basic>* At least one should be true.</Segment>
-        <div className="password-generator">
-          <div style={{ minHeight: 50 }}>
-            {strSlice(resultValue).map((item) =>
-              item.isDigit ? (
-                <span key={item.idx} className="password-generator-digits">
-                  {item.char}
-                </span>
-              ) : (
-                <span key={item.idx} className="password-generator-letter">
-                  {item.char}
-                </span>
-              )
-            )}
+        <p>* At least one should be true.</p>
+        <Segment>
+          <div className="password-generator">
+            {strSlice(resultValue).map((item) => (
+              <span key={item.idx} className={item.className}>
+                {item.char}
+              </span>
+            ))}
           </div>
           <PasswordStrengthBar password={resultValue} />
-        </div>
+        </Segment>
         <Form.Group>
           <Form.Button primary onClick={onGenerate}>
             Generate
