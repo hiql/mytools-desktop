@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import { format } from 'sql-formatter';
 import NumericInput from 'react-numeric-input';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import repeat from 'repeat-string';
 import utils from '../utils';
 import * as constants from '../constants';
@@ -119,10 +119,11 @@ export default function SQLFormatter() {
           label="Uppercase keywords"
         />
       </Form.Group>
-      <OverlayScrollbarsComponent style={{ height: 400 }} className="code-box">
-        <Highlight language="sql">{resultValue}</Highlight>
-      </OverlayScrollbarsComponent>
-
+      <div style={{ height: 400 }} className="code-box">
+        <PerfectScrollbar>
+          <Highlight language="sql">{resultValue}</Highlight>
+        </PerfectScrollbar>
+      </div>
       <Form.Group inline>
         <Form.Button onClick={onCopy}>
           <Icon name="copy" />

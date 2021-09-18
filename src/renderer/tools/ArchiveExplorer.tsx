@@ -10,7 +10,7 @@ import {
 } from 'semantic-ui-react';
 import { FileDrop } from 'react-file-drop';
 import { Drawer } from 'react-pretty-drawer';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import byteSize from 'byte-size';
 import _ from 'lodash';
 import utils from '../utils';
@@ -306,14 +306,11 @@ export default function ArchiveExplorer() {
               </Button>
             </div>
           </div>
-          <OverlayScrollbarsComponent
-            options={{
-              scrollbars: { autoHide: 'leave' },
-              className: 'os-theme-dark drawer-container-content',
-            }}
-          >
-            <Highlight language={lang}>{openFileContent}</Highlight>
-          </OverlayScrollbarsComponent>
+          <div className="drawer-container-content">
+            <PerfectScrollbar>
+              <Highlight language={lang}>{openFileContent}</Highlight>
+            </PerfectScrollbar>
+          </div>
         </div>
       </Drawer>
     </>

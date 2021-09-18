@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import NumericInput from 'react-numeric-input';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import xmlFormatter from 'xml-formatter';
 import repeat from 'repeat-string';
 import utils from '../utils';
@@ -83,12 +83,11 @@ export default function XmlPrettifier() {
           }
           label="Keep content in the same line as the element, Only works if element contains at least one text node"
         />
-        <OverlayScrollbarsComponent
-          style={{ height: 400 }}
-          className="code-box"
-        >
-          <Highlight language="xml">{resultValue}</Highlight>
-        </OverlayScrollbarsComponent>
+        <div style={{ height: 400 }} className="code-box">
+          <PerfectScrollbar>
+            <Highlight language="xml">{resultValue}</Highlight>
+          </PerfectScrollbar>
+        </div>
 
         <Form.Group inline>
           <Form.Button onClick={onCopy}>

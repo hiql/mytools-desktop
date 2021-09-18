@@ -9,7 +9,7 @@ import {
   useHistory,
 } from 'react-router-dom';
 import { Button, Header, Input, Menu } from 'semantic-ui-react';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import _ from 'lodash';
 import * as constants from './constants';
 import './App.global.css';
@@ -338,8 +338,6 @@ const MainUI = () => {
   const { pathname } = useLocation();
   const history = useHistory();
 
-  const osRef = React.useRef<OverlayScrollbarsComponent>(null);
-
   const sortRoutesBy = (order: string) => {
     if (order === 'default') {
       return filteredRoutes;
@@ -398,7 +396,7 @@ const MainUI = () => {
   };
 
   React.useEffect(() => {
-    osRef?.current?.osInstance()?.scroll(0, 0);
+    // osRef?.current?.osInstance()?.scroll(0, 0);
   }, [pathname]);
 
   React.useEffect(() => {
@@ -423,29 +421,31 @@ const MainUI = () => {
               placeholder="Search..."
             />
           </div>
-          <OverlayScrollbarsComponent
-            options={{
-              scrollbars: { visibility: 'hidden' },
-              className: 'os-theme-light app-sidebar-main',
-            }}
-          >
-            <Menu
-              secondary
-              vertical
-              size="small"
-              className="app-sidebar-main-menu-list"
+          <div className="app-sidebar-main">
+            <PerfectScrollbar
+              options={{
+                maxScrollbarLength: 45,
+                minScrollbarLength: 15,
+              }}
             >
-              {sortedRoutes.map((route) =>
-                route.hideInSidebar ? null : (
-                  <SimpleMenuLink
-                    key={route.path}
-                    to={route.path}
-                    label={route.title}
-                  />
-                )
-              )}
-            </Menu>
-          </OverlayScrollbarsComponent>
+              <Menu
+                secondary
+                vertical
+                size="small"
+                className="app-sidebar-main-menu-list"
+              >
+                {sortedRoutes.map((route) =>
+                  route.hideInSidebar ? null : (
+                    <SimpleMenuLink
+                      key={route.path}
+                      to={route.path}
+                      label={route.title}
+                    />
+                  )
+                )}
+              </Menu>
+            </PerfectScrollbar>
+          </div>
         </div>
       </div>
 
@@ -543,31 +543,32 @@ const MainUI = () => {
               </div>
             </div>
           </div>
-
-          <OverlayScrollbarsComponent
-            options={{
-              scrollbars: { autoHide: 'leave' },
-              className: 'os-theme-dark app-main-content',
-              callbacks: {
-                onScroll: (e) => setNavbarShadow(e?.target?.scrollTop !== 0),
-              },
-            }}
-          >
-            <div className="app-main-content-wrap">
-              <Switch>
-                <Suspense fallback={<div>Loading...</div>}>
-                  {routes.map((route) => (
-                    <Route
-                      exact={route.exact}
-                      key={route.path}
-                      path={route.path}
-                      component={route.main}
-                    />
-                  ))}
-                </Suspense>
-              </Switch>
-            </div>
-          </OverlayScrollbarsComponent>
+          <div className="app-main-content">
+            <PerfectScrollbar
+              options={{
+                maxScrollbarLength: 100,
+                minScrollbarLength: 50,
+              }}
+              onScrollY={(container) =>
+                setNavbarShadow(container.scrollTop !== 0)
+              }
+            >
+              <div className="app-main-content-wrap">
+                <Switch>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    {routes.map((route) => (
+                      <Route
+                        exact={route.exact}
+                        key={route.path}
+                        path={route.path}
+                        component={route.main}
+                      />
+                    ))}
+                  </Suspense>
+                </Switch>
+              </div>
+            </PerfectScrollbar>
+          </div>
         </div>
       </div>
     </>

@@ -4,10 +4,10 @@
  */
 
 @import '~semantic-ui-css/semantic.min.css';
-@import '~overlayscrollbars/css/OverlayScrollbars.min.css';
 @import '~highlight.js/styles/atom-one-light.css';
 @import '~rc-slider/assets/index.css';
-@import 'games/TicTacToe/index.css';
+@import './scrollbar.css';
+@import './games/TicTacToe/index.css';
 
 html,
 body {

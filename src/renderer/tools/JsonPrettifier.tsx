@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import NumericInput from 'react-numeric-input';
 import { Drawer } from 'react-pretty-drawer';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import ReactJson from 'react-json-view';
 import utils from '../utils';
 import Highlight from '../components/Highlight';
@@ -53,12 +53,11 @@ export default function JsonPrettifier() {
           label="JSON"
           placeholder="Enter or paste json here"
         />
-        <OverlayScrollbarsComponent
-          style={{ height: 400 }}
-          className="code-box"
-        >
-          <Highlight language="json">{resultValue}</Highlight>
-        </OverlayScrollbarsComponent>
+        <div style={{ height: 400 }} className="code-box">
+          <PerfectScrollbar>
+            <Highlight language="json">{resultValue}</Highlight>
+          </PerfectScrollbar>
+        </div>
         <Form.Group inline>
           <Form.Field>
             <label>Indent</label>
@@ -84,14 +83,11 @@ export default function JsonPrettifier() {
               <div className="drawer-container-header">
                 <div className="title">JSON Inspector</div>
               </div>
-              <OverlayScrollbarsComponent
-                options={{
-                  scrollbars: { autoHide: 'leave' },
-                  className: 'os-theme-dark drawer-container-content',
-                }}
-              >
-                <ReactJson style={{ padding: 20 }} src={jsonObject} />
-              </OverlayScrollbarsComponent>
+              <div className="drawer-container-content">
+                <PerfectScrollbar>
+                  <ReactJson style={{ padding: 20 }} src={jsonObject} />
+                </PerfectScrollbar>
+              </div>
             </div>
           </Drawer>
 
