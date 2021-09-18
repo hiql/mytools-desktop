@@ -20,6 +20,7 @@ interface IRoute {
   keywords: string;
   main: FunctionComponent;
   hideInSidebar?: boolean;
+  exact?: boolean;
 }
 
 const routes: IRoute[] = [
@@ -29,6 +30,7 @@ const routes: IRoute[] = [
     keywords: '',
     main: React.lazy(() => import('./Home')),
     hideInSidebar: true,
+    exact: true,
   },
   {
     path: '/running',
@@ -42,6 +44,14 @@ const routes: IRoute[] = [
     title: 'Games',
     keywords: '',
     main: React.lazy(() => import('./Games')),
+    hideInSidebar: true,
+    exact: true,
+  },
+  {
+    path: '/games/tic-tac-toe',
+    title: 'Games',
+    keywords: '',
+    main: React.lazy(() => import('./games/TicTacToe')),
     hideInSidebar: true,
   },
   {
@@ -495,17 +505,15 @@ const MainUI = () => {
               </div>
               <div className="navbar-container-item-center">
                 <Switch>
-                  {routes.map((route) =>
-                    route.path === '/' ? (
-                      <Route exact key={route.path} path={route.path}>
-                        <Header as="h4">{route.title}</Header>
-                      </Route>
-                    ) : (
-                      <Route key={route.path} path={route.path}>
-                        <Header as="h4">{route.title}</Header>
-                      </Route>
-                    )
-                  )}
+                  {routes.map((route) => (
+                    <Route
+                      exact={route.exact}
+                      key={route.path}
+                      path={route.path}
+                    >
+                      <Header as="h4">{route.title}</Header>
+                    </Route>
+                  ))}
                 </Switch>
               </div>
               <div className="navbar-container-item-right">
@@ -548,22 +556,14 @@ const MainUI = () => {
             <div className="app-main-content-wrap">
               <Switch>
                 <Suspense fallback={<div>Loading...</div>}>
-                  {routes.map((route) =>
-                    route.path === '/' ? (
-                      <Route
-                        exact
-                        key={route.path}
-                        path={route.path}
-                        component={route.main}
-                      />
-                    ) : (
-                      <Route
-                        key={route.path}
-                        path={route.path}
-                        component={route.main}
-                      />
-                    )
-                  )}
+                  {routes.map((route) => (
+                    <Route
+                      exact={route.exact}
+                      key={route.path}
+                      path={route.path}
+                      component={route.main}
+                    />
+                  ))}
                 </Suspense>
               </Switch>
             </div>

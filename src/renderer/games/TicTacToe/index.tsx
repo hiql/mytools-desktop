@@ -1,5 +1,6 @@
 import React, { ReactNode, useState } from 'react';
-import { Button, List, Segment } from 'semantic-ui-react';
+import { Button, List } from 'semantic-ui-react';
+import GameLayout from '../GameLayout';
 
 type SquareValue = 'X' | 'O' | null;
 
@@ -167,9 +168,6 @@ const Game: React.FC = () => {
 
   return (
     <div>
-      <Segment textAlign="center" basic>
-        <h1>Tic Tac Toe</h1>
-      </Segment>
       <div className="tic-tac-toe-game">
         <div className="tic-tac-toe-game-board">
           <Board squares={current.squares} onClick={(i) => handleClick(i)} />
@@ -183,4 +181,10 @@ const Game: React.FC = () => {
   );
 };
 
-export default Game;
+export default function TicTacToeGame() {
+  return (
+    <GameLayout title="Tic Tac Toe">
+      <Game />
+    </GameLayout>
+  );
+}

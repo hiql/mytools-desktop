@@ -1,10 +1,16 @@
 import React from 'react';
-import TicTacToe from './games/TicTacToe';
+import { Link } from 'react-router-dom';
 
 export default function Games() {
   return (
     <>
-      <TicTacToe />
+      <div className="cards">
+        <div className="cards-item">
+          <Link to="/games/tic-tac-toe">
+            <h1>Tic Tac Toe</h1>
+          </Link>
+        </div>
+      </div>
     </>
   );
 }
