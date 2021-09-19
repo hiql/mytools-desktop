@@ -10,6 +10,11 @@ export default function Games() {
             <h1>Tic Tac Toe</h1>
           </Link>
         </div>
+        <div className="cards-item">
+          <Link to="/games/typing">
+            <h1>Typing</h1>
+          </Link>
+        </div>
       </div>
     </>
   );

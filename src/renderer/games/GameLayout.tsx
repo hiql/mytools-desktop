@@ -4,14 +4,14 @@ import { Grid } from 'semantic-ui-react';
 
 type GameLayoutProps = {
   title: string;
-  children: React.ReactElement;
+  children: React.ReactNode;
 };
 
 const GameLayout = (props: GameLayoutProps) => {
   const { title, children } = props;
   return (
     <div>
-      <div style={{ marginBottom: 50 }}>
+      <div style={{ marginBottom: 25 }}>
         <Grid columns={3}>
           <Grid.Column>
             <Link to="/games">
@@ -32,7 +32,7 @@ const GameLayout = (props: GameLayoutProps) => {
           <Grid.Column textAlign="center">
             <h1>{title}</h1>
           </Grid.Column>
-          <Grid.Column />
+          <Grid.Column textAlign="right" />
         </Grid>
       </div>
       <div>{children}</div>

@@ -1,0 +1,104 @@
+@keyframes flash {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.typing-game {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.typing-game .caret {
+  animation-name: flash;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  transition: 0.12s;
+}
+
+.typing-game .caret {
+  position: absolute;
+  display: inline;
+}
+
+.typing-game .tracking-wide {
+  letter-spacing: 0.025em;
+}
+
+.typing-game .pointer-events-none {
+  pointer-events: none;
+}
+
+.typing-game .relative {
+  position: relative;
+}
+.typing-game .outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.typing-game .text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.typing-game .font-serif {
+  font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+.typing-game .select-none {
+  user-select: none;
+}
+
+.typing-game .box {
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  background-color: #1b1f23;
+  color: #d1d5da;
+}
+
+.typing-game .statistics {
+  margin-top: 10px;
+}
+
+.typing-game .cursor {
+  border-left: 2px solid #fff;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mt-4 {
+  margin-bottom: 1rem;
+}
+
+.mr-4 {
+  margin-right: 1rem;
+}
+
+.text-green {
+  color: #22863a;
+}
+
+.text-blue {
+  color: #005cc5;
+}
+
+.text-yellow {
+  color: #f9c513;
+}
+
+.text-gray {
+  color: #586069;
+}
+
+.keystroke-font {
+  font-size: 3em;
+}

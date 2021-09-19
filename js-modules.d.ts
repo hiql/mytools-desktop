@@ -14,3 +14,4 @@ declare module 'repeat-string';
 declare module 'ls-archive';
 declare module 'byte-size';
 declare module 'he';
+declare module 'random-paragraph';

@@ -55,6 +55,13 @@ const routes: IRoute[] = [
     hideInSidebar: true,
   },
   {
+    path: '/games/typing',
+    title: 'Games',
+    keywords: '',
+    main: React.lazy(() => import('./games/Typing')),
+    hideInSidebar: true,
+  },
+  {
     path: '/settings',
     title: 'Settings',
     keywords: '',
@@ -421,7 +428,7 @@ const MainUI = () => {
               placeholder="Search..."
             />
           </div>
-          <div className="app-sidebar-main">
+          <div className="app-sidebar-main no-drag">
             <PerfectScrollbar
               options={{
                 maxScrollbarLength: 45,
