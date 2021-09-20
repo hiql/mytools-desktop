@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import NumericInput from 'react-numeric-input';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import xmlFormatter from 'xml-formatter';
 import repeat from 'repeat-string';
 import utils from '../utils';
@@ -84,9 +83,7 @@ export default function XmlPrettifier() {
           label="Keep content in the same line as the element, Only works if element contains at least one text node"
         />
         <div style={{ height: 400 }} className="code-box">
-          <PerfectScrollbar>
-            <Highlight language="xml">{resultValue}</Highlight>
-          </PerfectScrollbar>
+          <Highlight language="xml">{resultValue}</Highlight>
         </div>
 
         <Form.Group inline>

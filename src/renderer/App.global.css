@@ -6,7 +6,6 @@
 @import '~semantic-ui-css/semantic.min.css';
 @import '~highlight.js/styles/atom-one-light.css';
 @import '~rc-slider/assets/index.css';
-@import './scrollbar.css';
 @import './games/TicTacToe/index.css';
 @import './games/Typing/index.css';
 
@@ -18,6 +17,40 @@ body {
   height: 100vh;
 }
 
+/* reset scrollbar style */
+::-webkit-scrollbar:vertical {
+  width: 12px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 12px;
+}
+
+::-webkit-scrollbar-track:vertical,
+::-webkit-scrollbar-track:horizontal {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:vertical,
+::-webkit-scrollbar-thumb:horizontal {
+  background-clip: padding-box;
+  background-color: rgba(0, 0, 0, 0.15);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:vertical:hover,
+::-webkit-scrollbar-thumb:horizontal:hover {
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+.invisible-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* layout styles */
 .app {
   display: flex;
   width: 100%;
@@ -182,6 +215,7 @@ body {
   -webkit-app-region: no-drag;
 }
 
+/* drawer */
 .drawer-container {
   display: flex;
   flex-direction: column;
@@ -212,6 +246,8 @@ body {
 
 .drawer-container-content {
   flex: 1;
+  width: 100%;
+  height: 100%;
   overflow: auto;
 }
 
@@ -219,6 +255,7 @@ body {
   margin-bottom: 8px;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: auto;
 }
 
 .color-value {

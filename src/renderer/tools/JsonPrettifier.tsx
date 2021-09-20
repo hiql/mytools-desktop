@@ -3,7 +3,6 @@ import * as React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import NumericInput from 'react-numeric-input';
 import { Drawer } from 'react-pretty-drawer';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import ReactJson from 'react-json-view';
 import utils from '../utils';
 import Highlight from '../components/Highlight';
@@ -54,9 +53,7 @@ export default function JsonPrettifier() {
           placeholder="Enter or paste json here"
         />
         <div style={{ height: 400 }} className="code-box">
-          <PerfectScrollbar>
-            <Highlight language="json">{resultValue}</Highlight>
-          </PerfectScrollbar>
+          <Highlight language="json">{resultValue}</Highlight>
         </div>
         <Form.Group inline>
           <Form.Field>
@@ -84,9 +81,7 @@ export default function JsonPrettifier() {
                 <div className="title">JSON Inspector</div>
               </div>
               <div className="drawer-container-content">
-                <PerfectScrollbar>
-                  <ReactJson style={{ padding: 20 }} src={jsonObject} />
-                </PerfectScrollbar>
+                <ReactJson style={{ padding: 20 }} src={jsonObject} />
               </div>
             </div>
           </Drawer>

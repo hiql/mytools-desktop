@@ -9,7 +9,6 @@ import {
   useHistory,
 } from 'react-router-dom';
 import { Button, Header, Input, Menu } from 'semantic-ui-react';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import _ from 'lodash';
 import * as constants from './constants';
 import './App.global.css';
@@ -361,27 +360,6 @@ const MainUI = () => {
     setFilteredRoutes(result);
   };
 
-  React.useEffect(() => {
-    history.push('/');
-
-    const order = window.store.get(
-      constants.KEY_SETTINGS_UI_MENU_ORDER,
-      'default'
-    );
-    setMenuOrder(order);
-
-    window.store.watch(
-      constants.KEY_SETTINGS_UI_MENU_ORDER,
-      (newValue: string) => {
-        setMenuOrder(newValue as string);
-      }
-    );
-
-    return () => {
-      window.store.unwatch(constants.KEY_SETTINGS_UI_MENU_ORDER);
-    };
-  }, []);
-
   const toggleSidebar = () => {
     setVisible(!visible);
   };
@@ -403,13 +381,43 @@ const MainUI = () => {
   };
 
   React.useEffect(() => {
-    // osRef?.current?.osInstance()?.scroll(0, 0);
-  }, [pathname]);
+    history.push('/');
+
+    const order = window.store.get(
+      constants.KEY_SETTINGS_UI_MENU_ORDER,
+      'default'
+    );
+    setMenuOrder(order);
+
+    window.store.watch(
+      constants.KEY_SETTINGS_UI_MENU_ORDER,
+      (newValue: string) => {
+        setMenuOrder(newValue as string);
+      }
+    );
+
+    return () => {
+      window.store.unwatch(constants.KEY_SETTINGS_UI_MENU_ORDER);
+    };
+  }, []);
 
   React.useEffect(() => {
     const newOrderRoutes = sortRoutesBy(menuOrder);
     setSortedReutes(newOrderRoutes);
   }, [menuOrder, filteredRoutes]);
+
+  const mainScrollbarRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    if (mainScrollbarRef !== null && mainScrollbarRef.current != null) {
+      mainScrollbarRef.current?.addEventListener('scroll', () =>
+        setNavbarShadow(mainScrollbarRef.current?.scrollTop !== 0)
+      );
+    }
+  }, []);
+
+  React.useEffect(() => {
+    mainScrollbarRef?.current?.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <>
@@ -428,34 +436,26 @@ const MainUI = () => {
               placeholder="Search..."
             />
           </div>
-          <div className="app-sidebar-main no-drag">
-            <PerfectScrollbar
-              options={{
-                maxScrollbarLength: 45,
-                minScrollbarLength: 15,
-              }}
+          <div className="app-sidebar-main no-drag invisible-scrollbar">
+            <Menu
+              secondary
+              vertical
+              size="small"
+              className="app-sidebar-main-menu-list"
             >
-              <Menu
-                secondary
-                vertical
-                size="small"
-                className="app-sidebar-main-menu-list"
-              >
-                {sortedRoutes.map((route) =>
-                  route.hideInSidebar ? null : (
-                    <SimpleMenuLink
-                      key={route.path}
-                      to={route.path}
-                      label={route.title}
-                    />
-                  )
-                )}
-              </Menu>
-            </PerfectScrollbar>
+              {sortedRoutes.map((route) =>
+                route.hideInSidebar ? null : (
+                  <SimpleMenuLink
+                    key={route.path}
+                    to={route.path}
+                    label={route.title}
+                  />
+                )
+              )}
+            </Menu>
           </div>
         </div>
       </div>
-
       <div className="app-main">
         <div className="app-main-container">
           <div
@@ -550,31 +550,21 @@ const MainUI = () => {
               </div>
             </div>
           </div>
-          <div className="app-main-content">
-            <PerfectScrollbar
-              options={{
-                maxScrollbarLength: 100,
-                minScrollbarLength: 50,
-              }}
-              onScrollY={(container) =>
-                setNavbarShadow(container.scrollTop !== 0)
-              }
-            >
-              <div className="app-main-content-wrap">
-                <Switch>
-                  <Suspense fallback={<div>Loading...</div>}>
-                    {routes.map((route) => (
-                      <Route
-                        exact={route.exact}
-                        key={route.path}
-                        path={route.path}
-                        component={route.main}
-                      />
-                    ))}
-                  </Suspense>
-                </Switch>
-              </div>
-            </PerfectScrollbar>
+          <div className="app-main-content" ref={mainScrollbarRef}>
+            <div className="app-main-content-wrap">
+              <Switch>
+                <Suspense fallback={<div>Loading...</div>}>
+                  {routes.map((route) => (
+                    <Route
+                      exact={route.exact}
+                      key={route.path}
+                      path={route.path}
+                      component={route.main}
+                    />
+                  ))}
+                </Suspense>
+              </Switch>
+            </div>
           </div>
         </div>
       </div>

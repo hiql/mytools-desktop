@@ -3,7 +3,6 @@ import * as React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
 import { format } from 'sql-formatter';
 import NumericInput from 'react-numeric-input';
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import repeat from 'repeat-string';
 import utils from '../utils';
 import * as constants from '../constants';
@@ -120,9 +119,7 @@ export default function SQLFormatter() {
         />
       </Form.Group>
       <div style={{ height: 400 }} className="code-box">
-        <PerfectScrollbar>
-          <Highlight language="sql">{resultValue}</Highlight>
-        </PerfectScrollbar>
+        <Highlight language="sql">{resultValue}</Highlight>
       </div>
       <Form.Group inline>
         <Form.Button onClick={onCopy}>
