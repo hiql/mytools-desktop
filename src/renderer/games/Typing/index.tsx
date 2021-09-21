@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Label, Radio, Segment } from 'semantic-ui-react';
+import { Button, Checkbox, Label, Radio, Segment } from 'semantic-ui-react';
 import randomParagraph from 'random-paragraph';
 import { paragraph } from 'txtgen';
+import * as constants from '../../constants';
 import GameLayout from '../GameLayout';
 import TypeThroughInput from './TypeThroughInput';
 
@@ -42,6 +43,8 @@ const Game = () => {
   const [text, setText] = React.useState('');
   const [method, setMethod] = React.useState('random');
   const [keyString, setKeyString] = React.useState('');
+  const [darkMode, setDarkMode] = React.useState(true);
+  const [fontSize, setFontSize] = React.useState('normal');
 
   const generate = () => {
     setKeyString('');
@@ -102,8 +105,30 @@ const Game = () => {
   }, [method]);
 
   React.useEffect(() => {
+    const storedFontSize = window.store.get(
+      constants.KEY_GAMES_TYPING_FONT_SIZE,
+      fontSize
+    );
+    setFontSize(storedFontSize as string);
+
+    const storedDarkMode = window.store.get(
+      constants.KEY_GAMES_TYPING_DARK_MODE,
+      darkMode
+    );
+    setDarkMode(storedDarkMode as boolean);
+
     generate();
   }, []);
+
+  const onFontSizeChange = (value: string) => {
+    window.store.set(constants.KEY_GAMES_TYPING_FONT_SIZE, value);
+    setFontSize(value);
+  };
+
+  const onDarkModeChange = (value: boolean) => {
+    window.store.set(constants.KEY_GAMES_TYPING_DARK_MODE, value);
+    setDarkMode(value);
+  };
 
   return (
     <GameLayout title="Typing">
@@ -141,11 +166,54 @@ const Game = () => {
           onChange={(_e, { value }) => setMethod(value as string)}
         />
       </Segment>
-      <TypeThroughInput text={text} keystroke={(key) => updateKeyStroke(key)} />
+      <TypeThroughInput
+        text={text}
+        keystroke={(key) => updateKeyStroke(key)}
+        dark={darkMode}
+        fontSize={fontSize}
+      />
 
       <Button primary onClick={generate}>
         New Game
       </Button>
+      <Checkbox
+        className="ml-4"
+        slider
+        label="Dark Mode"
+        checked={darkMode}
+        onChange={(_e, { checked }) =>
+          onDarkModeChange(checked === undefined ? darkMode : checked)
+        }
+      />
+      <span className="ml-4">Font Size:</span>
+      <Checkbox
+        radio
+        className="ml-4"
+        label="Normal"
+        name="fontSizeRadioGroup"
+        value="normal"
+        checked={fontSize === 'normal'}
+        onChange={(_e, { value }) => onFontSizeChange(value as string)}
+      />
+      <Checkbox
+        radio
+        className="ml-4"
+        label="Big"
+        name="fontSizeRadioGroup"
+        value="big"
+        checked={fontSize === 'big'}
+        onChange={(_e, { value }) => onFontSizeChange(value as string)}
+      />
+      <Checkbox
+        radio
+        className="ml-4"
+        label="Large"
+        name="fontSizeRadioGroup"
+        value="large"
+        checked={fontSize === 'large'}
+        onChange={(_e, { value }) => onFontSizeChange(value as string)}
+      />
+
       <Segment textAlign="center">
         <Label attached="top left">KeyStroke</Label>
         <div style={{ minHeight: 50 }}>

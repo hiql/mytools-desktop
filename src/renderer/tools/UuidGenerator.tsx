@@ -9,7 +9,8 @@ export default function UuidGenerator() {
   const [resultValue, setResultValue] = React.useState('');
   const [numberOfCount, setNumberOfCount] = React.useState(1);
   const [upperCase, setUpperCaseValue] = React.useState(false);
-  const [short, setShort] = React.useState(false);
+  const [hasHyphens, setHyphens] = React.useState(false);
+  const [hasBraces, setHasBraces] = React.useState(false);
 
   const onGenerate = () => {
     setResultValue('');
@@ -18,7 +19,8 @@ export default function UuidGenerator() {
     for (let index = 0; index < loops; index += 1) {
       let uid = uuidv4();
       uid = upperCase ? uid.toUpperCase() : uid.toLowerCase();
-      uid = short === true ? uid.replaceAll('-', '') : uid;
+      uid = hasHyphens ? uid : uid.replaceAll('-', '');
+      uid = hasBraces ? `{${uid}}` : uid;
       result.push(uid);
     }
     setResultValue(result.join('\n'));
@@ -56,12 +58,20 @@ export default function UuidGenerator() {
           />
         </Form.Field>
         <Form.Checkbox
-          checked={short}
+          checked={hasHyphens}
           slider
           onChange={(_e, { checked }) =>
-            setShort(checked === undefined ? short : checked)
+            setHyphens(checked === undefined ? hasHyphens : checked)
           }
-          label="Remove '-'"
+          label="Hyphens"
+        />
+        <Form.Checkbox
+          checked={hasBraces}
+          slider
+          onChange={(_e, { checked }) =>
+            setHasBraces(checked === undefined ? hasBraces : checked)
+          }
+          label="Braces"
         />
       </Form.Group>
 

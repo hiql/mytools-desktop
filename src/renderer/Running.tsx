@@ -70,7 +70,7 @@ export default function Running() {
           </Statistic>
         </div>
 
-        {/* <div className="cards-item">
+        <div className="cards-item">
           <Statistic>
             <Statistic.Value>
               {window.sysinfo.pid()}
@@ -78,7 +78,7 @@ export default function Running() {
             </Statistic.Value>
             <Statistic.Label>PID</Statistic.Label>
           </Statistic>
-        </div> */}
+        </div>
 
         <div className="cards-item">
           <Statistic>

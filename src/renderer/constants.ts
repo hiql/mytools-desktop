@@ -22,3 +22,6 @@ export const KEY_SVGO_IMAGE_SIZE = 'mytools.svgoptimizer.image.size';
 
 export const KEY_TIMESTAMP_CONVERTER_DATETIME_FORMAT =
   'mytools.timestampconverter.datetime.format';
+
+export const KEY_GAMES_TYPING_FONT_SIZE = 'mytools.games.typing.font.size';
+export const KEY_GAMES_TYPING_DARK_MODE = 'mytools.games.typing.dark.mode';

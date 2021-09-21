@@ -25,6 +25,8 @@ export default function Home() {
           <List>
             <List.Header as="h1">MyTools</List.Header>
             <List.Description>A set of tools for Developers</List.Description>
+            <List.Item />
+            <List.Item>version: {appVer}</List.Item>
           </List>
 
           <div style={{ marginTop: 25, marginBottom: 25 }}>
@@ -142,7 +144,6 @@ export default function Home() {
               </div>
             </List.Item>
             <List.Item />
-            <List.Item>version: {appVer}</List.Item>
           </List>
         </div>
       </div>

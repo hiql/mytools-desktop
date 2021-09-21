@@ -122,10 +122,14 @@ export default function FileChecksum() {
     <Form>
       <div className="file-drop-box">
         <FileDrop onDrop={onFileDrop} onTargetClick={showFilePicker}>
-          <div style={{ margin: 8, fontSize: '1.2em', wordBreak: 'break-all' }}>
-            {fileName}
+          <div>
+            <div
+              style={{ margin: 8, fontSize: '1.2em', wordBreak: 'break-all' }}
+            >
+              {fileName}
+            </div>
+            <div style={{ color: '#555' }}>{fileSize}</div>
           </div>
-          <div style={{ color: '#555' }}>{fileSize}</div>
           <div
             style={{
               margin: 8,

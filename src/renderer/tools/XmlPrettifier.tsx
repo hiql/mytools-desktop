@@ -83,7 +83,7 @@ export default function XmlPrettifier() {
           label="Keep content in the same line as the element, Only works if element contains at least one text node"
         />
         <div style={{ height: 400 }} className="code-box">
-          <Highlight language="xml">{resultValue}</Highlight>
+          <Highlight language="xml" code={resultValue} />
         </div>
 
         <Form.Group inline>

@@ -6,6 +6,7 @@ import {
   Input,
   Label,
   List,
+  Message,
   Segment,
 } from 'semantic-ui-react';
 import { FileDrop } from 'react-file-drop';
@@ -136,6 +137,8 @@ export default function ArchiveExplorer() {
     setLang('');
 
     if (e === '') return;
+    setOpenFilePath(e);
+    openDrawer();
     window.nio.archive.read(archiveFile, e, (err: Error, content: string) => {
       if (err !== null) {
         utils.toast.error(err.message);
@@ -144,10 +147,7 @@ export default function ArchiveExplorer() {
       if (content != null) {
         setLang(languageRegistry.get(window.nio.extname(e).toLowerCase()));
         setOpenFileContent(content.toString());
-        setOpenFilePath(e);
       }
-
-      openDrawer();
     });
   };
 
@@ -199,20 +199,24 @@ export default function ArchiveExplorer() {
     <>
       <div className="file-drop-box">
         <FileDrop onDrop={onFileDrop} onTargetClick={showFilePicker}>
-          <div style={{ margin: 8, fontSize: '1.2em', wordBreak: 'break-all' }}>
-            {archiveFileName}
+          <div>
+            <div
+              style={{ margin: 8, fontSize: '1.2em', wordBreak: 'break-all' }}
+            >
+              {archiveFileName}
+            </div>
+            <div
+              style={{
+                margin: 8,
+                fontSize: '1.0em',
+                color: '#555',
+                wordBreak: 'break-all',
+              }}
+            >
+              {archiveFilePath}
+            </div>
+            <div style={{ color: '#333' }}>{archiveFileSize}</div>
           </div>
-          <div
-            style={{
-              margin: 8,
-              fontSize: '1.0em',
-              color: '#555',
-              wordBreak: 'break-all',
-            }}
-          >
-            {archiveFilePath}
-          </div>
-          <div style={{ color: '#333' }}>{archiveFileSize}</div>
           <div
             style={{
               margin: 8,
@@ -277,13 +281,13 @@ export default function ArchiveExplorer() {
           ))}
         </List>
       </Segment>
-      <Container fluid>
-        <h3>Supported file extensions:</h3>
+      <Message warning>
+        <Message.Header>Supported file extensions:</Message.Header>
         <p>
           .epub .jar .love .nupkg .tar .tar .gz .tgz .tar .bz2 .tbz .tbz2 .war
           .zip .egg .whl .xpi
         </p>
-      </Container>
+      </Message>
 
       <Drawer
         visible={visible}
@@ -306,7 +310,7 @@ export default function ArchiveExplorer() {
             </div>
           </div>
           <div className="drawer-container-content">
-            <Highlight language={lang}>{openFileContent}</Highlight>
+            <Highlight language={lang} code={openFileContent} />
           </div>
         </div>
       </Drawer>

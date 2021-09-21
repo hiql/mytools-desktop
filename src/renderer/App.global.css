@@ -76,6 +76,7 @@ body {
 .app-sidebar-controls {
   grid-row: 1;
   height: 54px;
+  align-items: right;
 }
 
 .app-sidebar-header {
@@ -140,11 +141,12 @@ body {
 
 .navbar-container-item-center {
   flex: 1;
-  text-align: center;
 }
 
-.navbar-container-item-center > h4 {
+.navbar-container-item-center > h3 {
+  font-size: 1.1rem !important;
   font-weight: normal !important;
+  opacity: 0.9;
 }
 
 .navbar-container-item-right {

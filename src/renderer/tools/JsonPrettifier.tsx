@@ -53,7 +53,7 @@ export default function JsonPrettifier() {
           placeholder="Enter or paste json here"
         />
         <div style={{ height: 400 }} className="code-box">
-          <Highlight language="json">{resultValue}</Highlight>
+          <Highlight language="json" code={resultValue} />
         </div>
         <Form.Group inline>
           <Form.Field>

@@ -119,7 +119,7 @@ export default function SQLFormatter() {
         />
       </Form.Group>
       <div style={{ height: 400 }} className="code-box">
-        <Highlight language="sql">{resultValue}</Highlight>
+        <Highlight language="sql" code={resultValue} loading={false} />
       </div>
       <Form.Group inline>
         <Form.Button onClick={onCopy}>

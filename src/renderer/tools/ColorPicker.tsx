@@ -389,10 +389,10 @@ const tabPaletteColors = () => <TabPaletteColors />;
 const tabColorTable = () => <TabColorTable />;
 
 const panes = [
-  { menuItem: 'Color Picker', render: tabColorPicker },
+  { menuItem: 'Picker', render: tabColorPicker },
   { menuItem: 'Palettes', render: tabPaletteColors },
-  { menuItem: 'Web Safe Colors', render: tabWebSafeColors },
   { menuItem: 'Colors', render: tabColorTable },
+  { menuItem: 'Web Safe', render: tabWebSafeColors },
 ];
 
 export default function ColorPicker() {

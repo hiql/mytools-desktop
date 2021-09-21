@@ -42,9 +42,19 @@
   outline-offset: 2px;
 }
 
-.typing-game .text-xl {
+.typing-game .text-size-normal {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.typing-game .text-size-big {
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+}
+
+.typing-game .text-size-large {
+  font-size: 2rem;
+  line-height: 2.5rem;
 }
 
 .typing-game .font-serif {
@@ -57,10 +67,14 @@
 
 .typing-game .box {
   padding: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(0, 0, 0, 0.75);
   border-radius: 6px;
-  background-color: #1b1f23;
-  color: #d1d5da;
+  background-color: #fcfcfc;
+}
+
+.typing-game .box.dark {
+  background-color: #1b1f23 !important;
+  color: #d1d5da !important;
 }
 
 .typing-game .statistics {
@@ -68,7 +82,11 @@
 }
 
 .typing-game .cursor {
-  border-left: 2px solid #fff;
+  border-left: 2px solid #000;
+}
+
+.typing-game .cursor.dark {
+  border-left: 2px solid #fff !important;
 }
 
 .mb-4 {
@@ -81,6 +99,10 @@
 
 .mr-4 {
   margin-right: 1rem;
+}
+
+.ml-4 {
+  margin-left: 1rem;
 }
 
 .text-green {

@@ -1,16 +1,19 @@
 import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
 import useTyping from 'react-typing-game-hook';
 
-const TypeThroughInput: FC<{
+interface TypeThroughInputProps {
   text: string;
+  dark?: boolean;
+  fontSize?: string;
   keystroke?: (key: string) => void;
-}> = ({
+}
+
+const TypeThroughInput: FC<TypeThroughInputProps> = ({
   text,
+  dark,
+  fontSize,
   keystroke,
-}: {
-  text: string;
-  keystroke?: (key: string) => void;
-}) => {
+}: TypeThroughInputProps) => {
   const [duration, setDuration] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
   const letterElements = useRef<HTMLDivElement>(null);
@@ -71,14 +74,14 @@ const TypeThroughInput: FC<{
 
   return (
     <div className="typing-game">
-      <div className="box">
+      <div className={`box${dark ? ' dark' : ''}`}>
         <div
           role="button"
           tabIndex={0}
           onKeyDown={(e) => handleKeyDown(e.key, e.ctrlKey)}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          className="text-xl outline-none relative font-serif"
+          className={`outline-none relative font-serif text-size-${fontSize}`}
         >
           <div
             role="button"
@@ -110,7 +113,7 @@ const TypeThroughInput: FC<{
                 left: pos.left,
                 top: pos.top,
               }}
-              className="caret cursor"
+              className={`caret cursor${dark ? ' dark' : ''}`}
             >
               &nbsp;
             </span>
@@ -144,6 +147,8 @@ const TypeThroughInput: FC<{
 
 TypeThroughInput.defaultProps = {
   keystroke: undefined,
+  dark: true,
+  fontSize: 'normal',
 };
 
 export default TypeThroughInput;

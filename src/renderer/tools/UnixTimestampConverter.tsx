@@ -158,7 +158,7 @@ export default function UnixTimestampConverter() {
           </Form.Button>
         </Form.Group>
         <Segment basic>
-          <strong> {timestampResult}</strong>
+          <h3> {timestampResult}</h3>
         </Segment>
 
         <Header as="h3">Date/Time to Unix Time</Header>
@@ -238,12 +238,12 @@ export default function UnixTimestampConverter() {
           Convert
         </Form.Button>
         <Segment basic>
-          <strong> {humanDateResult}</strong>
+          <h3>{humanDateResult}</h3>
         </Segment>
       </Form>
 
       <div style={{ marginTop: 25 }}>
-        <h2>What is epoch time?</h2>
+        <h3>What is epoch time?</h3>
         <p>
           The <b>Unix epoch</b> (or <b>Unix time</b> or <b>POSIX time</b> or
           <b>Unix timestamp</b>) is the number of seconds that have elapsed
@@ -288,7 +288,7 @@ export default function UnixTimestampConverter() {
           </tbody>
         </table>
 
-        <h2>In programming languages</h2>
+        <h3>In programming languages</h3>
         <table className="ui collapsing very basic table stackable">
           <thead>
             <tr>
