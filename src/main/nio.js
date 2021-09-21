@@ -4,6 +4,7 @@ const fs = require('fs');
 const p = require('path');
 const archivex = require('ls-archive');
 const MultiStream = require('multistream');
+const { isText } = require('istextorbinary');
 
 module.exports = {
   openPath: (path) => {
@@ -59,7 +60,8 @@ module.exports = {
     },
     read: (archivePath, filePath, callback) => {
       archivex.readFile(archivePath, filePath, (err, content) => {
-        callback(err, content.toString('UTF-8'));
+        const isTextFile = isText(null, content);
+        callback(err, content.toString('UTF-8'), isTextFile);
       });
     },
     save: (archivePath, filePath, outputPath, callback) => {

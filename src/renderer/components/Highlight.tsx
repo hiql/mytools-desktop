@@ -24,7 +24,8 @@ export default function Highlight({ language, code, loading }: Props) {
     }
     setTimeout(() => {
       if (code !== null && code !== '') {
-        highlight.highlightElement(codeRef.current as HTMLElement);
+        if (language !== undefined && language !== '')
+          highlight.highlightElement(codeRef.current as HTMLElement);
       }
       setIsLoading(false);
     }, 100);
@@ -42,7 +43,11 @@ export default function Highlight({ language, code, loading }: Props) {
       <pre>
         <code
           className={language}
-          style={{ overflow: 'unset', backgroundColor: 'transparent' }}
+          style={{
+            overflow: 'unset',
+            backgroundColor: 'transparent',
+            padding: 15,
+          }}
           ref={codeRef}
         >
           {result}

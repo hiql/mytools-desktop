@@ -138,16 +138,24 @@ export default function ArchiveExplorer() {
     if (e === '') return;
     setOpenFilePath(e);
     openDrawer();
-    window.nio.archive.read(archiveFile, e, (err: Error, content: string) => {
-      if (err !== null) {
-        utils.toast.error(err.message);
-        return;
+    window.nio.archive.read(
+      archiveFile,
+      e,
+      (err: Error, content: string, isText: boolean) => {
+        if (err !== null) {
+          utils.toast.error(err.message);
+          return;
+        }
+        if (content != null) {
+          setLang(languageRegistry.get(window.nio.extname(e).toLowerCase()));
+          if (isText) {
+            setOpenFileContent(content.toString());
+          } else {
+            setOpenFileContent('Binary can not be previewed');
+          }
+        }
       }
-      if (content != null) {
-        setLang(languageRegistry.get(window.nio.extname(e).toLowerCase()));
-        setOpenFileContent(content.toString());
-      }
-    });
+    );
   };
 
   const onSaveFile = (file: string) => {
