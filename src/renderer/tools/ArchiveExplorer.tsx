@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Button,
-  Container,
   Icon,
   Input,
   Label,
@@ -194,6 +193,15 @@ export default function ArchiveExplorer() {
   const getFileName = (p: string) => {
     return window.nio.basename(p);
   };
+
+  React.useEffect(() => {
+    return () => {
+      setOpenFileContent('');
+      setFilteredResultValue([]);
+      setResultValue([]);
+      setFilteredResultValue([]);
+    };
+  }, []);
 
   return (
     <>

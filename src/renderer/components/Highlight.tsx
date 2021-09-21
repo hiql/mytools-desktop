@@ -30,6 +30,12 @@ export default function Highlight({ language, code, loading }: Props) {
     }, 100);
   }, [code]);
 
+  React.useEffect(() => {
+    return () => {
+      setResult('');
+    };
+  }, []);
+
   return (
     <>
       <Loader active={isLoading} />
