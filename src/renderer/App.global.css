@@ -46,6 +46,10 @@ body {
   background-clip: padding-box;
 }
 
+::-webkit-scrollbar-thumb:window-inactive {
+  display: none;
+}
+
 .invisible-scrollbar::-webkit-scrollbar {
   display: none;
 }
