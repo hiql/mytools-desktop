@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import * as React from 'react';
-import { Form, Icon, Segment } from 'semantic-ui-react';
+import { Form, Grid, Icon, Segment } from 'semantic-ui-react';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import NumericInput from 'react-numeric-input';
 import utils from '../utils';
@@ -74,11 +74,11 @@ export default function PasswordGenerator() {
   return (
     <>
       <Form>
-        <Form.Field>
+        <Form.Field inline>
           <label>Length</label>
           <NumericInput
             min={4}
-            max={128}
+            max={64}
             step={1}
             value={options.length}
             onChange={(value: string) =>
@@ -89,70 +89,90 @@ export default function PasswordGenerator() {
             }
           />
         </Form.Field>
-        <Form.Checkbox
-          required
-          checked={options.numbers}
-          slider
-          onChange={(_e, { checked }) =>
-            setOptionsValue({
-              ...options,
-              numbers: checked === undefined ? options.numbers : checked,
-            })
-          }
-          label="Numbers"
-        />
-        <Form.Checkbox
-          checked={options.symbols}
-          slider
-          required
-          onChange={(_e, { checked }) =>
-            setOptionsValue({
-              ...options,
-              symbols: checked === undefined ? options.symbols : checked,
-            })
-          }
-          label="Symbols"
-        />
-        <Form.Checkbox
-          checked={options.uppercase}
-          slider
-          required
-          onChange={(_e, { checked }) =>
-            setOptionsValue({
-              ...options,
-              uppercase: checked === undefined ? options.uppercase : checked,
-            })
-          }
-          label="UpperCase"
-        />
-        <Form.Checkbox
-          checked={options.lowercase}
-          slider
-          required
-          onChange={(_e, { checked }) =>
-            setOptionsValue({
-              ...options,
-              lowercase: checked === undefined ? options.lowercase : checked,
-            })
-          }
-          label="LowerCase"
-        />
+        <Grid columns={2} stackable>
+          <Grid.Row>
+            <Grid.Column>
+              <Form.Checkbox
+                required
+                checked={options.numbers}
+                slider
+                onChange={(_e, { checked }) =>
+                  setOptionsValue({
+                    ...options,
+                    numbers: checked === undefined ? options.numbers : checked,
+                  })
+                }
+                label="Numbers"
+              />
+              <Form.Checkbox
+                checked={options.symbols}
+                slider
+                required
+                onChange={(_e, { checked }) =>
+                  setOptionsValue({
+                    ...options,
+                    symbols: checked === undefined ? options.symbols : checked,
+                  })
+                }
+                label="Symbols"
+              />
+            </Grid.Column>
+            <Grid.Column>
+              <Form.Checkbox
+                checked={options.uppercase}
+                slider
+                required
+                onChange={(_e, { checked }) =>
+                  setOptionsValue({
+                    ...options,
+                    uppercase:
+                      checked === undefined ? options.uppercase : checked,
+                  })
+                }
+                label="UpperCase"
+              />
+              <Form.Checkbox
+                checked={options.lowercase}
+                slider
+                required
+                onChange={(_e, { checked }) =>
+                  setOptionsValue({
+                    ...options,
+                    lowercase:
+                      checked === undefined ? options.lowercase : checked,
+                  })
+                }
+                label="LowerCase"
+              />
+            </Grid.Column>
+          </Grid.Row>
 
-        <Form.Checkbox
-          checked={options.excludeSimilarCharacters}
-          slider
-          onChange={(_e, { checked }) =>
-            setOptionsValue({
-              ...options,
-              excludeSimilarCharacters:
-                checked === undefined
-                  ? options.excludeSimilarCharacters
-                  : checked,
-            })
-          }
-          label="Exclude similar chars, like 'i' and 'l'"
-        />
-        <p>* At least one should be true.</p>
+          <Grid.Row>
+            <Grid.Column>
+              <Form.Checkbox
+                checked={options.excludeSimilarCharacters}
+                slider
+                onChange={(_e, { checked }) =>
+                  setOptionsValue({
+                    ...options,
+                    excludeSimilarCharacters:
+                      checked === undefined
+                        ? options.excludeSimilarCharacters
+                        : checked,
+                  })
+                }
+                label="Exclude similar chars, like 'i' and 'l'"
+              />
+            </Grid.Column>
+            <Grid.Column>
+              <p>
+                <span style={{ color: 'red' }}>*</span> At least one should be
+                true.
+              </p>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+
         <Segment>
           <div className="password-generator">
             {strSlice(resultValue).map((item) => (
@@ -163,6 +183,7 @@ export default function PasswordGenerator() {
           </div>
           <PasswordStrengthBar password={resultValue} />
         </Segment>
+
         <Form.Group>
           <Form.Button primary onClick={onGenerate}>
             Generate

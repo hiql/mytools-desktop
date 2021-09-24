@@ -106,23 +106,25 @@ function TabImageColorPicker() {
         </Form.Group>
         <FileInput accept="image/*" />
       </Form>
+      <Segment textAlign="center" className="image-box">
+        <Image
+          inline
+          id="img-sample"
+          src={files.length > 0 ? `atom://${files[0].path}` : ''}
+          hidden={files.length === 0}
+          size={imageSize}
+        />
+      </Segment>
       <Segment.Group>
-        <Segment textAlign="center" className="image-box">
-          <Image
-            inline
-            id="img-sample"
-            src={files.length > 0 ? `atom://${files[0].path}` : ''}
-            hidden={files.length === 0}
-            size={imageSize}
-          />
-        </Segment>
         <Segment>
-          <Table basic="very" unstackable compact>
+          <Header as="h3">Dominant Color</Header>
+
+          <Table basic="very" unstackable>
             <Table.Body>
               <Table.Row>
                 {color.length > 0 && (
                   <>
-                    <Table.Cell>
+                    <Table.Cell collapsing>
                       <Segment
                         style={{
                           backgroundColor: rgbToHex(
@@ -133,7 +135,6 @@ function TabImageColorPicker() {
                         }}
                       />
                     </Table.Cell>
-                    <Table.Cell>Dominant Color</Table.Cell>
                     <Table.Cell>
                       {rgbToHex(color[0], color[1], color[2])}
                     </Table.Cell>
@@ -157,44 +158,37 @@ function TabImageColorPicker() {
             </Table.Body>
           </Table>
         </Segment>
+        <Segment>
+          <Header as="h3">Palette</Header>
+          <Table basic="very" unstackable>
+            <Table.Body>
+              {palette.map((rgb, index) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <Table.Row key={index}>
+                  <Table.Cell collapsing>
+                    <Segment
+                      style={{
+                        backgroundColor: rgbToHex(rgb[0], rgb[1], rgb[2]),
+                      }}
+                    />
+                  </Table.Cell>
+                  <Table.Cell>{rgbToHex(rgb[0], rgb[1], rgb[2])}</Table.Cell>
+                  <Table.Cell>{`rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`}</Table.Cell>
+                  <Table.Cell textAlign="right">
+                    <Button
+                      basic
+                      icon="star outline"
+                      onClick={() =>
+                        onAddToFavorites(rgbToHex(rgb[0], rgb[1], rgb[2]))
+                      }
+                    />
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table>
+        </Segment>
       </Segment.Group>
-
-      <Header as="h3">Palette</Header>
-      <Table basic="very" unstackable>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Color</Table.HeaderCell>
-            <Table.HeaderCell>HEX</Table.HeaderCell>
-            <Table.HeaderCell>RGB</Table.HeaderCell>
-            <Table.HeaderCell />
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {palette.map((rgb, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <Table.Row key={index}>
-              <Table.Cell>
-                <Segment
-                  style={{
-                    backgroundColor: rgbToHex(rgb[0], rgb[1], rgb[2]),
-                  }}
-                />
-              </Table.Cell>
-              <Table.Cell>{rgbToHex(rgb[0], rgb[1], rgb[2])}</Table.Cell>
-              <Table.Cell>{`rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`}</Table.Cell>
-              <Table.Cell textAlign="right">
-                <Button
-                  basic
-                  icon="star outline"
-                  onClick={() =>
-                    onAddToFavorites(rgbToHex(rgb[0], rgb[1], rgb[2]))
-                  }
-                />
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
     </Tab.Pane>
   );
 }
@@ -242,7 +236,7 @@ function TabFavoriteColors() {
           {colors.map((hex, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <Table.Row key={index}>
-              <Table.Cell>
+              <Table.Cell collapsing>
                 <Segment
                   style={{
                     backgroundColor: hex,

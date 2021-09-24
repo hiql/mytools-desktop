@@ -255,7 +255,8 @@ body {
 }
 
 .drawer-container-header .title {
-  font-size: 1em;
+  font-size: 1.2em;
+  font-weight: 600;
 }
 
 .drawer-container-header-item-right {
@@ -269,6 +270,14 @@ body {
   width: 100%;
   height: 100%;
   overflow: auto;
+}
+
+.drawer-container-footer {
+  flex-shrink: 1;
+  width: 100%;
+  min-height: 42px;
+  padding: 4px 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.035);
 }
 
 .code-box {
@@ -308,14 +317,14 @@ body {
 }
 
 .file-list {
-  display: grid;
   user-select: none;
   min-height: 50px;
 }
 
 .file-item {
-  padding: 12px 8px;
+  padding: 8px;
   cursor: grab;
+  min-height: 80px;
   word-break: break-all;
   word-wrap: break-word;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -325,19 +334,25 @@ body {
   border: none;
 }
 
+.file-item .name {
+  font-size: 1.1em;
+  display: block;
+}
+
 .file-item .path {
   display: block;
-  margin-right: 120px;
+  color: rgba(0, 0, 0, 0.35);
 }
 
 .file-item .size {
   display: block;
   float: right;
+  padding-left: 10px;
   color: rgba(0, 0, 0, 0.6);
 }
 
 .file-dragged {
-  border: 1px solid #000000 !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
   background-color: #ffffff;
   font-weight: bold;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);

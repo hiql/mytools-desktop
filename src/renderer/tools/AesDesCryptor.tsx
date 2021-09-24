@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import * as React from 'react';
-import { Form, Icon, Tab } from 'semantic-ui-react';
+import { Form, Icon, Label, Tab } from 'semantic-ui-react';
 import CryptoJS from 'crypto-js';
 import utils from '../utils';
 
@@ -57,6 +57,13 @@ const isHexString = (value: string) => {
   const pattern = '^[a-fA-F0-9\\s]+$';
   const regex = new RegExp(pattern);
   return regex.test(value);
+};
+
+const noborderLabel: React.CSSProperties = {
+  borderLeft: 'none',
+  color: 'grey',
+  textAlign: 'right',
+  fontWeight: 'normal',
 };
 
 const TabAesDesEncryptor = () => {
@@ -194,23 +201,6 @@ const TabAesDesEncryptor = () => {
             placeholder="Select mode"
             options={modeOptions}
           />
-        </Form.Group>
-        <Form.Group widths="equal">
-          <Form.Input
-            value={secretKey}
-            onChange={(e) => setSecretKey(e.currentTarget.value)}
-            label="Secret Key"
-            placeholder="Enter secret key"
-          />
-          <Form.Input
-            value={iv}
-            disabled={mode !== 'CBC'}
-            onChange={(e) => setIv(e.currentTarget.value)}
-            label="IV"
-            placeholder="Enter initialization vector"
-          />
-        </Form.Group>
-        <Form.Group>
           <Form.Select
             label="Padding"
             value={padding}
@@ -220,6 +210,35 @@ const TabAesDesEncryptor = () => {
             placeholder="Select padding scheme"
             options={paddingOptions}
           />
+        </Form.Group>
+        <Form.Group widths="equal">
+          <Form.Input
+            value={secretKey}
+            onChange={(e) => setSecretKey(e.currentTarget.value)}
+            label="Secret Key"
+            placeholder="Enter secret key"
+            labelPosition="right"
+          >
+            <input />
+            <Label basic style={noborderLabel}>
+              Length: {secretKey.length}
+            </Label>
+          </Form.Input>
+        </Form.Group>
+        <Form.Group widths="equal">
+          <Form.Input
+            value={iv}
+            disabled={mode !== 'CBC'}
+            onChange={(e) => setIv(e.currentTarget.value)}
+            label="IV"
+            placeholder="Enter initialization vector"
+            labelPosition="right"
+          >
+            <input />
+            <Label basic style={noborderLabel}>
+              Length: {iv.length}
+            </Label>
+          </Form.Input>
         </Form.Group>
         <Form.Group inline>
           <label>Output Text Format </label>
@@ -427,23 +446,6 @@ const TabAesDesDecryptor = () => {
             placeholder="Select mode"
             options={modeOptions}
           />
-        </Form.Group>
-        <Form.Group widths="equal">
-          <Form.Input
-            value={secretKey}
-            onChange={(e) => setSecretKey(e.currentTarget.value)}
-            label="Secret Key"
-            placeholder="Enter secret key"
-          />
-          <Form.Input
-            value={iv}
-            disabled={mode !== 'CBC'}
-            onChange={(e) => setIv(e.currentTarget.value)}
-            label="IV"
-            placeholder="Enter initialization vector"
-          />
-        </Form.Group>
-        <Form.Group>
           <Form.Select
             disabled={algorithm === 'DES'}
             label="Padding"
@@ -454,6 +456,35 @@ const TabAesDesDecryptor = () => {
             placeholder="Select padding scheme"
             options={paddingOptions}
           />
+        </Form.Group>
+        <Form.Group widths="equal">
+          <Form.Input
+            value={secretKey}
+            onChange={(e) => setSecretKey(e.currentTarget.value)}
+            label="Secret Key"
+            placeholder="Enter secret key"
+            labelPosition="right"
+          >
+            <input />
+            <Label basic style={noborderLabel}>
+              Length: {secretKey.length}
+            </Label>
+          </Form.Input>
+        </Form.Group>
+        <Form.Group widths="equal">
+          <Form.Input
+            value={iv}
+            disabled={mode !== 'CBC'}
+            onChange={(e) => setIv(e.currentTarget.value)}
+            label="IV"
+            placeholder="Enter initialization vector"
+            labelPosition="right"
+          >
+            <input />
+            <Label basic style={noborderLabel}>
+              Length: {iv.length}
+            </Label>
+          </Form.Input>
         </Form.Group>
         <Form.Group>
           <Form.Button primary onClick={onDecrypt}>

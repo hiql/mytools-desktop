@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Header, Segment, Container } from 'semantic-ui-react';
+import { Form, Header, Container } from 'semantic-ui-react';
 
 export default function IpConverter() {
   const [fromIP, setFormIP] = React.useState('');
@@ -22,13 +22,14 @@ export default function IpConverter() {
       a * parseInt(ip[2], 10) +
       parseInt(ip[3], 10);
 
-    setToDecimal(i.toString());
+    if (!Number.isNaN(i)) setToDecimal(i.toString());
   }, [fromIP]);
 
   React.useEffect(() => {
     setToIP('');
     if (fromDecimal.trim() === '') return;
     const int = parseInt(fromDecimal, 10);
+    if (Number.isNaN(int)) return;
     const ip = `${(Math.floor(int / c) % 256).toString()}.${(
       Math.floor(int / b) % 256
     ).toString()}.${(Math.floor(int / a) % 256).toString()}.${(
@@ -44,18 +45,18 @@ export default function IpConverter() {
         <Form.Group>
           <Form.Input
             value={fromIP}
-            label="IP to Decimal"
+            label="IP"
             onChange={(e) => setFormIP(e.currentTarget.value)}
           />
-          <Segment basic>{toDecimal}</Segment>
+          <Form.Input value={toDecimal} label="To Decimal" />
         </Form.Group>
         <Form.Group>
           <Form.Input
             value={fromDecimal}
-            label="Decimal to IP"
+            label="Decimal"
             onChange={(e) => setFormDecimal(e.currentTarget.value)}
           />
-          <Segment basic>{toIP}</Segment>
+          <Form.Input value={toIP} label="To IP" />
         </Form.Group>
       </Form>
       <Container fluid>

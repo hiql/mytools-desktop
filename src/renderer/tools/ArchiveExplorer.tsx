@@ -289,7 +289,7 @@ export default function ArchiveExplorer() {
               display: archiveFile === '' ? 'block' : 'none',
             }}
           >
-            Drop your file here or Click to select
+            <p>Drop your file here or Click to select</p>
           </div>
         </FileDrop>
 
@@ -324,7 +324,7 @@ export default function ArchiveExplorer() {
           {filteredResultValue.map((antry) => (
             <List.Item key={antry.path}>
               {antry.isFile ? (
-                <List.Icon name="file outline" color="grey" />
+                <></>
               ) : (
                 <List.Icon name="folder" color="yellow" />
               )}
@@ -374,31 +374,10 @@ export default function ArchiveExplorer() {
         <div className="drawer-container">
           <div className="drawer-container-header">
             <div className="title" style={{ paddingLeft: fullscreen ? 80 : 8 }}>
-              {openFilePath}
+              File Preview
             </div>
             <div className="drawer-container-header-item-right">
               <span style={{ marginRight: 20 }}>
-                <Button
-                  icon
-                  className="link-button"
-                  onClick={() => prevFilePreview()}
-                >
-                  <Icon name="chevron left" />
-                </Button>
-                <Button
-                  icon
-                  className="link-button"
-                  onClick={() => nextFilePreview()}
-                >
-                  <Icon name="chevron right" />
-                </Button>
-                <Button
-                  icon
-                  className="link-button"
-                  onClick={() => onSaveFile(openFilePath)}
-                >
-                  <Icon name="download" />
-                </Button>
                 <Button
                   icon
                   className="link-button"
@@ -417,7 +396,8 @@ export default function ArchiveExplorer() {
               alignItems: 'center',
               flexDirection: 'column',
               height: '100%',
-              backgroundColor: openFileType === FileType.IMAGE ? '#f0f0f0' : '',
+              backgroundColor:
+                openFileType === FileType.IMAGE ? '#efefef' : '#fafafa',
             }}
           >
             {openFileType === FileType.UNKNOWN && <p>Loading</p>}
@@ -470,6 +450,35 @@ export default function ArchiveExplorer() {
                 <Highlight language={lang} code={openFileContent} loading />
               </div>
             )}
+          </div>
+          <div className="drawer-container-footer">
+            <Button
+              icon
+              className="link-button"
+              onClick={() => prevFilePreview()}
+            >
+              <Icon name="chevron left" />
+            </Button>
+            <Button
+              icon
+              className="link-button"
+              onClick={() => nextFilePreview()}
+            >
+              <Icon name="chevron right" />
+            </Button>
+            <span className="ml-4">
+              <span>{window.nio.dirname(openFilePath)}</span>
+              <Icon name="chevron right" color="grey" size="small" />
+              <strong>{window.nio.basename(openFilePath)}</strong>
+            </span>
+            <Button
+              floated="right"
+              icon
+              className="link-button"
+              onClick={() => onSaveFile(openFilePath)}
+            >
+              <Icon name="download" />
+            </Button>
           </div>
         </div>
       </Drawer>

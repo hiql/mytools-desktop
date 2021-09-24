@@ -20,35 +20,44 @@ function calc(v: number, u: string): number {
 }
 
 export default function ByteCalculator() {
-  const [bValue, setBValue] = React.useState(0);
-  const [kbValue, setKbValue] = React.useState(0);
-  const [mbValue, setMbValue] = React.useState(0);
-  const [gbValue, setGbValue] = React.useState(0);
-  const [tbValue, setTbValue] = React.useState(0);
+  const [bValue, setBValue] = React.useState('');
+  const [kbValue, setKbValue] = React.useState('');
+  const [mbValue, setMbValue] = React.useState('');
+  const [gbValue, setGbValue] = React.useState('');
+  const [tbValue, setTbValue] = React.useState('');
 
   const setBaseValue = (v: string, u: string) => {
-    const nv = v === '' ? 0 : parseFloat(v);
+    if (v === '') {
+      setBValue(v);
+      setKbValue(v);
+      setMbValue(v);
+      setGbValue(v);
+      setTbValue(v);
+      return;
+    }
 
-    if (u === 'b') setBValue(nv);
-    if (u === 'kb') setKbValue(nv);
-    if (u === 'mb') setMbValue(nv);
-    if (u === 'gb') setGbValue(nv);
-    if (u === 'tb') setTbValue(nv);
+    const nv = parseFloat(v);
+
+    if (u === 'b') setBValue(v);
+    if (u === 'kb') setKbValue(v);
+    if (u === 'mb') setMbValue(v);
+    if (u === 'gb') setGbValue(v);
+    if (u === 'tb') setTbValue(v);
 
     const bt = toByte(nv, u);
 
-    if (u !== 'b') setBValue(calc(bt, 'b'));
-    if (u !== 'kb') setKbValue(calc(bt, 'kb'));
-    if (u !== 'mb') setMbValue(calc(bt, 'mb'));
-    if (u !== 'gb') setGbValue(calc(bt, 'gb'));
-    if (u !== 'tb') setTbValue(calc(bt, 'tb'));
+    if (u !== 'b') setBValue(calc(bt, 'b').toString());
+    if (u !== 'kb') setKbValue(calc(bt, 'kb').toString());
+    if (u !== 'mb') setMbValue(calc(bt, 'mb').toString());
+    if (u !== 'gb') setGbValue(calc(bt, 'gb').toString());
+    if (u !== 'tb') setTbValue(calc(bt, 'tb').toString());
   };
 
   const noborder: React.CSSProperties = {
     borderLeft: 'none',
     color: 'grey',
     width: 50,
-    textAlign: 'right',
+    textAlign: 'left',
     fontWeight: 'normal',
   };
 
@@ -58,7 +67,7 @@ export default function ByteCalculator() {
         <Form.Group>
           <Form.Input
             type="text"
-            label="Bytes"
+            placeholder="Bytes"
             value={bValue}
             labelPosition="right"
             onChange={(e) => setBaseValue(e.currentTarget.value, 'b')}
@@ -72,7 +81,7 @@ export default function ByteCalculator() {
         <Form.Group>
           <Form.Input
             type="text"
-            label="Kilobytes"
+            placeholder="Kilobytes"
             labelPosition="right"
             value={kbValue}
             onChange={(e) => setBaseValue(e.currentTarget.value, 'kb')}
@@ -86,7 +95,7 @@ export default function ByteCalculator() {
         <Form.Group>
           <Form.Input
             type="text"
-            label="Megabytes"
+            placeholder="Megabytes"
             labelPosition="right"
             value={mbValue}
             onChange={(e) => setBaseValue(e.currentTarget.value, 'mb')}
@@ -100,7 +109,7 @@ export default function ByteCalculator() {
         <Form.Group>
           <Form.Input
             type="text"
-            label="Gigabytes"
+            placeholder="Gigabytes"
             labelPosition="right"
             value={gbValue}
             onChange={(e) => setBaseValue(e.currentTarget.value, 'gb')}
@@ -114,7 +123,7 @@ export default function ByteCalculator() {
         <Form.Group>
           <Form.Input
             type="text"
-            label="Terabytes"
+            placeholder="Terabytes"
             labelPosition="right"
             value={tbValue}
             onChange={(e) => setBaseValue(e.currentTarget.value, 'tb')}

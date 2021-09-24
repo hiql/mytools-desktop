@@ -180,7 +180,7 @@ function TabColorPicker() {
           {colors.map((hex, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <Table.Row key={index}>
-              <Table.Cell>
+              <Table.Cell collapsing textAlign="center">
                 <Segment
                   style={{
                     backgroundColor: hex,
@@ -221,7 +221,7 @@ function TabWebSafeColors() {
         <Table.Body>
           {webSafeColors.map((color) => (
             <Table.Row key={color.hex}>
-              <Table.Cell textAlign="center">
+              <Table.Cell collapsing textAlign="center">
                 <Segment
                   style={{
                     backgroundColor: color.hex,
@@ -358,7 +358,7 @@ function TabColorTable() {
         <Table.Body>
           {colorTable.map((color) => (
             <Table.Row key={color.name}>
-              <Table.Cell textAlign="center">
+              <Table.Cell collapsing textAlign="center">
                 <Segment
                   style={{
                     backgroundColor: color.hex,

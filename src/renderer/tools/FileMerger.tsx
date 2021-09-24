@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Label, Segment } from 'semantic-ui-react';
+import { Form, Icon, Label, Segment } from 'semantic-ui-react';
 import SortableList, { SortableItem } from 'react-easy-sort';
 import arrayMove from 'array-move';
 import byteSize from 'byte-size';
@@ -78,15 +78,12 @@ export default function FileMerger() {
   return (
     <Form>
       <Form.Group inline>
-        <Form.Button primary onClick={showFilePicker}>
-          Add files ...
-        </Form.Button>
-        <span>Drag files to adjust the merge order.</span>
+        <strong>Files</strong>
       </Form.Group>
       <FileInput accept="*" multiple />
       <Segment>
-        <Label attached="top right">
-          <strong style={{ fontSize: '1.2em' }}>{items.length}</strong>
+        <Label attached="bottom right">
+          <strong>Files: {items.length}</strong>
         </Label>
         <SortableList
           onSortEnd={onSortEnd}
@@ -98,13 +95,21 @@ export default function FileMerger() {
             <SortableItem key={index}>
               <div className="file-item">
                 <div className="size">{item.size.toString()}</div>
-                <span className="path">{item.path}</span>
+                <span className="name">{window.nio.basename(item.path)}</span>
+                <span className="path">
+                  <Icon name="folder outline" /> {window.nio.dirname(item.path)}
+                </span>
               </div>
             </SortableItem>
           ))}
         </SortableList>
+        <span className="mb-4">Drag files to adjust the merge order.</span>
       </Segment>
       <Form.Group>
+        <Form.Button icon primary onClick={showFilePicker}>
+          <Icon name="plus" />
+          Add files ...
+        </Form.Button>
         <Form.Button primary onClick={merge}>
           Merge
         </Form.Button>
@@ -112,7 +117,7 @@ export default function FileMerger() {
       </Form.Group>
       <Segment loading={loading} textAlign="center">
         <Label attached="top left">Output File</Label>
-        <div style={{ height: 50 }}>{outputFileName}</div>
+        <div style={{ height: 50, fontSize: '1.2em' }}>{outputFileName}</div>
       </Segment>
     </Form>
   );

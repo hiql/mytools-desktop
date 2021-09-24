@@ -62,7 +62,7 @@ export default function TcpUdpPorts() {
           {result.map((item, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <Table.Row key={index}>
-              <Table.Cell>{item.port}</Table.Cell>
+              <Table.Cell collapsing>{item.port}</Table.Cell>
               <Table.Cell>{item.description}</Table.Cell>
             </Table.Row>
           ))}
