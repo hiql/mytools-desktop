@@ -61,7 +61,32 @@ module.exports = {
     read: (archivePath, filePath, callback) => {
       archivex.readFile(archivePath, filePath, (err, content) => {
         const isTextFile = isText(null, content);
-        callback(err, content.toString('UTF-8'), isTextFile);
+        let imageMimeType = null;
+        let isImageFile = false;
+        const fileName = p.posix.basename(filePath);
+        if (fileName.endsWith('.svg')) {
+          imageMimeType = 'data:image/svg+xml;base64';
+        } else if (fileName.endsWith('.gif')) {
+          imageMimeType = 'data:image/gif;base64';
+        } else if (fileName.endsWith('.png')) {
+          imageMimeType = 'data:image/png;base64';
+        } else if (fileName.endsWith('.webp')) {
+          imageMimeType = 'data:image/webp;base64';
+        } else if (fileName.endsWith('.jpg') || fileName.endsWith('.jpeg')) {
+          imageMimeType = 'data:image/jpeg;base64';
+        } else if (fileName.endsWith('.ico')) {
+          imageMimeType = 'data:image/x-icon;base64';
+        }
+
+        let stringContent = null;
+        if (imageMimeType !== null) {
+          isImageFile = true;
+          stringContent = `${imageMimeType},${content.toString('base64')}`;
+        } else if (isTextFile) {
+          stringContent = content.toString('UTF-8');
+        }
+
+        callback(err, stringContent, isTextFile, isImageFile);
       });
     },
     save: (archivePath, filePath, outputPath, callback) => {

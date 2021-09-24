@@ -187,13 +187,27 @@ body {
   padding: 0;
   margin: 0;
   cursor: pointer;
-  color: #4183c4 !important;
+  color: #959da5 !important;
   background-color: transparent !important;
   border: none;
   outline: none;
 }
 
 .link-button:hover {
+  color: #0d71bb !important;
+}
+
+.link-file {
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: #4183c4 !important;
+  background-color: transparent !important;
+  border: none;
+  outline: none;
+}
+
+.link-file:hover {
   color: #0d71bb !important;
 }
 
@@ -241,7 +255,7 @@ body {
 }
 
 .drawer-container-header .title {
-  font-weight: bold;
+  font-size: 1em;
 }
 
 .drawer-container-header-item-right {
@@ -341,6 +355,11 @@ body {
       #eee 100%
     ),
     linear-gradient(45deg, #eee 25%, #fff 25%, #fff 75%, #eee 75%, #eee 100%) !important;
+}
+
+.image-shadow {
+  border-radius: 8px !important;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
 }
 
 .ui.vertical.menu .item a {
@@ -501,4 +520,20 @@ body {
   .cards-item {
     flex-basis: 50%;
   }
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mt-4 {
+  margin-bottom: 1rem;
+}
+
+.mr-4 {
+  margin-right: 1rem;
+}
+
+.ml-4 {
+  margin-left: 1rem;
 }

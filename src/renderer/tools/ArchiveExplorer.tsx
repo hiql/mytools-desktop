@@ -1,12 +1,14 @@
 import * as React from 'react';
 import {
   Button,
+  Image,
   Icon,
   Input,
   Label,
   List,
   Message,
   Segment,
+  Checkbox,
 } from 'semantic-ui-react';
 import { FileDrop } from 'react-file-drop';
 import { Drawer } from 'react-pretty-drawer';
@@ -33,8 +35,8 @@ languageRegistry.set('.php', 'php');
 languageRegistry.set('.py', 'python');
 languageRegistry.set('.sql', 'sql');
 languageRegistry.set('.swift', 'swift');
-languageRegistry.set('.ymal', 'ymal');
-languageRegistry.set('.yml', 'ymal');
+languageRegistry.set('.yaml', 'yaml');
+languageRegistry.set('.yml', 'yaml');
 languageRegistry.set('.ts', 'typescript');
 languageRegistry.set('.tsx', 'typescript');
 languageRegistry.set('.sh', 'bash');
@@ -53,6 +55,13 @@ interface IEntryFile {
   path: string;
 }
 
+enum FileType {
+  UNKNOWN,
+  TEXT,
+  BINARY,
+  IMAGE,
+}
+
 export default function ArchiveExplorer() {
   const { files, FileInput, showFilePicker } = useFilePicker({
     minSize: 10000,
@@ -68,13 +77,19 @@ export default function ArchiveExplorer() {
   const [filteredResultValue, setFilteredResultValue] = React.useState<
     IEntryFile[]
   >([]);
+  const [keyword, setKeyword] = React.useState('');
+  const [hideFolders, setHideFolders] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+
   const [openFileContent, setOpenFileContent] = React.useState('');
   const [openFilePath, setOpenFilePath] = React.useState('');
-  const [keyword, setKeyword] = React.useState('');
-  const [loading, setLoading] = React.useState(true);
+  const [openFileType, setOpenFileType] = React.useState<FileType>(
+    FileType.UNKNOWN
+  );
   const [lang, setLang] = React.useState('');
 
   const [visible, setIsVisible] = React.useState(false);
+  const [fullscreen, setFullscreen] = React.useState(false);
 
   const closeDrawer = () => setIsVisible(false);
   const openDrawer = () => setIsVisible(true);
@@ -87,6 +102,8 @@ export default function ArchiveExplorer() {
     setArchiveFileSize('');
     setResultValue([]);
     setFilteredResultValue([]);
+
+    setKeyword('');
 
     if (file == null) return;
 
@@ -126,13 +143,14 @@ export default function ArchiveExplorer() {
       });
     } catch (error) {
       setLoading(false);
-      utils.toast.success(`Not supported file format!`);
+      utils.toast.error(`Not supported file format!`);
     }
   }, [archiveFile]);
 
   const onOpenFile = (e: string) => {
     setOpenFileContent('');
     setOpenFilePath('');
+    setOpenFileType(FileType.UNKNOWN);
     setLang('');
 
     if (e === '') return;
@@ -141,21 +159,48 @@ export default function ArchiveExplorer() {
     window.nio.archive.read(
       archiveFile,
       e,
-      (err: Error, content: string, isText: boolean) => {
+      (err: Error, content: string, isText: boolean, isImage: boolean) => {
         if (err !== null) {
           utils.toast.error(err.message);
           return;
         }
-        if (content != null) {
+
+        if (isImage) {
+          setOpenFileType(FileType.IMAGE);
+          setOpenFileContent(content.toString());
+        } else if (isText) {
           setLang(languageRegistry.get(window.nio.extname(e).toLowerCase()));
-          if (isText) {
-            setOpenFileContent(content.toString());
-          } else {
-            setOpenFileContent('Binary can not be previewed');
-          }
+          setOpenFileType(FileType.TEXT);
+          setOpenFileContent(content.toString());
+        } else {
+          setOpenFileType(FileType.BINARY);
         }
       }
     );
+  };
+
+  const prevFilePreview = () => {
+    const idx = filteredResultValue.findIndex((v) => v.path === openFilePath);
+    if (idx <= 0) return;
+    for (let i = idx - 1; i >= 0; i -= 1) {
+      const v = filteredResultValue[i];
+      if (v.isFile) {
+        onOpenFile(v.path);
+        break;
+      }
+    }
+  };
+
+  const nextFilePreview = () => {
+    const idx = filteredResultValue.findIndex((v) => v.path === openFilePath);
+    if (idx >= filteredResultValue.length - 1) return;
+    for (let i = idx + 1; i < filteredResultValue.length; i += 1) {
+      const v = filteredResultValue[i];
+      if (v.isFile) {
+        onOpenFile(v.path);
+        break;
+      }
+    }
   };
 
   const onSaveFile = (file: string) => {
@@ -186,13 +231,16 @@ export default function ArchiveExplorer() {
 
   const search = (kw: string) => {
     const patt = new RegExp(kw, 'i');
-    const searchResult = _.filter(resultValue, (p) => patt.test(p.path));
+    const searchResult = _.filter(resultValue, (p) => {
+      if (hideFolders && !p.isFile) return false;
+      return patt.test(p.path);
+    });
     setFilteredResultValue(searchResult);
   };
 
   React.useEffect(() => {
     search(keyword);
-  }, [keyword]);
+  }, [keyword, hideFolders]);
 
   const getPathName = (p: string) => {
     return window.nio.dirname(p);
@@ -257,6 +305,16 @@ export default function ArchiveExplorer() {
           icon="search"
           onChange={(e) => setKeyword(e.currentTarget.value)}
           placeholder="Search..."
+          className="mr-4"
+        />
+
+        <Checkbox
+          checked={hideFolders}
+          slider
+          onChange={(_e, { checked }) =>
+            setHideFolders(checked === undefined ? hideFolders : checked)
+          }
+          label="Hide folders"
         />
 
         <Label attached="top right">{archiveFileType}</Label>
@@ -284,7 +342,7 @@ export default function ArchiveExplorer() {
                   {window.nio.sep}
                   <button
                     type="button"
-                    className="link-button"
+                    className="link-file"
                     onClick={() => onOpenFile(antry.path)}
                   >
                     {getFileName(antry.path)}
@@ -309,24 +367,109 @@ export default function ArchiveExplorer() {
         visible={visible}
         onClose={closeDrawer}
         width="100%"
-        height="70%"
+        height={fullscreen ? '100%' : '70%'}
         placement="bottom"
         closable
       >
         <div className="drawer-container">
           <div className="drawer-container-header">
-            <div className="title">{openFilePath}</div>
+            <div className="title" style={{ paddingLeft: fullscreen ? 80 : 8 }}>
+              {openFilePath}
+            </div>
             <div className="drawer-container-header-item-right">
-              <Button
-                className="link-button"
-                onClick={() => onSaveFile(openFilePath)}
-              >
-                <Icon name="download" />
-              </Button>
+              <span style={{ marginRight: 20 }}>
+                <Button
+                  icon
+                  className="link-button"
+                  onClick={() => prevFilePreview()}
+                >
+                  <Icon name="chevron left" />
+                </Button>
+                <Button
+                  icon
+                  className="link-button"
+                  onClick={() => nextFilePreview()}
+                >
+                  <Icon name="chevron right" />
+                </Button>
+                <Button
+                  icon
+                  className="link-button"
+                  onClick={() => onSaveFile(openFilePath)}
+                >
+                  <Icon name="download" />
+                </Button>
+                <Button
+                  icon
+                  className="link-button"
+                  onClick={() => setFullscreen(!fullscreen)}
+                >
+                  <Icon name={fullscreen ? 'compress' : 'expand'} />
+                </Button>
+              </span>
             </div>
           </div>
-          <div className="drawer-container-content">
-            <Highlight language={lang} code={openFileContent} />
+          <div
+            className="drawer-container-content"
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+              height: '100%',
+              backgroundColor: openFileType === FileType.IMAGE ? '#f0f0f0' : '',
+            }}
+          >
+            {openFileType === FileType.UNKNOWN && <p>Loading</p>}
+
+            {openFileType === FileType.IMAGE && (
+              <div
+                style={{
+                  overflow: 'auto',
+                  width: '100%',
+                  textAlign: 'center',
+                  padding: 20,
+                }}
+              >
+                <Image
+                  inline
+                  src={openFileContent}
+                  className="image-box image-shadow"
+                />
+              </div>
+            )}
+
+            {openFileType === FileType.BINARY && (
+              <div
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                <p>
+                  <Icon
+                    name="eye slash outline"
+                    size="huge"
+                    style={{ color: '#eeeeee' }}
+                  />
+                </p>
+                <h3>Binary can not be previewed</h3>
+              </div>
+            )}
+
+            {openFileType === FileType.TEXT && (
+              <div
+                style={{
+                  flexGrow: 1,
+                  width: '100%',
+                  height: '100%',
+                  overflow: 'auto',
+                  paddingLeft: 8,
+                  paddingRight: 8,
+                }}
+              >
+                <Highlight language={lang} code={openFileContent} loading />
+              </div>
+            )}
           </div>
         </div>
       </Drawer>
