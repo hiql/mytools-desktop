@@ -2,12 +2,10 @@
 import * as React from 'react';
 import {
   Button,
-  Container,
   Form,
   Grid,
   Header,
   Icon,
-  List,
   Segment,
   Table,
 } from 'semantic-ui-react';
@@ -46,6 +44,12 @@ function strSlice(text: string) {
   return ret;
 }
 
+interface IBatchItem {
+  idx: number;
+  pwd: string;
+  copied: boolean;
+}
+
 export default function PasswordGenerator() {
   const [options, setOptionsValue] = React.useState({
     length: 12,
@@ -59,7 +63,7 @@ export default function PasswordGenerator() {
   const [resultValue, setResultValue] = React.useState('');
 
   const [groupSize, setGroupSize] = React.useState(5);
-  const [passwordGroup, setPasswordGroup] = React.useState<string[]>([]);
+  const [passwordGroup, setPasswordGroup] = React.useState<IBatchItem[]>([]);
 
   const onGenerate = () => {
     setResultValue('');
@@ -81,7 +85,7 @@ export default function PasswordGenerator() {
   };
 
   const onBatchGenerate = () => {
-    const items: string[] = [];
+    const items: IBatchItem[] = [];
     setPasswordGroup(items);
     for (let i = 0; i < groupSize; i += 1) {
       const pwd = window.misc.password({
@@ -98,7 +102,7 @@ export default function PasswordGenerator() {
         symbols: options.symbols,
         excludeSimilarCharacters: options.excludeSimilarCharacters,
       });
-      items.push(pwd);
+      items.push({ idx: i, pwd, copied: false });
     }
     setPasswordGroup(items);
   };
@@ -107,7 +111,13 @@ export default function PasswordGenerator() {
     utils.copy(resultValue, 'Password copied!');
   };
 
-  const onCopyPassword = (pwd: string) => {
+  const onCopyPassword = (index: number, pwd: string) => {
+    const group = [...passwordGroup];
+    const item = group.find((p) => p.idx === index);
+    if (item !== undefined) {
+      item.copied = true;
+    }
+    setPasswordGroup(group);
     utils.copy(pwd, 'Password copied!');
   };
 
@@ -252,21 +262,42 @@ export default function PasswordGenerator() {
           </Form.Button>
         </Form.Group>
       </Form>
-      <Container
-        style={{ display: passwordGroup.length > 0 ? 'block' : 'none' }}
+      <div
+        style={{
+          marginTop: 15,
+          display: passwordGroup.length > 0 ? 'block' : 'none',
+        }}
       >
         <Header as="h3">Batch Result</Header>
         <Table basic stackable>
           <Table.Body>
-            {passwordGroup.map((p, idx) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <Table.Row key={idx}>
-                <Table.Cell collapsing>{idx + 1}</Table.Cell>
+            {passwordGroup.map((p) => (
+              <Table.Row key={p.idx}>
+                <Table.Cell collapsing>
+                  <span
+                    style={{
+                      color: p.copied ? 'gray' : '',
+                    }}
+                  >
+                    {p.idx + 1}
+                  </span>
+                </Table.Cell>
                 <Table.Cell>
-                  <span style={{ wordBreak: 'break-all' }}>{p}</span>
+                  <span
+                    style={{
+                      wordBreak: 'break-all',
+                      color: p.copied ? 'gray' : '',
+                    }}
+                  >
+                    {p.pwd}
+                  </span>
                 </Table.Cell>
                 <Table.Cell textAlign="right">
-                  <Button icon size="mini" onClick={() => onCopyPassword(p)}>
+                  <Button
+                    icon
+                    size="mini"
+                    onClick={() => onCopyPassword(p.idx, p.pwd)}
+                  >
                     <Icon name="copy" />
                   </Button>
                 </Table.Cell>
@@ -274,7 +305,7 @@ export default function PasswordGenerator() {
             ))}
           </Table.Body>
         </Table>
-      </Container>
+      </div>
     </>
   );
 }
