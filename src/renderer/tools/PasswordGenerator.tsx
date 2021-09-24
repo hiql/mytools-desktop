@@ -1,6 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import * as React from 'react';
-import { Form, Grid, Icon, Segment } from 'semantic-ui-react';
+import {
+  Button,
+  Container,
+  Form,
+  Grid,
+  Header,
+  Icon,
+  List,
+  Segment,
+  Table,
+} from 'semantic-ui-react';
 import PasswordStrengthBar from 'react-password-strength-bar';
 import NumericInput from 'react-numeric-input';
 import utils from '../utils';
@@ -48,6 +58,9 @@ export default function PasswordGenerator() {
   });
   const [resultValue, setResultValue] = React.useState('');
 
+  const [groupSize, setGroupSize] = React.useState(5);
+  const [passwordGroup, setPasswordGroup] = React.useState<string[]>([]);
+
   const onGenerate = () => {
     setResultValue('');
     const password = window.misc.password({
@@ -67,8 +80,35 @@ export default function PasswordGenerator() {
     setResultValue(password);
   };
 
+  const onBatchGenerate = () => {
+    const items: string[] = [];
+    setPasswordGroup(items);
+    for (let i = 0; i < groupSize; i += 1) {
+      const pwd = window.misc.password({
+        length: options.length,
+        uppercase: options.uppercase,
+        lowercase:
+          options.uppercase === false &&
+          options.lowercase === false &&
+          options.numbers === false &&
+          options.symbols === false
+            ? true
+            : options.lowercase,
+        numbers: options.numbers,
+        symbols: options.symbols,
+        excludeSimilarCharacters: options.excludeSimilarCharacters,
+      });
+      items.push(pwd);
+    }
+    setPasswordGroup(items);
+  };
+
   const onCopy = () => {
     utils.copy(resultValue, 'Password copied!');
+  };
+
+  const onCopyPassword = (pwd: string) => {
+    utils.copy(pwd, 'Password copied!');
   };
 
   return (
@@ -80,6 +120,7 @@ export default function PasswordGenerator() {
             min={4}
             max={64}
             step={1}
+            size={5}
             value={options.length}
             onChange={(value: string) =>
               setOptionsValue({
@@ -192,8 +233,48 @@ export default function PasswordGenerator() {
             <Icon name="copy" />
             Copy
           </Form.Button>
+          <Form.Field inline>
+            <label>Count</label>
+            <NumericInput
+              min={4}
+              max={100}
+              step={1}
+              size={5}
+              value={groupSize}
+              onChange={(value: number) =>
+                setGroupSize(value > 100 ? 100 : value)
+              }
+            />
+          </Form.Field>
+
+          <Form.Button primary onClick={onBatchGenerate}>
+            Batch
+          </Form.Button>
         </Form.Group>
       </Form>
+      <Container
+        style={{ display: passwordGroup.length > 0 ? 'block' : 'none' }}
+      >
+        <Header as="h3">Batch Result</Header>
+        <Table basic stackable>
+          <Table.Body>
+            {passwordGroup.map((p, idx) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <Table.Row key={idx}>
+                <Table.Cell collapsing>{idx + 1}</Table.Cell>
+                <Table.Cell>
+                  <span style={{ wordBreak: 'break-all' }}>{p}</span>
+                </Table.Cell>
+                <Table.Cell textAlign="right">
+                  <Button icon size="mini" onClick={() => onCopyPassword(p)}>
+                    <Icon name="copy" />
+                  </Button>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+      </Container>
     </>
   );
 }
