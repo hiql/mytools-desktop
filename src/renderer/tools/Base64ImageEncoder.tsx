@@ -34,6 +34,11 @@ export default function Base64ImageEncoder() {
     utils.copy(resultValue);
   };
 
+  const onCopyWithMimeType = () => {
+    if (resultValue === '') return;
+    utils.copy(`${mimeType},${resultValue}`);
+  };
+
   const onCopyAsHtmlImage = () => {
     if (resultValue === '') return;
     utils.copy(`<img src="${mimeType},${resultValue}" />`);
@@ -62,6 +67,8 @@ export default function Base64ImageEncoder() {
       mimetypeString = 'data:image/webp;base64';
     } else if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) {
       mimetypeString = 'data:image/jpeg;base64';
+    } else if (filePath.endsWith('.ico')) {
+      mimetypeString = 'data:image/x-icon;base64';
     } else {
       utils.toast.error('Unsupported image format');
       return;
@@ -109,8 +116,10 @@ export default function Base64ImageEncoder() {
           <Icon name="copy" />
           Copy
         </Form.Button>
+        <Form.Button onClick={onCopyWithMimeType}>
+          Copy with Mime Type
+        </Form.Button>
         <Form.Button onClick={onCopyAsHtmlImage}>
-          <Icon name="copy" />
           Copy as HTML Image Markup
         </Form.Button>
       </Form.Group>

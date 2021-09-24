@@ -27,25 +27,17 @@ const mimeTypeOptions = [
     value: 'data:image/jpeg;base64',
     text: 'jpeg',
   },
+  {
+    key: 'data:image/x-icon;base64',
+    value: 'data:image/x-icon;base64',
+    text: 'ico',
+  },
 ];
 
 export default function Base64ImageDecoder() {
   const [rawValue, setRawValue] = React.useState('');
-  const [mimeType, setMimeType] = React.useState('svg');
+  const [mimeType, setMimeType] = React.useState('png');
   const [imageSize, setImageSize] = React.useState('medium');
-
-  React.useEffect(() => {
-    const storedImageSize = window.store.get(
-      constants.KEY_BASE64_IMAGE_DECODER_IMAGE_SIZE,
-      imageSize
-    );
-    const storedImageType = window.store.get(
-      constants.KEY_BASE64_IMAGE_DECODER_IMAGE_TYPE,
-      mimeType
-    );
-    setImageSize(storedImageSize as string);
-    setMimeType(storedImageType as string);
-  }, []);
 
   const onImageSizeChange = (value: string) => {
     window.store.set(constants.KEY_BASE64_IMAGE_DECODER_IMAGE_SIZE, value);
@@ -71,6 +63,32 @@ export default function Base64ImageDecoder() {
     link.href = `${mimeType},${rawValue}`;
     link.click();
   };
+
+  React.useEffect(() => {
+    if (mimeType.startsWith('data:image/')) {
+      for (let i = 0; i < mimeTypeOptions.length; i += 1) {
+        const opt = mimeTypeOptions[i];
+        if (rawValue.startsWith(opt.value)) {
+          setRawValue(rawValue.substring(opt.value.length + 1));
+          setMimeType(opt.value);
+          break;
+        }
+      }
+    }
+  }, [rawValue]);
+
+  React.useEffect(() => {
+    const storedImageSize = window.store.get(
+      constants.KEY_BASE64_IMAGE_DECODER_IMAGE_SIZE,
+      imageSize
+    );
+    const storedImageType = window.store.get(
+      constants.KEY_BASE64_IMAGE_DECODER_IMAGE_TYPE,
+      mimeType
+    );
+    setImageSize(storedImageSize as string);
+    setMimeType(storedImageType as string);
+  }, []);
 
   return (
     <Form>
