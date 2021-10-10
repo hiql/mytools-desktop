@@ -285,6 +285,12 @@ const routes: IRoute[] = [
     main: React.lazy(() => import('./tools/IpConverter')),
   },
   {
+    path: '/websocket-tester',
+    title: 'WebSocket Tester',
+    keywords: 'web,socket',
+    main: React.lazy(() => import('./tools/WebSocketTester')),
+  },
+  {
     path: '/morse-code-translator',
     title: 'Morse Code Translator',
     keywords: 'morse,translator,converter',

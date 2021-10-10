@@ -45,8 +45,13 @@ A desktop application based on Electron and React for daily application developm
 - SQL Formatter
 - IP Converter
 - Morse Code Translator
+- WebSocket Tester
+
+## CheatSheets
+
 - TCP/UDP Ports
-- HTML Codes
+- HTTP Status Codes
+- HTML Entities
 - MIME Types
 - Country Codes
 

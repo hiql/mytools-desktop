@@ -15,3 +15,4 @@ declare module 'ls-archive';
 declare module 'byte-size';
 declare module 'he';
 declare module 'random-paragraph';
+declare module 'sockjs-client';
