@@ -25,6 +25,7 @@ A desktop application based on Electron and React for daily application developm
 - JSON to CSV
 - CSV to Markdown Table
 - HTML to Markdown
+- HTML Coder
 - Password Generator
 - UUID Generator
 - Unix Time Converter

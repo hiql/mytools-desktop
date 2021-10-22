@@ -171,6 +171,12 @@ const routes: IRoute[] = [
     main: React.lazy(() => import('./tools/Html2Markdown')),
   },
   {
+    path: '/html-coder',
+    title: 'HTML Coder',
+    keywords: 'encode,decode,html',
+    main: React.lazy(() => import('./tools/HtmlCoder')),
+  },
+  {
     path: '/qrcode-generator',
     title: 'QRCode Generator',
     keywords: 'qrcode,generator',
