@@ -141,10 +141,28 @@ const routes: IRoute[] = [
     main: React.lazy(() => import('./tools/XmlBeautifier')),
   },
   {
+    path: '/html-beautifier',
+    title: 'HTML Beautifier',
+    keywords: 'html,formatter',
+    main: React.lazy(() => import('./tools/HtmlBeautifier')),
+  },
+  {
+    path: '/js-beautifier',
+    title: 'Javascript Beautifier',
+    keywords: 'javascript,js,formatter',
+    main: React.lazy(() => import('./tools/JsBeautifier')),
+  },
+  {
     path: '/json-beautifier',
     title: 'JSON Beautifier',
     keywords: 'json,formatter',
     main: React.lazy(() => import('./tools/JsonBeautifier')),
+  },
+  {
+    path: '/css-beautifier',
+    title: 'CSS Beautifier',
+    keywords: 'css,formatter',
+    main: React.lazy(() => import('./tools/CssBeautifier')),
   },
   {
     path: '/json2csv',

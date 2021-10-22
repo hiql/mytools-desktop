@@ -20,7 +20,10 @@ A desktop application based on Electron and React for daily application developm
 - URL Parser
 - Number Converter
 - XML Beautifier
+- HTML Beautifier
+- Javascript Beautifier
 - JSON Beautifier
+- CSS Beautifier
 - CSV to JSON
 - JSON to CSV
 - CSV to Markdown Table
