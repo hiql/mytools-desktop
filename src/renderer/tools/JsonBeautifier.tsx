@@ -7,7 +7,7 @@ import ReactJson from 'react-json-view';
 import utils from '../utils';
 import Highlight from '../components/Highlight';
 
-export default function JsonPrettifier() {
+export default function JsonBeautifier() {
   const [rawValue, setRawValue] = React.useState('');
   const [resultValue, setResultValue] = React.useState('');
   const [indentSize, setIndentSize] = React.useState(2);

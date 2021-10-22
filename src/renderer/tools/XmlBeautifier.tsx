@@ -7,7 +7,7 @@ import repeat from 'repeat-string';
 import utils from '../utils';
 import Highlight from '../components/Highlight';
 
-export default function XmlPrettifier() {
+export default function XmlBeautifier() {
   const [rawValue, setRawValue] = React.useState('');
   const [resultValue, setResultValue] = React.useState('');
   const [indentSize, setIndentSize] = React.useState(2);

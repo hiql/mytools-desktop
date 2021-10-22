@@ -135,16 +135,16 @@ const routes: IRoute[] = [
     main: React.lazy(() => import('./tools/NumberConverter')),
   },
   {
-    path: '/xml-prettifier',
-    title: 'XML Prettifier',
+    path: '/xml-beautifier',
+    title: 'XML Beautifier',
     keywords: 'xml,formatter',
-    main: React.lazy(() => import('./tools/XmlPrettifier')),
+    main: React.lazy(() => import('./tools/XmlBeautifier')),
   },
   {
-    path: '/json-prettifier',
-    title: 'JSON Prettifier',
+    path: '/json-beautifier',
+    title: 'JSON Beautifier',
     keywords: 'json,formatter',
-    main: React.lazy(() => import('./tools/JsonPrettifier')),
+    main: React.lazy(() => import('./tools/JsonBeautifier')),
   },
   {
     path: '/json2csv',

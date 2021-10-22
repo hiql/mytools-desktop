@@ -19,8 +19,8 @@ A desktop application based on Electron and React for daily application developm
 - URL Encoder/Decoder
 - URL Parser
 - Number Converter
-- XML Prettifier
-- JSON Prettier
+- XML Beautifier
+- JSON Beautifier
 - CSV to JSON
 - JSON to CSV
 - CSV to Markdown Table
