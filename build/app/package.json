@@ -1,7 +1,7 @@
 {
   "name": "mytools-desktop",
   "productName": "MyTools",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A desktop application based on Electron and React for daily application development",
   "main": "./dist/main/main.js",
   "author": {
