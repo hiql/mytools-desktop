@@ -47,7 +47,7 @@ A desktop application based on Electron and React for daily application developm
 - File Checksum Calculator
 - Archive Explorer
 - QRCode Generator
-- SQL Formatter
+- SQL Beautifier
 - IP Converter
 - Morse Code Translator
 - WebSocket Tester

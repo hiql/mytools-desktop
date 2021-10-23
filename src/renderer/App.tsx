@@ -279,10 +279,10 @@ const routes: IRoute[] = [
     main: React.lazy(() => import('./tools/ArchiveExplorer')),
   },
   {
-    path: '/sql-formatter',
-    title: 'SQL Formatter',
+    path: '/sql-beautifier',
+    title: 'SQL Beautifier',
     keywords: 'sql,formatter',
-    main: React.lazy(() => import('./tools/SQLFormatter')),
+    main: React.lazy(() => import('./tools/SQLBeautifier')),
   },
   {
     path: '/text-counter',

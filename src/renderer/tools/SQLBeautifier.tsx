@@ -21,7 +21,7 @@ const formatOptions = [
   { value: 'tsql', text: 'Transact-SQL' },
 ];
 
-export default function SQLFormatter() {
+export default function SQLBeautifier() {
   const [rawValue, setRawValue] = React.useState('');
   const [resultValue, setResultValue] = React.useState('');
   const [sqlLang, setSqlLang] = React.useState('sql');
