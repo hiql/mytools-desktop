@@ -177,10 +177,10 @@ const routes: IRoute[] = [
     main: React.lazy(() => import('./tools/Csv2Json')),
   },
   {
-    path: '/csv2md',
-    title: 'CSV to Markdown Table',
-    keywords: 'markdown,md,table,csv,converter',
-    main: React.lazy(() => import('./tools/Csv2MarkdownTable')),
+    path: '/csv-tableizer',
+    title: 'CSV Tableizer',
+    keywords: 'markdown,md,table,html,csv,converter',
+    main: React.lazy(() => import('./tools/CsvTableizer')),
   },
   {
     path: '/html2md',

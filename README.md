@@ -26,7 +26,7 @@ A desktop application based on Electron and React for daily application developm
 - CSS Beautifier
 - CSV to JSON
 - JSON to CSV
-- CSV to Markdown Table
+- CSV Tableizer
 - HTML to Markdown
 - HTML Coder
 - Password Generator
