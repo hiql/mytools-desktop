@@ -41,6 +41,7 @@ A desktop application based on Electron and React for daily application developm
 - Base64 Image Decoder
 - Byte Calculator
 - Text Counter
+- Text Diff Viewer
 - String Utilities
 - File Merger
 - File Checksum Calculator

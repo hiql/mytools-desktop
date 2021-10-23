@@ -291,6 +291,12 @@ const routes: IRoute[] = [
     main: React.lazy(() => import('./tools/TextCounter')),
   },
   {
+    path: '/text-diff-viewer',
+    title: 'Text Diff Viewer',
+    keywords: 'text',
+    main: React.lazy(() => import('./tools/TextDiffViewer')),
+  },
+  {
     path: '/string-utilities',
     title: 'String Utilities',
     keywords: 'text,string',
