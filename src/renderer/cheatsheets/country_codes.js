@@ -132,7 +132,7 @@ const countryCodes = [
     name: 'Congo',
     iso2: 'CG',
     iso3: 'COG',
-    telephone: '243',
+    telephone: '242',
     internet: '.cg',
   },
   {
@@ -140,7 +140,7 @@ const countryCodes = [
     name: 'Congo, the Democratic Republic of the',
     iso2: 'CD',
     iso3: 'COD',
-    telephone: '242',
+    telephone: '243',
     internet: '.cd',
   },
   {
